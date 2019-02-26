@@ -15,11 +15,11 @@ contract Grade {
 
     //Constructor
     constructor () public {
-        addCandidate("Bob");
-        addCandidate("Marley");
+        addStudent("Bob");
+        addStudent("Marley");
     }
 
-    function addStudent (string _name) private {
+    function addStudent (string memory _name) private {
         studentsCount++;
         students[studentsCount] = Student(studentsCount, _name, "Bahasa Malaysia", 0);
     }
