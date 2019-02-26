@@ -33,6 +33,15 @@
               </tbody>
             </table>
             <hr/>
+            <form onSubmit="App.submitGrade(); return false;">
+              <div class="form-group">
+                <label for="studentsSelect">Select Student</label>
+                <select class="form-control" id="studentsSelect">
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit Grade</button>
+              <hr />
+            </form>
             <p id="accountAddress" class="text-center"></p>
           </div>
         </div>

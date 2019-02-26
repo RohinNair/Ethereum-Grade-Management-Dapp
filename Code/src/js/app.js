@@ -32,7 +32,7 @@ App = {
   },
 
   render: function() {
-    var electionInstance;
+    var gradeInstance;
     var loader = $("#loader");
     var content = $("#content");
 
@@ -55,6 +55,9 @@ App = {
       var studentsResults = $("#studentsResults");
       studentsResults.empty();
 
+      var studentsSelect = $('#studentsSelect');
+      studentsSelect.empty();
+
       for (var i = 1; i <= studentsCount; i++) {
         gradeInstance.students(i).then(function(student) {
           var id = student[0];
@@ -62,16 +65,37 @@ App = {
           var subject = student[2];
           var marks = student[3];
 
-          // Render candidate Result
+          // Render Student Grade Result
           var studentTemplate = "<tr><th>" + id + "</th><td>" + name + "</td><td>" + subject + "</td><td>" + marks + "</td></tr>"
           studentsResults.append(studentTemplate);
+
+          // Render Student Selection Menu
+          var studentOption = "<option value='" + id + "' >" + name + "</ option>"
+          studentsSelect.append(studentOption);
         });
       }
-
+      return gradeInstance.graders(App.account);
+  }).then(function(hasGraded) {
+    // Do not allow a teacher to grade
+    if(hasGraded) {
+      $('form').hide();
+    }
       loader.hide();
       content.show();
     }).catch(function(error) {
       console.warn(error);
+    });
+  },
+  submitGrade: function() {
+    var studentId = $('#studentsSelect').val();
+    App.contracts.Grade.deployed().then(function(instance) {
+      return instance.grade(studentId, { from: App.account });
+    }).then(function(marks) {
+      // Wait for votes to update
+      $("#content").hide();
+      $("#loader").show();
+    }).catch(function(err) {
+      console.error(err);
     });
   }
 };
