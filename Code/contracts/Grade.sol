@@ -1,11 +1,26 @@
 pragma solidity ^0.5.0;
 
 contract Grade {
-    //Read/write subject
-    string public subject;
+    //Modelling a Student
+    struct Student {
+        uint id;
+        string name;
+        string subject;
+        uint marks;
+    }
+
+    mapping(uint => Student) public students;
+
+    uint public studentsCount;
 
     //Constructor
     constructor () public {
-        subject = "Bahasa Malaysia";
+        addStudent("Bob");
+        addStudent("Marley");
+    }
+
+    function addStudent (string memory _name) private {
+        studentsCount++;
+        students[studentsCount] = Student(studentsCount, _name, "Bahasa Malaysia", 0);
     }
 }
