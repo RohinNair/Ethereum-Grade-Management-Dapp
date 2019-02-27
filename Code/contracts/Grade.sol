@@ -9,13 +9,22 @@ contract Grade {
         uint marks;
     }
 
+    struct Subject {
+        uint subjectId;
+        string subjectName;
+    }
+
     //Read/write students
     mapping(uint => Student) public students;
+
+    mapping(uint => Subject) public subjects;
 
     mapping(address => bool) public graders;
 
     //Store Students Count
     uint public studentsCount;
+
+    uint public subjectsCount;
 
     event gradedEvent (
         uint indexed _studentId
@@ -23,16 +32,32 @@ contract Grade {
 
     //Constructor
     constructor () public {
+        /*addSubject("Bahasa Malaysia");
+        addSubject("Bahasa Inggeris2");
+        addSubject("Pendidikan Islam");
+        addSubject("Pendididkan Moral");
+        addSubject("Sejarah");
+        addSubject("Mathematics");
+        addSubject("Physics");
+        addSubject("Chemistry");
+        addSubject("Biology");
+        addSubject("Add Maths");*/
+        //addStudent("Sempoi");
         addStudent("Bob");
         addStudent("Marley");
     }
+
+    /*function addSubject (string memory _subjectName) private {
+        subjectsCount++;
+        subjects[subjectsCount] = Subject(subjectsCount, _subjectName);
+    }*/
 
     function addStudent (string memory _name) private {
         studentsCount++;
         students[studentsCount] = Student(studentsCount, _name, "Bahasa Malaysia", 0);
     }
 
-    function grade (uint _studentId) public {
+    function grade (uint _studentId, uint _studentMarks) public {
         //Require that they haven't graded a student before
         require(!graders[msg.sender]);
 
@@ -43,7 +68,7 @@ contract Grade {
         graders[msg.sender] = true;
 
         //Update student grade
-        students[_studentId].marks ++;
+        students[_studentId].marks = _studentMarks;
 
         emit gradedEvent(_studentId);
     }

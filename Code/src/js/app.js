@@ -103,8 +103,9 @@ App = {
   },
   submitGrade: function() {
     var studentId = $('#studentsSelect').val();
+    var studentMarks = $('#student-marks').val()
     App.contracts.Grade.deployed().then(function(instance) {
-      return instance.grade(studentId, { from: App.account });
+      return instance.grade(studentId, studentMarks, { from: App.account });
     }).then(function(marks) {
       // Wait for grades to update
       $("#content").hide();
