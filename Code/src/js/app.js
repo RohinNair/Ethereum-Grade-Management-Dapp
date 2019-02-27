@@ -27,7 +27,22 @@ App = {
       // Connect provider to interact with contract
       App.contracts.Grade.setProvider(App.web3Provider);
 
+      App.listenForEvents();
+
       return App.render();
+    });
+  },
+
+  listenForEvents: function() {
+    App.contracts.Grade.deployed().then(function(instance) {
+      instance.gradedEvent({}, {
+        fromBlock: 0,
+        toBlock: 'latest'
+      }).watch(function(error, event) {
+        console.log("event triggered", event)
+        // Reload when a new grade is recorded
+        App.render();
+      });
     });
   },
 
@@ -91,7 +106,7 @@ App = {
     App.contracts.Grade.deployed().then(function(instance) {
       return instance.grade(studentId, { from: App.account });
     }).then(function(marks) {
-      // Wait for votes to update
+      // Wait for grades to update
       $("#content").hide();
       $("#loader").show();
     }).catch(function(err) {

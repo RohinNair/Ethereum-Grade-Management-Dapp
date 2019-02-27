@@ -17,6 +17,10 @@ contract Grade {
     //Store Students Count
     uint public studentsCount;
 
+    event gradedEvent (
+        uint indexed _studentId
+    );
+
     //Constructor
     constructor () public {
         addStudent("Bob");
@@ -40,5 +44,7 @@ contract Grade {
 
         //Update student grade
         students[_studentId].marks ++;
+
+        emit gradedEvent(_studentId);
     }
 }
