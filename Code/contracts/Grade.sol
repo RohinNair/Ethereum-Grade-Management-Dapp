@@ -59,19 +59,22 @@ contract Grade {
         students[studentsCount] = Student(studentsCount, _name, "Bahasa Malaysia", 0);
     }
 
-    function grade (uint _studentId, uint _studentMarks) public {
+    function grade (uint _subjectId, uint _subjectMarks) public {
         //Require that they haven't graded a student before
         //require(!graders[msg.sender]);
 
         //Require a valid Student
-        require(_studentId > 0 && _studentId <= studentsCount);
+        require(_subjectId > 0 && _subjectId <= subjectsCount);
+
+        //Require a valid grade
+        require(_subjectMarks >=0 && _subjectMarks <= 100);
 
         //Record that teacher has graded
         //graders[msg.sender] = true;
 
         //Update student grade
-        students[_studentId].marks = _studentMarks;
+        subjects[_subjectId].marks = _subjectMarks;
 
-        emit gradedEvent(_studentId);
+        emit gradedEvent(_subjectId);
     }
 }

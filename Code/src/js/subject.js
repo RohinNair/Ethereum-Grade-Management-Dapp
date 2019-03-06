@@ -73,8 +73,8 @@ App = {
       var studentsSubjects = $("#studentsSubjects");
       studentsSubjects.empty();
 
-      var studentsSelect = $('#studentsSelect');
-      studentsSelect.empty();
+      var subjectsSelect = $('#subjectsSelect');
+      subjectsSelect.empty();
 
       //var studentsCheck = document.getElementById("admission");
 
@@ -96,8 +96,8 @@ App = {
           studentsSubjects.append(studentTemplate);
 
           // Render Student Selection Menu
-          var studentOption = "<option value='" + id + "' >" + name + "</ option>"
-          studentsSelect.append(studentOption);
+          var subjectOption = "<option value='" + id + "' >" + name + "</ option>"
+          subjectsSelect.append(subjectOption);
         });
       }
       return gradeInstance2.graders(App.account);
@@ -113,10 +113,10 @@ App = {
     });
   },
   submitGrade: function() {
-    var studentId = $('#studentsSelect').val();
-    var studentMarks = $('#student-marks').val()
+    var subjectId = $('#subjectsSelect').val();
+    var subjectMarks = $('#subject-marks').val()
     App.contracts.Grade.deployed().then(function(instance2) {
-      return instance2.grade(studentId, studentMarks, { from: App.account });
+      return instance2.grade(subjectId, subjectMarks, { from: App.account });
     }).then(function(marks) {
       // Wait for grades to update
       $("#content").hide();

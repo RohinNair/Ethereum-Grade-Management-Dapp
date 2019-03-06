@@ -90,10 +90,12 @@ App = {
           var id = student[0];
           var name = student[1];
           var subject = student[2];
-          var marks = student[3];
+          //var marks = student[3];
+          var str = "Grade Student";
+          var goto = str.link("./index2.html")
 
           // Render Student Grade Result
-          var studentTemplate = "<tr><th>" + id + "</th><td>" + name + "</td><td>" + subject + "</td><td>" + marks + "</td></tr>"
+          var studentTemplate = "<tr><th>" + id + "</th><td>" + name + "</td><td>" + subject + "</td><td>" + goto + "</td></tr>"
           studentsResults.append(studentTemplate);
 
           // Render Student Selection Menu
