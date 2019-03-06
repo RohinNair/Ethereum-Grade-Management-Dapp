@@ -34,8 +34,8 @@ App = {
   },
 
   listenForEvents: function() {
-    App.contracts.Grade.deployed().then(function(instance) {
-      instance.gradedEvent({}, {
+    App.contracts.Grade.deployed().then(function(instance2) {
+      instance2.gradedEvent({}, {
         fromBlock: 0,
         toBlock: 'latest'
       }).watch(function(error, event) {
@@ -47,7 +47,7 @@ App = {
   },
 
   render: function() {
-    var gradeInstance;
+    var gradeInstance2;
     var loader = $("#loader");
     var content = $("#content");
 
@@ -63,45 +63,44 @@ App = {
     });
 
     // Load contract data
-    App.contracts.Grade.deployed().then(function(instance) {
-      gradeInstance = instance;
-      return gradeInstance.studentsCount();
-    }).then(function(studentsCount) {
+    App.contracts.Grade.deployed().then(function(instance2) {
+      gradeInstance2 = instance2;
+      return gradeInstance2.subjectsCount();
+    }).then(function(subjectsCount) {
       var studentsName = $("#studentsName");
       studentsName.empty();
 
-      var studentsResults = $("#studentsResults");
-      studentsResults.empty();
+      var studentsSubjects = $("#studentsSubjects");
+      studentsSubjects.empty();
 
       var studentsSelect = $('#studentsSelect');
       studentsSelect.empty();
 
       //var studentsCheck = document.getElementById("admission");
 
-      gradeInstance.students(1).then(function(student) {
+      gradeInstance2.students(1).then(function(student) {
         var name = student[1];
 
         var nameTemplate = "<th>" + name + "</th>"
         studentsName.append(nameTemplate);
       })
 
-      for (var i = 1; i <= studentsCount; i++) {
-        gradeInstance.students(i).then(function(student) {
-          var id = student[0];
-          var name = student[1];
-          var subject = student[2];
-          var marks = student[3];
+      for (var i = 1; i <= subjectsCount; i++) {
+        gradeInstance2.subjects(i).then(function(subject) {
+          var id = subject[0];
+          var name = subject[1];
+          var marks = subject[2];
 
-          // Render Student Grade Result
-          var studentTemplate = "<tr><th>" + id + "</th><td>" + name + "</td><td>" + subject + "</td><td>" + marks + "</td></tr>"
-          studentsResults.append(studentTemplate);
+          // Render Student Subjects
+          var studentTemplate = "<tr><th>" + id + "</th><td>" + name + "</td><td>" + marks + "</td></tr>"
+          studentsSubjects.append(studentTemplate);
 
           // Render Student Selection Menu
           var studentOption = "<option value='" + id + "' >" + name + "</ option>"
           studentsSelect.append(studentOption);
         });
       }
-      return gradeInstance.graders(App.account);
+      return gradeInstance2.graders(App.account);
   }).then(function(studentsCheck) {
     // Do not allow a teacher to grade
     if(studentsCheck.checked == true) {
@@ -116,8 +115,8 @@ App = {
   submitGrade: function() {
     var studentId = $('#studentsSelect').val();
     var studentMarks = $('#student-marks').val()
-    App.contracts.Grade.deployed().then(function(instance) {
-      return instance.grade(studentId, studentMarks, { from: App.account });
+    App.contracts.Grade.deployed().then(function(instance2) {
+      return instance2.grade(studentId, studentMarks, { from: App.account });
     }).then(function(marks) {
       // Wait for grades to update
       $("#content").hide();

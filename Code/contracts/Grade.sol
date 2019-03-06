@@ -12,6 +12,7 @@ contract Grade {
     struct Subject {
         uint subjectId;
         string subjectName;
+        uint marks;
     }
 
     //Read/write students
@@ -32,8 +33,8 @@ contract Grade {
 
     //Constructor
     constructor () public {
-        /*addSubject("Bahasa Malaysia");
-        addSubject("Bahasa Inggeris2");
+        addSubject("Bahasa Malaysia");
+        addSubject("Bahasa Inggeris");
         addSubject("Pendidikan Islam");
         addSubject("Pendididkan Moral");
         addSubject("Sejarah");
@@ -41,16 +42,17 @@ contract Grade {
         addSubject("Physics");
         addSubject("Chemistry");
         addSubject("Biology");
-        addSubject("Add Maths");*/
-        //addStudent("Sempoi");
+        addSubject("Add Maths");
+        addStudent("Sempoi");
         addStudent("Bob");
         addStudent("Marley");
+        addStudent("Bobo");
     }
 
-    /*function addSubject (string memory _subjectName) private {
+    function addSubject (string memory _subjectName) private {
         subjectsCount++;
-        subjects[subjectsCount] = Subject(subjectsCount, _subjectName);
-    }*/
+        subjects[subjectsCount] = Subject(subjectsCount, _subjectName, 0);
+    }
 
     function addStudent (string memory _name) private {
         studentsCount++;
@@ -59,13 +61,13 @@ contract Grade {
 
     function grade (uint _studentId, uint _studentMarks) public {
         //Require that they haven't graded a student before
-        require(!graders[msg.sender]);
+        //require(!graders[msg.sender]);
 
         //Require a valid Student
         require(_studentId > 0 && _studentId <= studentsCount);
 
         //Record that teacher has graded
-        graders[msg.sender] = true;
+        //graders[msg.sender] = true;
 
         //Update student grade
         students[_studentId].marks = _studentMarks;
