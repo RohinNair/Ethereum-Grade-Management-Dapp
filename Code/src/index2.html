@@ -33,6 +33,7 @@
                   <th scope="col">#</th>
                   <th scope="col">Subject</th>
                   <th scope="col">Marks</th>
+                  <th scole="col">Grade</th>
                 </tr>
               </thead>
               <tbody id="studentsSubjects">
@@ -45,7 +46,7 @@
                 <select class="form-control" id="subjectsSelect">
                 </select>
                 <br/>
-                <label for="subject-marks">Enter Marks</label>
+                <label for="subject-marks">Enter Marks:</label>
                 <input id="subject-marks" type="text" class="form-control"></input>
               </div>
               <!----input type="checkbox" id="admission"> I have completed the marking for these students and hereby submit these marks to the system.<-->
@@ -53,8 +54,15 @@
               <button type="submit" class="btn btn-primary">Submit Grade</button>
               <hr />
             </form>
+            <!--form onSubmit="App.finaliseGrade(); return false;">
+              <div class="form-group">
+                <input type="checkbox" id="admission"> I have completed the marking for these students and hereby submit these marks to the system.</input>
+              <br/>
+              <br/>
+              <button type="submit" class="btn btn-primary">Proceed</button>
+              </div>
+            </form-->
             <p id="accountAddress" class="text-center"></p>
-            <!--a href="./index2.html">Subjects</a-->
             </form>
             <br/>
           </div>

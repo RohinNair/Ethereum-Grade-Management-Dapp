@@ -89,13 +89,13 @@ App = {
         gradeInstance.students(i).then(function(student) {
           var id = student[0];
           var name = student[1];
-          var subject = student[2];
+          var icno = student[2];
           //var marks = student[3];
           var str = "Grade Student";
           var goto = str.link("./index2.html")
 
           // Render Student Grade Result
-          var studentTemplate = "<tr><th>" + id + "</th><td>" + name + "</td><td>" + subject + "</td><td>" + goto + "</td></tr>"
+          var studentTemplate = "<tr><th>" + id + "</th><td>" + name + "</td><td>" + icno + "</td><td>" + goto + "</td></tr>"
           studentsResults.append(studentTemplate);
 
           // Render Student Selection Menu
@@ -115,7 +115,7 @@ App = {
       console.warn(error);
     });
   },
-  submitGrade: function() {
+  /*submitGrade: function() {
     var studentId = $('#studentsSelect').val();
     var studentMarks = $('#student-marks').val()
     App.contracts.Grade.deployed().then(function(instance) {
@@ -127,7 +127,7 @@ App = {
     }).catch(function(err) {
       console.error(err);
     });
-  }
+  }*/
 };
 
 $(function() {

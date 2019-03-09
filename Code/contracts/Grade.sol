@@ -5,14 +5,16 @@ contract Grade {
     struct Student {
         uint id;
         string name;
-        string subject;
-        uint marks;
+        uint icno;
+        //string subject;
+        //uint marks;
     }
 
     struct Subject {
         uint subjectId;
         string subjectName;
         uint marks;
+        bool graded;
     }
 
     //Read/write students
@@ -28,7 +30,7 @@ contract Grade {
     uint public subjectsCount;
 
     event gradedEvent (
-        uint indexed _studentId
+        uint indexed _subjectId
     );
 
     //Constructor
@@ -43,27 +45,27 @@ contract Grade {
         addSubject("Chemistry");
         addSubject("Biology");
         addSubject("Add Maths");
-        addStudent("Sempoi");
-        addStudent("Bob");
-        addStudent("Marley");
-        addStudent("Bobo");
+        //addStudent("Sempoi");
+        addStudent("Bob", 970225015607);
+        addStudent("Marley", 980223024302);
+        //addStudent("Bobo");
     }
 
     function addSubject (string memory _subjectName) private {
         subjectsCount++;
-        subjects[subjectsCount] = Subject(subjectsCount, _subjectName, 0);
+        subjects[subjectsCount] = Subject(subjectsCount, _subjectName, 0, false);
     }
 
-    function addStudent (string memory _name) private {
+    function addStudent (string memory _name, uint _icno) private {
         studentsCount++;
-        students[studentsCount] = Student(studentsCount, _name, "Bahasa Malaysia", 0);
+        students[studentsCount] = Student(studentsCount, _name, _icno);
     }
 
-    function grade (uint _subjectId, uint _subjectMarks) public {
+    function grade (uint _subjectId, uint _subjectMarks, bool _graded) public {
         //Require that they haven't graded a student before
-        //require(!graders[msg.sender]);
+        require(subjects[_subjectId].graded == false);
 
-        //Require a valid Student
+        //Require a valid subject
         require(_subjectId > 0 && _subjectId <= subjectsCount);
 
         //Require a valid grade
@@ -75,6 +77,15 @@ contract Grade {
         //Update student grade
         subjects[_subjectId].marks = _subjectMarks;
 
+        subjects[_subjectId].graded = _graded;
+
         emit gradedEvent(_subjectId);
     }
+
+    /*function finalise () public {
+        require(!graders[msg.sender]);
+
+        graders[msg.sender] = true;
+
+    }*/
 }
