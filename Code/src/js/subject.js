@@ -169,7 +169,16 @@ App = {
     });
   },
   finaliseGrade: function() {
-
+    var subjectId = $('#subjectsSelect').val();
+    App.contracts.Grade.deployed().then(function(instance2) {
+      return instance2.finalise(subjectId, { from: App.account });
+    }).then(function(marks) {
+      // Wait for grades to update
+      $("#content").hide();
+      $("#loader").show();
+    }).catch(function(err) {
+      console.error(err);
+    });
   }
 };
 

@@ -114,20 +114,7 @@ App = {
     }).catch(function(error) {
       console.warn(error);
     });
-  },
-  /*submitGrade: function() {
-    var studentId = $('#studentsSelect').val();
-    var studentMarks = $('#student-marks').val()
-    App.contracts.Grade.deployed().then(function(instance) {
-      return instance.grade(studentId, studentMarks, { from: App.account });
-    }).then(function(marks) {
-      // Wait for grades to update
-      $("#content").hide();
-      $("#loader").show();
-    }).catch(function(err) {
-      console.error(err);
-    });
-  }*/
+  }
 };
 
 $(function() {

@@ -33,6 +33,10 @@ contract Grade {
         uint indexed _subjectId
     );
 
+    /*event finalisedGrade (
+        uint indexed _finalise
+    );*/
+
     //Constructor
     constructor () public {
         addSubject("Bahasa Malaysia");
@@ -62,7 +66,7 @@ contract Grade {
     }
 
     function grade (uint _subjectId, uint _subjectMarks, bool _graded) public {
-        //Require that they haven't graded a student before
+        //Require that the subject hasn't been graded before
         require(subjects[_subjectId].graded == false);
 
         //Require a valid subject
@@ -70,9 +74,6 @@ contract Grade {
 
         //Require a valid grade
         require(_subjectMarks >=0 && _subjectMarks <= 100);
-
-        //Record that teacher has graded
-        //graders[msg.sender] = true;
 
         //Update student grade
         subjects[_subjectId].marks = _subjectMarks;
@@ -82,10 +83,13 @@ contract Grade {
         emit gradedEvent(_subjectId);
     }
 
-    /*function finalise () public {
+    function finalise (uint _subjectId) public {
+        //Require that they haven't graded a student before
         require(!graders[msg.sender]);
 
+        //Record that teacher has graded
         graders[msg.sender] = true;
 
-    }*/
+        emit gradedEvent(_subjectId);
+    }
 }
