@@ -90,9 +90,51 @@ App = {
           var id = subject[0];
           var name = subject[1];
           var marks = subject[2];
+          var grade ="-";
+
+          //calculate grade
+          if(marks>=90 && marks<=100){
+            grade = "A+";
+          }
+          else
+          if(marks>=80 && marks<=89){
+            grade = "A";
+          }
+          else
+          if(marks>=76 && marks<=79){
+            grade = "A-";
+          }
+          else
+          if(marks>=70 && marks<=75){
+            grade = "B+";
+          }
+          else
+          if(marks>=66 && marks<=69){
+            grade = "B";
+          }
+          else
+          if(marks>=60 && marks<=65){
+            grade = "C+";
+          }
+          else
+          if(marks>=50 && marks<=59){
+            grade = "C";
+          }
+          else
+          if(marks>=45 && marks<=49){
+            grade = "D";
+          }
+          else
+          if(marks>=40 && marks<=4){
+            grade = "E";
+          }
+          else
+          if(marks>=1 && marks<=39){
+            grade = "G";
+          }
 
           // Render Student Subjects
-          var studentTemplate = "<tr><th>" + id + "</th><td>" + name + "</td><td>" + marks + "</td></tr>"
+          var studentTemplate = "<tr><th>" + id + "</th><td>" + name + "</td><td>" + marks + "</td><td>" + grade + "</td></tr>"
           studentsSubjects.append(studentTemplate);
 
           // Render Student Selection Menu
@@ -101,9 +143,9 @@ App = {
         });
       }
       return gradeInstance2.graders(App.account);
-  }).then(function(studentsCheck) {
+  }).then(function(finalised) {
     // Do not allow a teacher to grade
-    if(studentsCheck.checked == true) {
+    if(finalised) {
       $('form').hide();
     }
       loader.hide();
@@ -115,8 +157,21 @@ App = {
   submitGrade: function() {
     var subjectId = $('#subjectsSelect').val();
     var subjectMarks = $('#subject-marks').val()
+    var graded = true;
     App.contracts.Grade.deployed().then(function(instance2) {
-      return instance2.grade(subjectId, subjectMarks, { from: App.account });
+      return instance2.grade(subjectId, subjectMarks, graded, { from: App.account });
+    }).then(function(marks) {
+      // Wait for grades to update
+      $("#content").hide();
+      $("#loader").show();
+    }).catch(function(err) {
+      console.error(err);
+    });
+  },
+  finaliseGrade: function() {
+    var subjectId = $('#subjectsSelect').val();
+    App.contracts.Grade.deployed().then(function(instance2) {
+      return instance2.finalise(subjectId, { from: App.account });
     }).then(function(marks) {
       // Wait for grades to update
       $("#content").hide();
