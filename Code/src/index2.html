@@ -23,7 +23,10 @@
           <div id="content" style="display: none;">
             <table>
               <th>Student Name: </th>
-              <th id="studentsName"></th>
+              <td id="studentsName"></td>
+              <th>&nbsp;&nbsp;&nbsp;</th>
+              <th>IC No: </th>
+              <td id="studentsIc"></td>
             </table>
             <br/>
             <br/>
@@ -39,7 +42,17 @@
               <tbody id="studentsSubjects">
               </tbody>
             </table>
-            <hr/>
+            <hr>
+            <!----div>
+              <table>
+                <th>Number of subjects enrolled: </th>
+                <td id="subCount"></td>
+                <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>Total Marks: </th>
+                <td id="studentsTotalMarks"></td>
+              </table>
+            </div>
+            <hr-->
             <form onSubmit="App.submitGrade(); return false;">
               <div class="form-group">
                 <label for="subjectsSelect">Select Subject</label>

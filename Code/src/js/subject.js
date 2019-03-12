@@ -70,19 +70,32 @@ App = {
       var studentsName = $("#studentsName");
       studentsName.empty();
 
+      var studentsIc = $("#studentsIc");
+      studentsIc.empty();
+
       var studentsSubjects = $("#studentsSubjects");
       studentsSubjects.empty();
 
       var subjectsSelect = $('#subjectsSelect');
       subjectsSelect.empty();
 
-      //var studentsCheck = document.getElementById("admission");
+      /*var studentsTotalMarks = $('#studentsTotalMarks');
+      studentsTotalMarks.empty();*/
 
       gradeInstance2.students(1).then(function(student) {
         var name = student[1];
+        var ic = student[2];
+        var subjectCount = subjectsCount;
 
-        var nameTemplate = "<th>" + name + "</th>"
+        var nameTemplate = "<td>" + name + "</td>"
         studentsName.append(nameTemplate);
+
+        var icTemplate = "<td>" + ic + "</td>"
+        studentsIc.append(icTemplate);
+
+        /*var subCountTemplate = subjectCount
+        subCount.append(subCountTemplate);*/
+
       })
 
       for (var i = 1; i <= subjectsCount; i++) {
@@ -91,6 +104,7 @@ App = {
           var name = subject[1];
           var marks = subject[2];
           var grade ="-";
+          //var total = 0;
 
           //calculate grade
           if(marks>=90 && marks<=100){
@@ -133,6 +147,8 @@ App = {
             grade = "G";
           }
 
+          //total += marks;
+
           // Render Student Subjects
           var studentTemplate = "<tr><th>" + id + "</th><td>" + name + "</td><td>" + marks + "</td><td>" + grade + "</td></tr>"
           studentsSubjects.append(studentTemplate);
@@ -140,6 +156,9 @@ App = {
           // Render Student Selection Menu
           var subjectOption = "<option value='" + id + "' >" + name + "</ option>"
           subjectsSelect.append(subjectOption);
+
+          /*var totalMarks = "<td>" + total + "</td>"
+          studentsTotalMarks.append(totalMarks);*/
         });
       }
       return gradeInstance2.graders(App.account);
