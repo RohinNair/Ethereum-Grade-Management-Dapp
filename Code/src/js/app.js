@@ -76,23 +76,18 @@ App = {
       var studentsSelect = $('#studentsSelect');
       studentsSelect.empty();
 
-      //var studentsCheck = document.getElementById("admission");
-
-      gradeInstance.students(1).then(function(student) {
-        var name = student[1];
-
-        var nameTemplate = "<th>" + name + "</th>"
-        studentsName.append(nameTemplate);
-      })
-
       for (var i = 1; i <= studentsCount; i++) {
         gradeInstance.students(i).then(function(student) {
           var id = student[0];
           var name = student[1];
           var icno = student[2];
-          //var marks = student[3];
-          var str = "Grade Student";
-          var goto = str.link("./index2.html")
+          links = [
+            "",
+            '<a href="./index2.html">First</a>',
+            '<a href="./index3.html">Second</a>'
+          ];
+
+          var goto = links[id];
 
           // Render Student Grade Result
           var studentTemplate = "<tr><th>" + id + "</th><td>" + name + "</td><td>" + icno + "</td><td>" + goto + "</td></tr>"
@@ -101,6 +96,7 @@ App = {
           // Render Student Selection Menu
           var studentOption = "<option value='" + id + "' >" + name + "</ option>"
           studentsSelect.append(studentOption);
+          x++;
         });
       }
       return gradeInstance.graders(App.account);

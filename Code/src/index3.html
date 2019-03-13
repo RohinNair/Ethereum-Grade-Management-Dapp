@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Student Grade Report</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="https://cdn.icon-icons.com/icons2/1804/PNG/512/iconfinder-499-student-education-graduate-learning-4212915_114945.png">
+  </head>
+  <body>
+    <div class="container" style="width: auto;">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="text-center">Student Grade Report</h1>
+          <hr/>
+          <br/>
+          <div id="loader">
+            <p class="text-center">Loading...</p>
+          </div>
+          <div id="content" style="display: none;">
+            <table>
+              <th>Student Name: </th>
+              <td id="studentsName"></td>
+              <th>&nbsp;&nbsp;&nbsp;</th>
+              <th>IC No: </th>
+              <td id="studentsIc"></td>
+            </table>
+            <br/>
+            <br/>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Subject</th>
+                  <th scope="col">Marks</th>
+                  <th scole="col">Grade</th>
+                </tr>
+              </thead>
+              <tbody id="studentsSubjects">
+              </tbody>
+            </table>
+            <hr>
+            <!----div>
+              <table>
+                <th>Number of subjects enrolled: </th>
+                <td id="subCount"></td>
+                <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>Total Marks: </th>
+                <td id="studentsTotalMarks"></td>
+              </table>
+            </div>
+            <hr-->
+            <form onSubmit="App.submitGrade(); return false;">
+              <div class="form-group">
+                <label for="subjectsSelect">Select Subject</label>
+                <select class="form-control" id="subjectsSelect">
+                </select>
+                <br/>
+                <label for="subject-marks">Enter Marks:</label>
+                <input id="subject-marks" type="text" class="form-control"></input>
+              </div>
+              <!----input type="checkbox" id="admission"> I have completed the marking for these students and hereby submit these marks to the system.<-->
+              <br/>
+              <button type="submit" class="btn btn-primary">Submit Grade</button>
+              <hr />
+            </form>
+            <form onSubmit="App.finaliseGrade(); return false;">
+              <div class="form-group">
+                <p><font color="red">I hereby finalize the grades entered above. I understand that by clicking the button below, the grades above will be permanently stored
+                    in the system and cannot be modified in the event of a mistake.</font></p>
+              <button type="submit" class="btn btn-primary">Finalize Grades</button>
+              </div>
+            </form>
+            <p id="accountAddress" class="text-center"></p>
+            </form>
+            <br/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/subject2.js"></script>
+  </body>
+</html>
