@@ -79,13 +79,13 @@ App = {
       var subjectsSelect = $('#subjectsSelect');
       subjectsSelect.empty();
 
-      /*var studentsTotalMarks = $('#studentsTotalMarks');
-      studentsTotalMarks.empty();*/
+      var studentsTotalMarks = $('#studentsTotalMarks');
+      studentsTotalMarks.empty();
 
       gradeInstance2.students(1).then(function(student) {
         var name = student[1];
         var ic = student[2];
-        var subjectCount = subjectsCount;
+        var subjectCount = student[3];
 
         var nameTemplate = "<td>" + name + "</td>"
         studentsName.append(nameTemplate);
@@ -93,8 +93,8 @@ App = {
         var icTemplate = "<td>" + ic + "</td>"
         studentsIc.append(icTemplate);
 
-        /*var subCountTemplate = subjectCount
-        subCount.append(subCountTemplate);*/
+        var subCountTemplate = subjectCount
+        subCount.append(subCountTemplate);
 
       })
 

@@ -6,6 +6,7 @@ contract Grade {
         uint id;
         string name;
         uint icno;
+        uint subjectCount;
     }
 
     struct Subject {
@@ -44,8 +45,8 @@ contract Grade {
         addSubject("Chemistry");
         addSubject("Biology");
         addSubject("Add Maths");
-        addStudent("Bob", 970225015607);
-        addStudent("Marley", 980223024302);
+        addStudent("Bob", 970225015607, 10);
+        addStudent("Marley", 980223024302, 10);
     }
 
     function addSubject (string memory _subjectName) private {
@@ -53,9 +54,9 @@ contract Grade {
         subjects[subjectsCount] = Subject(subjectsCount, _subjectName, 0, false);
     }
 
-    function addStudent (string memory _name, uint _icno) private {
+    function addStudent (string memory _name, uint _icno, uint _subjectCount) private {
         studentsCount++;
-        students[studentsCount] = Student(studentsCount, _name, _icno);
+        students[studentsCount] = Student(studentsCount, _name, _icno, _subjectCount);
     }
 
     function grade (uint _subjectId, uint _subjectMarks, bool _graded) public {
