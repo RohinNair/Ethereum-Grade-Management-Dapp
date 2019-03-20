@@ -6,8 +6,6 @@ contract Grade {
         uint id;
         string name;
         uint icno;
-        //string subject;
-        //uint marks;
     }
 
     struct Subject {
@@ -15,6 +13,7 @@ contract Grade {
         string subjectName;
         uint marks;
         bool graded;
+        //uint studentId;
     }
 
     //Read/write students
@@ -33,10 +32,6 @@ contract Grade {
         uint indexed _subjectId
     );
 
-    /*event finalisedGrade (
-        uint indexed _finalise
-    );*/
-
     //Constructor
     constructor () public {
         addSubject("Bahasa Malaysia");
@@ -49,10 +44,8 @@ contract Grade {
         addSubject("Chemistry");
         addSubject("Biology");
         addSubject("Add Maths");
-        //addStudent("Sempoi");
         addStudent("Bob", 970225015607);
         addStudent("Marley", 980223024302);
-        //addStudent("Bobo");
     }
 
     function addSubject (string memory _subjectName) private {
@@ -79,6 +72,8 @@ contract Grade {
         subjects[_subjectId].marks = _subjectMarks;
 
         subjects[_subjectId].graded = _graded;
+
+        //subjects[_subjectId].studentId = _studentId;
 
         emit gradedEvent(_subjectId);
     }
