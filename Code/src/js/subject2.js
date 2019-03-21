@@ -34,8 +34,8 @@ App = {
   },
 
   listenForEvents: function() {
-    App.contracts.Grade.deployed().then(function(instance2) {
-      instance2.gradedEvent({}, {
+    App.contracts.Grade.deployed().then(function(instance3) {
+      instance3.gradedEvent({}, {
         fromBlock: 0,
         toBlock: 'latest'
       }).watch(function(error, event) {
@@ -47,7 +47,7 @@ App = {
   },
 
   render: function() {
-    var gradeInstance2;
+    var gradeInstance3;
     var loader = $("#loader");
     var content = $("#content");
 
@@ -63,9 +63,9 @@ App = {
     });
 
     // Load contract data
-    App.contracts.Grade.deployed().then(function(instance2) {
-      gradeInstance2 = instance2;
-      return gradeInstance2.subjectsCount();
+    App.contracts.Grade.deployed().then(function(instance3) {
+      gradeInstance3 = instance3;
+      return gradeInstance3.subjectsCount();
     }).then(function(subjectsCount) {
       var studentsName = $("#studentsName");
       studentsName.empty();
@@ -79,13 +79,13 @@ App = {
       var subjectsSelect = $('#subjectsSelect');
       subjectsSelect.empty();
 
-      //var studentsTotalMarks = $('#studentsTotalMarks');
-      //studentsTotalMarks.empty();
+      /*var studentsTotalMarks = $('#studentsTotalMarks');
+      studentsTotalMarks.empty();*/
 
-      gradeInstance2.students(1).then(function(student) {
+      gradeInstance3.students(2).then(function(student) {
         var name = student[1];
         var ic = student[2];
-        var subjectTaken = student[3];
+        var subjectCount = subjectsCount;
 
         var nameTemplate = "<td>" + name + "</td>"
         studentsName.append(nameTemplate);
@@ -93,13 +93,13 @@ App = {
         var icTemplate = "<td>" + ic + "</td>"
         studentsIc.append(icTemplate);
 
-        var subCountTemplate = subjectTaken
-        subCount.append(subCountTemplate);
+        /*var subCountTemplate = subjectCount
+        subCount.append(subCountTemplate);*/
 
       })
 
       for (var i = 1; i <= subjectsCount; i++) {
-        gradeInstance2.subjects(i).then(function(subject) {
+        gradeInstance3.subjects(i).then(function(subject) {
           var id = subject[0];
           var name = subject[1];
           var marks = subject[2];
@@ -155,11 +155,11 @@ App = {
           var subjectOption = "<option value='" + id + "' >" + name + "</ option>"
           subjectsSelect.append(subjectOption);
 
-          //var totalMarks = total;
-          //studentsTotalMarks.append(total);
+          /*var totalMarks = "<td>" + total + "</td>"
+          studentsTotalMarks.append(totalMarks);*/
         });
       }
-      return gradeInstance2.graders(App.account);
+      return gradeInstance3.graders(App.account);
   }).then(function(finalised) {
     // Do not allow a teacher to grade
     if(finalised) {
@@ -175,9 +175,9 @@ App = {
     var subjectId = $('#subjectsSelect').val();
     var subjectMarks = $('#subject-marks').val()
     var graded = true;
-    //var studId = 1;
-    App.contracts.Grade.deployed().then(function(instance2) {
-      return instance2.grade(subjectId, subjectMarks, graded, { from: App.account });
+    //var studId = 2;
+    App.contracts.Grade.deployed().then(function(instance3) {
+      return instance3.grade(subjectId, subjectMarks, graded, { from: App.account });
     }).then(function(marks) {
       // Wait for grades to update
       $("#content").hide();
@@ -188,8 +188,8 @@ App = {
   },
   finaliseGrade: function() {
     var subjectId = $('#subjectsSelect').val();
-    App.contracts.Grade.deployed().then(function(instance2) {
-      return instance2.finalise(subjectId, { from: App.account });
+    App.contracts.Grade.deployed().then(function(instance3) {
+      return instance3.finalise(subjectId, { from: App.account });
     }).then(function(marks) {
       // Wait for grades to update
       $("#content").hide();
