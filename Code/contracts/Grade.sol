@@ -17,10 +17,19 @@ contract Grade {
         //uint studentId;
     }
 
+    struct BahasaMalaysia {
+        uint BMID;
+        uint studentID;
+        string studentName;
+        uint marks;
+    }
+
     //Read/write students
     mapping(uint => Student) public students;
 
     mapping(uint => Subject) public subjects;
+
+    mapping(uint => BahasaMalaysia) public bm;
 
     mapping(address => bool) public graders;
 
@@ -28,6 +37,8 @@ contract Grade {
     uint public studentsCount;
 
     uint public subjectsCount;
+
+    uint public bmCount;
 
     event gradedEvent (
         uint indexed _subjectId
@@ -47,11 +58,18 @@ contract Grade {
         addSubject("Add Maths");
         addStudent("Bob", 970225015607, 10);
         addStudent("Marley", 980223024302, 10);
+        enrollBM(1, "Adam");
+        enrollBM(2, "Steve");
     }
 
     function addSubject (string memory _subjectName) private {
         subjectsCount++;
         subjects[subjectsCount] = Subject(subjectsCount, _subjectName, 0, false);
+    }
+
+    function enrollBM (uint _studentID, string memory _studentName) private {
+        bmCount++;
+        bm[bmCount] = BahasaMalaysia(bmCount, _studentID, _studentName, 0);
     }
 
     function addStudent (string memory _name, uint _icno, uint _subjectCount) private {
