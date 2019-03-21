@@ -103,10 +103,10 @@ App = {
           var id = subject[0];
           var name = subject[1];
           var marks = subject[2];
+          //var studentID = subject[4];
           var grade ="-";
-          //var total = 0;
 
-          //calculate grade
+            //calculate grade
           if(marks>=90 && marks<=100){
             grade = "A+";
           }
@@ -147,8 +147,6 @@ App = {
             grade = "G";
           }
 
-          //total += marks;
-
           // Render Student Subjects
           var studentTemplate = "<tr><th>" + id + "</th><td>" + name + "</td><td>" + marks + "</td><td>" + grade + "</td></tr>"
           studentsSubjects.append(studentTemplate);
@@ -177,6 +175,7 @@ App = {
     var subjectId = $('#subjectsSelect').val();
     var subjectMarks = $('#subject-marks').val()
     var graded = true;
+    //var studId = 2;
     App.contracts.Grade.deployed().then(function(instance3) {
       return instance3.grade(subjectId, subjectMarks, graded, { from: App.account });
     }).then(function(marks) {

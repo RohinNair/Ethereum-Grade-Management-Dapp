@@ -79,12 +79,13 @@ App = {
       var subjectsSelect = $('#subjectsSelect');
       subjectsSelect.empty();
 
-      var studentsTotalMarks = $('#studentsTotalMarks');
-      studentsTotalMarks.empty();
+      //var studentsTotalMarks = $('#studentsTotalMarks');
+      //studentsTotalMarks.empty();
 
       gradeInstance2.students(1).then(function(student) {
         var name = student[1];
         var ic = student[2];
+        var subjectTaken = student[3];
 
         var nameTemplate = "<td>" + name + "</td>"
         studentsName.append(nameTemplate);
@@ -92,7 +93,7 @@ App = {
         var icTemplate = "<td>" + ic + "</td>"
         studentsIc.append(icTemplate);
 
-        var subCountTemplate = "<td>" + subjectsCount + "</td>"
+        var subCountTemplate = subjectTaken
         subCount.append(subCountTemplate);
 
       })
@@ -102,10 +103,10 @@ App = {
           var id = subject[0];
           var name = subject[1];
           var marks = subject[2];
+          //var studentID = subject[4];
           var grade ="-";
-          var total = 0;
 
-          //calculate grade
+            //calculate grade
           if(marks>=90 && marks<=100){
             grade = "A+";
           }
@@ -146,8 +147,6 @@ App = {
             grade = "G";
           }
 
-          total += marks;
-
           // Render Student Subjects
           var studentTemplate = "<tr><th>" + id + "</th><td>" + name + "</td><td>" + marks + "</td><td>" + grade + "</td></tr>"
           studentsSubjects.append(studentTemplate);
@@ -156,8 +155,8 @@ App = {
           var subjectOption = "<option value='" + id + "' >" + name + "</ option>"
           subjectsSelect.append(subjectOption);
 
-          var totalMarks = "<td>" + total + "</td>"
-          studentsTotalMarks.append(totalMarks);
+          //var totalMarks = total;
+          //studentsTotalMarks.append(total);
         });
       }
       return gradeInstance2.graders(App.account);
@@ -176,6 +175,7 @@ App = {
     var subjectId = $('#subjectsSelect').val();
     var subjectMarks = $('#subject-marks').val()
     var graded = true;
+    //var studId = 1;
     App.contracts.Grade.deployed().then(function(instance2) {
       return instance2.grade(subjectId, subjectMarks, graded, { from: App.account });
     }).then(function(marks) {
