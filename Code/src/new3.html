@@ -25,8 +25,8 @@
               <th>Student Name: </th>
               <td id="studentsName"></td>
               <th>&nbsp;&nbsp;&nbsp;</th>
-              <th>IC No: </th>
-              <td id="studentsIc"></td>
+              <!----th>IC No: </th>
+              <td id="studentsIc"></td-->
             </table>
             <br/>
             <br/>
@@ -34,7 +34,8 @@
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Subject</th>
+                  <th scope="col">Student ID</th>
+                  <th scope="col">Name</th>
                   <th scope="col">Marks</th>
                   <th scole="col">Grade</th>
                 </tr>
@@ -43,7 +44,7 @@
               </tbody>
             </table>
             <hr>
-            <div>
+            <!----div>
               <table>
                 <th>Number of subjects enrolled: </th>
                 <td id="subCount"></td>
@@ -51,29 +52,28 @@
                 <th>Total Marks: </th>
                 <td id="studentsTotalMarks"></td>
               </table>
-            </div>
+            </div-->
             <hr>
             <form onSubmit="App.submitGrade(); return false;">
               <div class="form-group">
-                <label for="subjectsSelect">Select Subject</label>
+                <!--label for="subjectsSelect">Select Subject</label>
                 <select class="form-control" id="subjectsSelect">
-                </select>
+                </select-->
                 <br/>
                 <label for="subject-marks">Enter Marks:</label>
                 <input id="subject-marks" type="text" class="form-control"></input>
               </div>
-              <!----input type="checkbox" id="admission"> I have completed the marking for these students and hereby submit these marks to the system.<-->
               <br/>
               <button type="submit" class="btn btn-primary">Submit Grade</button>
               <hr />
             </form>
-            <form onSubmit="App.finaliseGrade(); return false;">
+            <!--form onSubmit="App.finaliseGrade(); return false;">
               <div class="form-group">
                 <p><font color="red">I hereby finalize the grades entered above. I understand that by clicking the button below, the grades above will be permanently stored
                     in the system and cannot be modified in the event of a mistake.</font></p>
               <button type="submit" class="btn btn-primary">Finalize Grades</button>
               </div>
-            </form>
+            </form-->
             <p id="accountAddress" class="text-center"></p>
             </form>
             <br/>
@@ -88,6 +88,6 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/web3.min.js"></script>
     <script src="js/truffle-contract.js"></script>
-    <script src="js/subject.js"></script>
+    <script src="js/new3.js"></script>
   </body>
 </html>

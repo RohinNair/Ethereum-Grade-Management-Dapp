@@ -46,7 +46,7 @@ contract Grade {
 
     //Constructor
     constructor () public {
-        addSubject("Bahasa Malaysia");
+        /*addSubject("Bahasa Malaysia");
         addSubject("Bahasa Inggeris");
         addSubject("Pendidikan Islam");
         addSubject("Pendididkan Moral");
@@ -57,47 +57,47 @@ contract Grade {
         addSubject("Biology");
         addSubject("Add Maths");
         addStudent("Bob", 970225015607, 10);
-        addStudent("Marley", 980223024302, 10);
+        addStudent("Marley", 980223024302, 10);*/
         enrollBM(1, "Adam");
         enrollBM(2, "Steve");
     }
 
-    function addSubject (string memory _subjectName) private {
+    /*function addSubject (string memory _subjectName) private {
         subjectsCount++;
         subjects[subjectsCount] = Subject(subjectsCount, _subjectName, 0, false);
     }
+
+    function addStudent (string memory _name, uint _icno, uint _subjectCount) private {
+        studentsCount++;
+        students[studentsCount] = Student(studentsCount, _name, _icno, _subjectCount);
+    }*/
 
     function enrollBM (uint _studentID, string memory _studentName) private {
         bmCount++;
         bm[bmCount] = BahasaMalaysia(bmCount, _studentID, _studentName, 0);
     }
 
-    function addStudent (string memory _name, uint _icno, uint _subjectCount) private {
-        studentsCount++;
-        students[studentsCount] = Student(studentsCount, _name, _icno, _subjectCount);
-    }
-
-    function grade (uint _subjectId, uint _subjectMarks, bool _graded) public {
+    function grade (uint _BMID, uint _subjectMarks) public {
         //Require that the subject hasn't been graded before
-        require(subjects[_subjectId].graded == false);
+        //require(subjects[_subjectId].graded == false);
 
         //Require a valid subject
-        require(_subjectId > 0 && _subjectId <= subjectsCount);
+        require(_BMID> 0 && _BMID <= bmCount);
 
         //Require a valid grade
         require(_subjectMarks >=0 && _subjectMarks <= 100);
 
         //Update student grade
-        subjects[_subjectId].marks = _subjectMarks;
+        bm[_BMID].marks = _subjectMarks;
 
-        subjects[_subjectId].graded = _graded;
+        //subjects[_subjectId].graded = _graded;
 
         //subjects[_subjectId].studentId = _studentId;
 
-        emit gradedEvent(_subjectId);
+        emit gradedEvent(_BMID);
     }
 
-    function finalise (uint _subjectId) public {
+    /*function finalise (uint _subjectId) public {
         //Require that they haven't graded a student before
         require(!graders[msg.sender]);
 
@@ -105,5 +105,5 @@ contract Grade {
         graders[msg.sender] = true;
 
         emit gradedEvent(_subjectId);
-    }
+    }*/
 }
