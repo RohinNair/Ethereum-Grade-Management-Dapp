@@ -1,8 +1,8 @@
 {
-  "name": "pet-shop",
+  "name": "grade-management",
   "version": "1.0.0",
   "description": "",
-  "main": "truffle.js",
+  "main": "truffle-config.js",
   "directories": {
     "test": "test"
   },

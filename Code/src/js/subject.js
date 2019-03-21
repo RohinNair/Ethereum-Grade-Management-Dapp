@@ -85,7 +85,6 @@ App = {
       gradeInstance2.students(1).then(function(student) {
         var name = student[1];
         var ic = student[2];
-        var subjectCount = student[3];
 
         var nameTemplate = "<td>" + name + "</td>"
         studentsName.append(nameTemplate);
@@ -93,7 +92,7 @@ App = {
         var icTemplate = "<td>" + ic + "</td>"
         studentsIc.append(icTemplate);
 
-        var subCountTemplate = subjectCount
+        var subCountTemplate = "<td>" + subjectsCount + "</td>"
         subCount.append(subCountTemplate);
 
       })
@@ -104,7 +103,7 @@ App = {
           var name = subject[1];
           var marks = subject[2];
           var grade ="-";
-          //var total = 0;
+          var total = 0;
 
           //calculate grade
           if(marks>=90 && marks<=100){
@@ -147,7 +146,7 @@ App = {
             grade = "G";
           }
 
-          //total += marks;
+          total += marks;
 
           // Render Student Subjects
           var studentTemplate = "<tr><th>" + id + "</th><td>" + name + "</td><td>" + marks + "</td><td>" + grade + "</td></tr>"
@@ -157,8 +156,8 @@ App = {
           var subjectOption = "<option value='" + id + "' >" + name + "</ option>"
           subjectsSelect.append(subjectOption);
 
-          /*var totalMarks = "<td>" + total + "</td>"
-          studentsTotalMarks.append(totalMarks);*/
+          var totalMarks = "<td>" + total + "</td>"
+          studentsTotalMarks.append(totalMarks);
         });
       }
       return gradeInstance2.graders(App.account);
