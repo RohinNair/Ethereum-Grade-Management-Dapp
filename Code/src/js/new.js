@@ -78,8 +78,8 @@ App = {
           var studentName = bms[2];
           links = [
             "",
-            '<a href="./new2.html">First</a>',
-            '<a href="./new3.html">Second</a>'
+            '<a href="./student1.html">First</a>',
+            '<a href="./student2.html">Second</a>'
           ];
 
           var goto = links[bmid];
