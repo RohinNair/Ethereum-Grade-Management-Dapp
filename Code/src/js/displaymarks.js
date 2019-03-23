@@ -46,6 +46,50 @@ App = {
     });
   },
 
+  calculateGrade: function(marks) {
+    if(marks>=90 && marks<=100){
+      grade = "A+";
+    }
+    else
+    if(marks>=80 && marks<=89){
+      grade = "A";
+    }
+    else
+    if(marks>=76 && marks<=79){
+      grade = "A-";
+    }
+    else
+    if(marks>=70 && marks<=75){
+      grade = "B+";
+    }
+    else
+    if(marks>=66 && marks<=69){
+      grade = "B";
+    }
+    else
+    if(marks>=60 && marks<=65){
+      grade = "C+";
+    }
+    else
+    if(marks>=50 && marks<=59){
+      grade = "C";
+    }
+    else
+    if(marks>=45 && marks<=49){
+      grade = "D";
+    }
+    else
+    if(marks>=40 && marks<=44){
+      grade = "E";
+    }
+    else
+    if(marks>=1 && marks<=39){
+      grade = "G";
+    }
+
+    return grade;
+  },
+
   render: function() {
     var gradeInstance2;
     var loader = $("#loader");
@@ -87,14 +131,13 @@ App = {
 
       for (var i = 1; i <= 1; i++) {
         gradeInstance2.bm(i).then(function(bms) {
-          var bmid = bms[0];
-          var studentid = bms[1];
-          var studentName = bms[2];
+          var subjectName = "Bahasa Malaysia";
           var bmmarks = bms[3];
           var bmgrade ="-";
 
           //calculate grade
-          if(bmmarks>=90 && bmmarks<=100){
+          bmgrade = App.calculateGrade(bmmarks);
+          /*if(bmmarks>=90 && bmmarks<=100){
             bmgrade = "A+";
           }
           else
@@ -132,24 +175,23 @@ App = {
           else
           if(bmmarks>=1 && bmmarks<=39){
             bmgrade = "G";
-          }
+          }*/
 
           // Render Student Subjects
-          var bmTemplate = "<tr><th>" + bmid + "</th><td>" + studentid + "</td><td>" + studentName + "</td><td>" + bmmarks + "</td><td>" + bmgrade + "</td></tr>"
+          var bmTemplate = "<tr><td>" + subjectName + "</td><td>" + bmmarks + "</td><td>" + bmgrade + "</td></tr>"
           bmMarks.append(bmTemplate);
         });
       }
 
       for (var i = 1; i <= 1; i++) {
         gradeInstance2.bi(i).then(function(bis) {
-          var biid = bis[0];
-          var studentid = bis[1];
-          var studentName = bis[2];
+          var subjectName = "Bahasa Inggeris";
           var bimarks = bis[3];
           var bigrade ="-";
 
           //calculate grade
-          if(bimarks>=90 && bimarks<=100){
+          bigrade = App.calculateGrade(bimarks);;
+          /*if(bimarks>=90 && bimarks<=100){
             bigrade = "A+";
           }
           else
@@ -187,10 +229,10 @@ App = {
           else
           if(bimarks>=1 && bimarks<=39){
             bigrade = "G";
-          }
+          }*/
 
           // Render Student Subjects
-          var biTemplate = "<tr><th>" + biid + "</th><td>" + studentid + "</td><td>" + studentName + "</td><td>" + bimarks + "</td><td>" + bigrade + "</td></tr>"
+          var biTemplate = "<tr><td>" + subjectName + "</td><td>" + bimarks + "</td><td>" + bigrade + "</td></tr>"
           biMarks.append(biTemplate);
         });
       }
