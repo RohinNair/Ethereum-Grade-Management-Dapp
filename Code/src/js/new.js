@@ -76,16 +76,23 @@ App = {
           var bmid = bms[0];
           var studentid = bms[1];
           var studentName = bms[2];
-          links = [
+          links1 = [
             "",
-            '<a href="./student1.html">First</a>',
-            '<a href="./student2.html">Second</a>'
+            '<a href="./inputmarks1.html">Grade</a>',
+            '<a href="./inputmarks2.html">Grade</a>'
           ];
 
-          var goto = links[bmid];
+          links2 = [
+            "",
+            '<a href="./displaymarks1.html">View</a>',
+            '<a href="./displaymarks2.html">View</a>'
+          ];
+
+          var goto1 = links1[bmid];
+          var goto2 = links2[bmid];
 
           // Render Student Grade Result
-          var studentTemplate = "<tr><th>" + bmid + "</th><td>" + studentid + "</td><td>" + studentName + "</td><td>" + goto + "</td></tr>"
+          var studentTemplate = "<tr><th>" + bmid + "</th><td>" + studentid + "</td><td>" + studentName + "</td><td>" + goto1 + "</td><td>" + goto2 + "</td></tr>"
           studentsResults.append(studentTemplate);
 
           // Render Student Selection Menu

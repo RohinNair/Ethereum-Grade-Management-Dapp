@@ -316,7 +316,7 @@ App = {
       console.warn(error);
     });
   },
-  submitGrade: function() {
+  /*submitGrade: function() {
     var subjectId = 1;
     var subjectMarks = $('#subject-marks').val()
     //var graded = true;
@@ -331,7 +331,7 @@ App = {
     }).catch(function(err) {
       console.error(err);
     });
-  },
+  },*/
   /*finaliseGrade: function() {
     var subjectId = $('#subjectsSelect').val();
     App.contracts.Grade.deployed().then(function(instance2) {
