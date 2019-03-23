@@ -196,24 +196,44 @@ contract Grade {
         cm[cmCount] = Chemistry(cmCount, _studentID, _studentName, 0);
     }*/
 
-    function grade (uint _BMID, uint _subjectMarks) public {
+    function grade (uint _ID, uint _subjectMarks, uint _subjectIdentifier) public {
         //Require that the subject hasn't been graded before
         //require(subjects[_subjectId].graded == false);
 
-        //Require a valid subject
-        require(_BMID> 0 && _BMID <= bmCount);
+        if(_subjectIdentifier == 1) {
+            //Require a valid subject
+        require(_ID> 0 && _ID <= bmCount);
 
         //Require a valid grade
         require(_subjectMarks >=0 && _subjectMarks <= 100);
 
         //Update student grade
-        bm[_BMID].marks = _subjectMarks;
+        bm[_ID].marks = _subjectMarks;
 
         //subjects[_subjectId].graded = _graded;
 
         //subjects[_subjectId].studentId = _studentId;
 
-        emit gradedEvent(_BMID);
+        emit gradedEvent(_ID);
+        }
+
+        if(_subjectIdentifier == 2) {
+            //Require a valid subject
+        require(_ID> 0 && _ID <= biCount);
+
+        //Require a valid grade
+        require(_subjectMarks >=0 && _subjectMarks <= 100);
+
+        //Update student grade
+        bi[_ID].marks = _subjectMarks;
+
+        //subjects[_subjectId].graded = _graded;
+
+        //subjects[_subjectId].studentId = _studentId;
+
+        emit gradedEvent(_ID);
+        }
+
     }
 
     function gradeBI (uint _BIID, uint _subjectMarks) public {

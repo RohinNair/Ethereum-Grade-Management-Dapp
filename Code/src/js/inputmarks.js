@@ -172,11 +172,33 @@ App = {
       console.warn(error);
     });
   },
-  submitGrade: function() {
+  submitbmGrade: function() {
+    //student within subject instance
     var subjectId = 1;
-    var subjectMarks = $('#subject-marks').val()
-    //var graded = true;
+    //value of marks input
+    var subjectMarks = $('#bm-marks').val()
+    //subject Identifier
     var subjectIdentifier = 1;
+    //var graded = true;
+    //var studId = 1;
+    App.contracts.Grade.deployed().then(function(instance2) {
+      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, { from: App.account });
+    }).then(function(marks) {
+      // Wait for grades to update
+      $("#content").hide();
+      $("#loader").show();
+    }).catch(function(err) {
+      console.error(err);
+    });
+  },
+  submitbiGrade: function() {
+    //student within subject instance
+    var subjectId = 1;
+    //value of marks input
+    var subjectMarks = $('#bi-marks').val()
+    //subject Identifier
+    var subjectIdentifier = 2;
+    //var graded = true;
     //var studId = 1;
     App.contracts.Grade.deployed().then(function(instance2) {
       return instance2.grade(subjectId, subjectMarks, subjectIdentifier, { from: App.account });

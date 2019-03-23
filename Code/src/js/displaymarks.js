@@ -70,31 +70,18 @@ App = {
       var studentsName = $("#studentsName");
       studentsName.empty();
 
-      /*var studentsIc = $("#studentsIc");
-      studentsIc.empty();*/
-
-      var studentsSubjects = $("#studentsSubjects");
-      studentsSubjects.empty();
-
-      var subjectsSelect = $('#subjectsSelect');
-      subjectsSelect.empty();
-
-      /*var studentsTotalMarks = $('#studentsTotalMarks');
-      studentsTotalMarks.empty();*/
+      var bmMarks = $("#bmMarks");
+      bmMarks.empty();
+      
+      var biMarks = $("#biMarks");
+      biMarks.empty();
 
       gradeInstance2.bm(1).then(function(bms) {
         var name = bms[2];
         //var ic = student[2];
-        //var subjectTaken = student[3];
 
         var nameTemplate = "<td>" + name + "</td>"
         studentsName.append(nameTemplate);
-
-        /*var icTemplate = "<td>" + ic + "</td>"
-        studentsIc.append(icTemplate);
-
-        var subCountTemplate = subjectTaken
-        subCount.append(subCountTemplate);*/
 
       })
 
@@ -103,61 +90,108 @@ App = {
           var bmid = bms[0];
           var studentid = bms[1];
           var studentName = bms[2];
-          var marks = bms[3];
-          //var studentID = subject[4];
-          var grade ="-";
+          var bmmarks = bms[3];
+          var bmgrade ="-";
 
-            //calculate grade
-          if(marks>=90 && marks<=100){
-            grade = "A+";
+          //calculate grade
+          if(bmmarks>=90 && bmmarks<=100){
+            bmgrade = "A+";
           }
           else
-          if(marks>=80 && marks<=89){
-            grade = "A";
+          if(bmmarks>=80 && bmmarks<=89){
+            bmgrade = "A";
           }
           else
-          if(marks>=76 && marks<=79){
-            grade = "A-";
+          if(bmmarks>=76 && bmmarks<=79){
+            bmgrade = "A-";
           }
           else
-          if(marks>=70 && marks<=75){
-            grade = "B+";
+          if(bmmarks>=70 && bmmarks<=75){
+            bmgrade = "B+";
           }
           else
-          if(marks>=66 && marks<=69){
-            grade = "B";
+          if(bmmarks>=66 && bmmarks<=69){
+            bmgrade = "B";
           }
           else
-          if(marks>=60 && marks<=65){
-            grade = "C+";
+          if(bmmarks>=60 && bmmarks<=65){
+            bmgrade = "C+";
           }
           else
-          if(marks>=50 && marks<=59){
-            grade = "C";
+          if(bmmarks>=50 && bmmarks<=59){
+            bmgrade = "C";
           }
           else
-          if(marks>=45 && marks<=49){
-            grade = "D";
+          if(bmmarks>=45 && bmmarks<=49){
+            bmgrade = "D";
           }
           else
-          if(marks>=40 && marks<=4){
-            grade = "E";
+          if(bmmarks>=40 && bmmarks<=44){
+            bmgrade = "E";
           }
           else
-          if(marks>=1 && marks<=39){
-            grade = "G";
+          if(bmmarks>=1 && bmmarks<=39){
+            bmgrade = "G";
           }
 
           // Render Student Subjects
-          var studentTemplate = "<tr><th>" + bmid + "</th><td>" + studentid + "</td><td>" + studentName + "</td><td>" + marks + "</td><td>" + grade + "</td></tr>"
-          studentsSubjects.append(studentTemplate);
+          var bmTemplate = "<tr><th>" + bmid + "</th><td>" + studentid + "</td><td>" + studentName + "</td><td>" + bmmarks + "</td><td>" + bmgrade + "</td></tr>"
+          bmMarks.append(bmTemplate);
+        });
+      }
 
-          // Render Student Selection Menu
-          //var subjectOption = "<option value='" + id + "' >" + name + "</ option>"
-          //subjectsSelect.append(subjectOption);
+      for (var i = 1; i <= 1; i++) {
+        gradeInstance2.bi(i).then(function(bis) {
+          var biid = bis[0];
+          var studentid = bis[1];
+          var studentName = bis[2];
+          var bimarks = bis[3];
+          var bigrade ="-";
 
-          //var totalMarks = total;
-          //studentsTotalMarks.append(total);
+          //calculate grade
+          if(bimarks>=90 && bimarks<=100){
+            bigrade = "A+";
+          }
+          else
+          if(bimarks>=80 && bimarks<=89){
+            bigrade = "A";
+          }
+          else
+          if(bimarks>=76 && bimarks<=79){
+            bigrade = "A-";
+          }
+          else
+          if(bimarks>=70 && bimarks<=75){
+            bigrade = "B+";
+          }
+          else
+          if(bimarks>=66 && bimarks<=69){
+            bigrade = "B";
+          }
+          else
+          if(bimarks>=60 && bimarks<=65){
+            bigrade = "C+";
+          }
+          else
+          if(bimarks>=50 && bimarks<=59){
+            bigrade = "C";
+          }
+          else
+          if(bimarks>=45 && bimarks<=49){
+            bigrade = "D";
+          }
+          else
+          if(bimarks>=40 && bimarks<=44){
+            bigrade = "E";
+          }
+          else
+          if(bimarks>=1 && bimarks<=39){
+            bigrade = "G";
+          }
+
+          // Render Student Subjects
+          var biTemplate = "<tr><th>" + biid + "</th><td>" + studentid + "</td><td>" + studentName + "</td><td>" + bimarks + "</td><td>" + bigrade + "</td></tr>"
+          biMarks.append(biTemplate);
         });
       }
       return gradeInstance2.graders(App.account);
