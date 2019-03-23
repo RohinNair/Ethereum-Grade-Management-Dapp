@@ -210,6 +210,158 @@ App = {
       console.error(err);
     });
   },
+  submitsjGrade: function() {
+    //student within subject instance
+    var subjectId = 1;
+    //value of marks input
+    var subjectMarks = $('#sj-marks').val()
+    //subject Identifier
+    var subjectIdentifier = 3;
+    //var graded = true;
+    //var studId = 1;
+    App.contracts.Grade.deployed().then(function(instance2) {
+      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, { from: App.account });
+    }).then(function(marks) {
+      // Wait for grades to update
+      $("#content").hide();
+      $("#loader").show();
+    }).catch(function(err) {
+      console.error(err);
+    });
+  },
+  submitmaGrade: function() {
+    //student within subject instance
+    var subjectId = 1;
+    //value of marks input
+    var subjectMarks = $('#ma-marks').val()
+    //subject Identifier
+    var subjectIdentifier = 4;
+    //var graded = true;
+    //var studId = 1;
+    App.contracts.Grade.deployed().then(function(instance2) {
+      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, { from: App.account });
+    }).then(function(marks) {
+      // Wait for grades to update
+      $("#content").hide();
+      $("#loader").show();
+    }).catch(function(err) {
+      console.error(err);
+    });
+  },
+  /*submitpmGrade: function() {
+    //student within subject instance
+    var subjectId = 1;
+    //value of marks input
+    var subjectMarks = $('#pm-marks').val()
+    //subject Identifier
+    var subjectIdentifier = 5;
+    //var graded = true;
+    //var studId = 1;
+    App.contracts.Grade.deployed().then(function(instance2) {
+      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, { from: App.account });
+    }).then(function(marks) {
+      // Wait for grades to update
+      $("#content").hide();
+      $("#loader").show();
+    }).catch(function(err) {
+      console.error(err);
+    });
+  },*/
+  submitpiGrade: function() {
+    //student within subject instance
+    var subjectId = 1;
+    //value of marks input
+    var subjectMarks = $('#pi-marks').val()
+    //subject Identifier
+    var subjectIdentifier = 6;
+    //var graded = true;
+    //var studId = 1;
+    App.contracts.Grade.deployed().then(function(instance2) {
+      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, { from: App.account });
+    }).then(function(marks) {
+      // Wait for grades to update
+      $("#content").hide();
+      $("#loader").show();
+    }).catch(function(err) {
+      console.error(err);
+    });
+  },
+  submitamGrade: function() {
+    //student within subject instance
+    var subjectId = 1;
+    //value of marks input
+    var subjectMarks = $('#am-marks').val()
+    //subject Identifier
+    var subjectIdentifier = 7;
+    //var graded = true;
+    //var studId = 1;
+    App.contracts.Grade.deployed().then(function(instance2) {
+      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, { from: App.account });
+    }).then(function(marks) {
+      // Wait for grades to update
+      $("#content").hide();
+      $("#loader").show();
+    }).catch(function(err) {
+      console.error(err);
+    });
+  },
+  submitpyGrade: function() {
+    //student within subject instance
+    var subjectId = 1;
+    //value of marks input
+    var subjectMarks = $('#py-marks').val()
+    //subject Identifier
+    var subjectIdentifier = 8;
+    //var graded = true;
+    //var studId = 1;
+    App.contracts.Grade.deployed().then(function(instance2) {
+      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, { from: App.account });
+    }).then(function(marks) {
+      // Wait for grades to update
+      $("#content").hide();
+      $("#loader").show();
+    }).catch(function(err) {
+      console.error(err);
+    });
+  },
+  submitblGrade: function() {
+    //student within subject instance
+    var subjectId = 1;
+    //value of marks input
+    var subjectMarks = $('#bl-marks').val()
+    //subject Identifier
+    var subjectIdentifier = 9;
+    //var graded = true;
+    //var studId = 1;
+    App.contracts.Grade.deployed().then(function(instance2) {
+      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, { from: App.account });
+    }).then(function(marks) {
+      // Wait for grades to update
+      $("#content").hide();
+      $("#loader").show();
+    }).catch(function(err) {
+      console.error(err);
+    });
+  },
+  submitcmGrade: function() {
+    //student within subject instance
+    var subjectId = 1;
+    //value of marks input
+    var subjectMarks = $('#cm-marks').val()
+    //subject Identifier
+    var subjectIdentifier = 10;
+    //var graded = true;
+    //var studId = 1;
+    App.contracts.Grade.deployed().then(function(instance2) {
+      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, { from: App.account });
+    }).then(function(marks) {
+      // Wait for grades to update
+      $("#content").hide();
+      $("#loader").show();
+    }).catch(function(err) {
+      console.error(err);
+    });
+  },
   /*finaliseGrade: function() {
     var subjectId = $('#subjectsSelect').val();
     App.contracts.Grade.deployed().then(function(instance2) {

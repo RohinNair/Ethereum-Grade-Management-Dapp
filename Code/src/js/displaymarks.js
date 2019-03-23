@@ -47,6 +47,8 @@ App = {
   },
 
   calculateGrade: function(marks) {
+    var grade ="-";
+
     if(marks>=90 && marks<=100){
       grade = "A+";
     }
@@ -120,6 +122,30 @@ App = {
       var biMarks = $("#biMarks");
       biMarks.empty();
 
+      var sjMarks = $("#sjMarks");
+      sjMarks.empty();
+
+      var maMarks = $("#maMarks");
+      maMarks.empty();
+
+      //var pmMarks = $("#pmMarks");
+      //pmMarks.empty();
+
+      var piMarks = $("#piMarks");
+      piMarks.empty();
+
+      var amMarks = $("#amMarks");
+      amMarks.empty();
+
+      var pyMarks = $("#pyMarks");
+      pyMarks.empty();
+
+      var blMarks = $("#blMarks");
+      blMarks.empty();
+
+      var cmMarks = $("#cmMarks");
+      cmMarks.empty();
+
       gradeInstance2.bm(1).then(function(bms) {
         var name = bms[2];
         //var ic = student[2];
@@ -133,52 +159,13 @@ App = {
         gradeInstance2.bm(i).then(function(bms) {
           var subjectName = "Bahasa Malaysia";
           var bmmarks = bms[3];
-          var bmgrade ="-";
+          var grade ="-";
 
           //calculate grade
-          bmgrade = App.calculateGrade(bmmarks);
-          /*if(bmmarks>=90 && bmmarks<=100){
-            bmgrade = "A+";
-          }
-          else
-          if(bmmarks>=80 && bmmarks<=89){
-            bmgrade = "A";
-          }
-          else
-          if(bmmarks>=76 && bmmarks<=79){
-            bmgrade = "A-";
-          }
-          else
-          if(bmmarks>=70 && bmmarks<=75){
-            bmgrade = "B+";
-          }
-          else
-          if(bmmarks>=66 && bmmarks<=69){
-            bmgrade = "B";
-          }
-          else
-          if(bmmarks>=60 && bmmarks<=65){
-            bmgrade = "C+";
-          }
-          else
-          if(bmmarks>=50 && bmmarks<=59){
-            bmgrade = "C";
-          }
-          else
-          if(bmmarks>=45 && bmmarks<=49){
-            bmgrade = "D";
-          }
-          else
-          if(bmmarks>=40 && bmmarks<=44){
-            bmgrade = "E";
-          }
-          else
-          if(bmmarks>=1 && bmmarks<=39){
-            bmgrade = "G";
-          }*/
+          grade = App.calculateGrade(bmmarks);
 
-          // Render Student Subjects
-          var bmTemplate = "<tr><td>" + subjectName + "</td><td>" + bmmarks + "</td><td>" + bmgrade + "</td></tr>"
+          // Render BM Grades
+          var bmTemplate = "<tr><td>" + subjectName + "</td><td>" + bmmarks + "</td><td>" + grade + "</td></tr>"
           bmMarks.append(bmTemplate);
         });
       }
@@ -187,53 +174,134 @@ App = {
         gradeInstance2.bi(i).then(function(bis) {
           var subjectName = "Bahasa Inggeris";
           var bimarks = bis[3];
-          var bigrade ="-";
+          var grade ="-";
 
           //calculate grade
-          bigrade = App.calculateGrade(bimarks);;
-          /*if(bimarks>=90 && bimarks<=100){
-            bigrade = "A+";
-          }
-          else
-          if(bimarks>=80 && bimarks<=89){
-            bigrade = "A";
-          }
-          else
-          if(bimarks>=76 && bimarks<=79){
-            bigrade = "A-";
-          }
-          else
-          if(bimarks>=70 && bimarks<=75){
-            bigrade = "B+";
-          }
-          else
-          if(bimarks>=66 && bimarks<=69){
-            bigrade = "B";
-          }
-          else
-          if(bimarks>=60 && bimarks<=65){
-            bigrade = "C+";
-          }
-          else
-          if(bimarks>=50 && bimarks<=59){
-            bigrade = "C";
-          }
-          else
-          if(bimarks>=45 && bimarks<=49){
-            bigrade = "D";
-          }
-          else
-          if(bimarks>=40 && bimarks<=44){
-            bigrade = "E";
-          }
-          else
-          if(bimarks>=1 && bimarks<=39){
-            bigrade = "G";
-          }*/
+          grade = App.calculateGrade(bimarks);
 
-          // Render Student Subjects
-          var biTemplate = "<tr><td>" + subjectName + "</td><td>" + bimarks + "</td><td>" + bigrade + "</td></tr>"
+          // Render BI Grades
+          var biTemplate = "<tr><td>" + subjectName + "</td><td>" + bimarks + "</td><td>" + grade + "</td></tr>"
           biMarks.append(biTemplate);
+        });
+      }
+
+      for (var i = 1; i <= 1; i++) {
+        gradeInstance2.sj(i).then(function(sjs) {
+          var subjectName = "Sejarah";
+          var sjmarks = sjs[3];
+          var sjgrade ="-";
+
+          //calculate grade
+          sjgrade = App.calculateGrade(sjmarks);
+
+          // Render Sejarah Grades
+          var sjTemplate = "<tr><td>" + subjectName + "</td><td>" + sjmarks + "</td><td>" + sjgrade + "</td></tr>"
+          sjMarks.append(sjTemplate);
+        });
+      }
+
+      for (var i = 1; i <= 1; i++) {
+        gradeInstance2.ma(i).then(function(mas) {
+          var subjectName = "Mathematics";
+          var mamarks = mas[3];
+          var magrade ="-";
+
+          //calculate grade
+          magrade = App.calculateGrade(mamarks);
+
+          // Render Mathematics Grades
+          var maTemplate = "<tr><td>" + subjectName + "</td><td>" + mamarks + "</td><td>" + magrade + "</td></tr>"
+          maMarks.append(maTemplate);
+        });
+      }
+
+      /*for (var i = 1; i <= 1; i++) {
+        gradeInstance2.pm(i).then(function(pms) {
+          var subjectName = "Pendidikan Moral";
+          var pmmarks = pms[3];
+          var pmgrade ="-";
+
+          //calculate grade
+          pmgrade = App.calculateGrade(pmmarks);
+
+          // Render Pendidikan Moral Grades
+          var pmTemplate = "<tr><td>" + subjectName + "</td><td>" + pmmarks + "</td><td>" + pmgrade + "</td></tr>"
+          pmMarks.append(pmTemplate);
+        });
+      }*/
+
+      for (var i = 1; i <= 1; i++) {
+        gradeInstance2.pi(i).then(function(pis) {
+          var subjectName = "Pendidikan Islam";
+          var pimarks = pis[3];
+          var pigrade ="-";
+
+          //calculate grade
+          pigrade = App.calculateGrade(pimarks);
+
+          // Render Pendidikan Islam Grades
+          var piTemplate = "<tr><td>" + subjectName + "</td><td>" + pimarks + "</td><td>" + pigrade + "</td></tr>"
+          piMarks.append(piTemplate);
+        });
+      }
+
+      for (var i = 1; i <= 1; i++) {
+        gradeInstance2.am(i).then(function(ams) {
+          var subjectName = "Add Maths";
+          var ammarks = ams[3];
+          var amgrade ="-";
+
+          //calculate grade
+          amgrade = App.calculateGrade(ammarks);
+
+          // Render Add Maths Grades
+          var amTemplate = "<tr><td>" + subjectName + "</td><td>" + ammarks + "</td><td>" + amgrade + "</td></tr>"
+          amMarks.append(amTemplate);
+        });
+      }
+
+      for (var i = 1; i <= 1; i++) {
+        gradeInstance2.py(i).then(function(pys) {
+          var subjectName = "Physics";
+          var pymarks = pys[3];
+          var pygrade ="-";
+
+          //calculate grade
+          pygrade = App.calculateGrade(pymarks);
+
+          // Render Physics Grades
+          var pyTemplate = "<tr><td>" + subjectName + "</td><td>" + pymarks + "</td><td>" + pygrade + "</td></tr>"
+          pyMarks.append(pyTemplate);
+        });
+      }
+
+      for (var i = 1; i <= 1; i++) {
+        gradeInstance2.bl(i).then(function(bls) {
+          var subjectName = "Biology";
+          var blmarks = bls[3];
+          var blgrade ="-";
+
+          //calculate grade
+          blgrade = App.calculateGrade(blmarks);
+
+          // Render Biology Grades
+          var blTemplate = "<tr><td>" + subjectName + "</td><td>" + blmarks + "</td><td>" + blgrade + "</td></tr>"
+          blMarks.append(blTemplate);
+        });
+      }
+
+      for (var i = 1; i <= 1; i++) {
+        gradeInstance2.cm(i).then(function(cms) {
+          var subjectName = "Chemistry";
+          var cmmarks = cms[3];
+          var cmgrade ="-";
+
+          //calculate grade
+          cmgrade = App.calculateGrade(cmmarks);
+
+          // Render Chemistry Grades
+          var cmTemplate = "<tr><td>" + subjectName + "</td><td>" + cmmarks + "</td><td>" + cmgrade + "</td></tr>"
+          cmMarks.append(cmTemplate);
         });
       }
       return gradeInstance2.graders(App.account);

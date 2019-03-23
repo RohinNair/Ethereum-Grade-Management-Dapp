@@ -16,7 +16,7 @@ contract Grade {
         uint marks;
     }
 
-    /*struct Sejarah {
+    struct Sejarah {
         uint SJID;
         uint studentID;
         string studentName;
@@ -70,14 +70,14 @@ contract Grade {
         uint studentID;
         string studentName;
         uint marks;
-    }*/
+    }
 
     //Read/write students
     mapping(uint => BahasaMalaysia) public bm;
 
     mapping(uint => BahasaInggeris) public bi;
 
-    /*mapping(uint => Sejarah) public sj;
+    mapping(uint => Sejarah) public sj;
 
     mapping(uint => Mathematics) public ma;
 
@@ -91,7 +91,7 @@ contract Grade {
 
     mapping(uint => Biology) public bl;
 
-    mapping(uint => Chemistry) public cm;*/
+    mapping(uint => Chemistry) public cm;
 
     //This code doesn't serve any purpose
     //But when I delete it the program doesn't work
@@ -104,7 +104,7 @@ contract Grade {
 
     uint public biCount;
 
-    /*uint public sjCount;
+    uint public sjCount;
 
     uint public maCount;
 
@@ -118,7 +118,7 @@ contract Grade {
 
     uint public blCount;
 
-    uint public cmCount;*/
+    uint public cmCount;
 
     event gradedEvent (
         uint indexed _Id
@@ -130,7 +130,7 @@ contract Grade {
         enrollBM(2, "Steve");
         enrollBI(1, "Adam");
         enrollBI(2, "Steve");
-        /*enrollSJ(1, "Adam");
+        enrollSJ(1, "Adam");
         enrollSJ(2, "Steve");
         enrollMA(1, "Adam");
         enrollMA(2, "Steve");
@@ -143,7 +143,7 @@ contract Grade {
         enrollBL(1, "Adam");
         enrollBL(2, "Steve");
         enrollCM(1, "Adam");
-        enrollCM(2, "Steve");*/
+        enrollCM(2, "Steve");
     }
 
     function enrollBM (uint _studentID, string memory _studentName) private {
@@ -156,7 +156,7 @@ contract Grade {
         bi[biCount] = BahasaInggeris(biCount, _studentID, _studentName, 0);
     }
 
-    /*function enrollSJ (uint _studentID, string memory _studentName) private {
+    function enrollSJ (uint _studentID, string memory _studentName) private {
         sjCount++;
         sj[sjCount] = Sejarah(sjCount, _studentID, _studentName, 0);
     }
@@ -168,7 +168,7 @@ contract Grade {
 
     function enrollPM (uint _studentID, string memory _studentName) private {
         pmCount++;
-        pm[bmCount] = PendidikanMoral(pmCount, _studentID, _studentName, 0);
+        pm[pmCount] = PendidikanMoral(pmCount, _studentID, _studentName, 0);
     }
 
     function enrollPI (uint _studentID, string memory _studentName) private {
@@ -194,7 +194,7 @@ contract Grade {
     function enrollCM (uint _studentID, string memory _studentName) private {
         cmCount++;
         cm[cmCount] = Chemistry(cmCount, _studentID, _studentName, 0);
-    }*/
+    }
 
     function grade (uint _ID, uint _subjectMarks, uint _subjectIdentifier) public {
         //Require that the subject hasn't been graded before
@@ -234,26 +234,141 @@ contract Grade {
         emit gradedEvent(_ID);
         }
 
-    }
-
-    function gradeBI (uint _BIID, uint _subjectMarks) public {
-        //Require that the subject hasn't been graded before
-        //require(subjects[_subjectId].graded == false);
-
-        //Require a valid subject
-        require(_BIID> 0 && _BIID <= biCount);
+        if(_subjectIdentifier == 3) {
+            //Require a valid subject
+        require(_ID> 0 && _ID <= sjCount);
 
         //Require a valid grade
         require(_subjectMarks >=0 && _subjectMarks <= 100);
 
         //Update student grade
-        bi[_BIID].marks = _subjectMarks;
+        sj[_ID].marks = _subjectMarks;
 
         //subjects[_subjectId].graded = _graded;
 
         //subjects[_subjectId].studentId = _studentId;
 
-        emit gradedEvent(_BIID);
+        emit gradedEvent(_ID);
+        }
+
+        if(_subjectIdentifier == 4) {
+            //Require a valid subject
+        require(_ID> 0 && _ID <= maCount);
+
+        //Require a valid grade
+        require(_subjectMarks >=0 && _subjectMarks <= 100);
+
+        //Update student grade
+        ma[_ID].marks = _subjectMarks;
+
+        //subjects[_subjectId].graded = _graded;
+
+        //subjects[_subjectId].studentId = _studentId;
+
+        emit gradedEvent(_ID);
+        }
+
+        if(_subjectIdentifier == 5) {
+            //Require a valid subject
+        require(_ID> 0 && _ID <= pmCount);
+
+        //Require a valid grade
+        require(_subjectMarks >=0 && _subjectMarks <= 100);
+
+        //Update student grade
+        pm[_ID].marks = _subjectMarks;
+
+        //subjects[_subjectId].graded = _graded;
+
+        //subjects[_subjectId].studentId = _studentId;
+
+        emit gradedEvent(_ID);
+        }
+
+        if(_subjectIdentifier == 6) {
+            //Require a valid subject
+        require(_ID> 0 && _ID <= piCount);
+
+        //Require a valid grade
+        require(_subjectMarks >=0 && _subjectMarks <= 100);
+
+        //Update student grade
+        pi[_ID].marks = _subjectMarks;
+
+        //subjects[_subjectId].graded = _graded;
+
+        //subjects[_subjectId].studentId = _studentId;
+
+        emit gradedEvent(_ID);
+        }
+
+        if(_subjectIdentifier == 7) {
+            //Require a valid subject
+        require(_ID> 0 && _ID <= amCount);
+
+        //Require a valid grade
+        require(_subjectMarks >=0 && _subjectMarks <= 100);
+
+        //Update student grade
+        am[_ID].marks = _subjectMarks;
+
+        //subjects[_subjectId].graded = _graded;
+
+        //subjects[_subjectId].studentId = _studentId;
+
+        emit gradedEvent(_ID);
+        }
+
+        if(_subjectIdentifier == 8) {
+            //Require a valid subject
+        require(_ID> 0 && _ID <= pyCount);
+
+        //Require a valid grade
+        require(_subjectMarks >=0 && _subjectMarks <= 100);
+
+        //Update student grade
+        py[_ID].marks = _subjectMarks;
+
+        //subjects[_subjectId].graded = _graded;
+
+        //subjects[_subjectId].studentId = _studentId;
+
+        emit gradedEvent(_ID);
+        }
+
+        if(_subjectIdentifier == 9) {
+            //Require a valid subject
+        require(_ID> 0 && _ID <= blCount);
+
+        //Require a valid grade
+        require(_subjectMarks >=0 && _subjectMarks <= 100);
+
+        //Update student grade
+        bl[_ID].marks = _subjectMarks;
+
+        //subjects[_subjectId].graded = _graded;
+
+        //subjects[_subjectId].studentId = _studentId;
+
+        emit gradedEvent(_ID);
+        }
+
+        if(_subjectIdentifier == 10) {
+            //Require a valid subject
+        require(_ID> 0 && _ID <= cmCount);
+
+        //Require a valid grade
+        require(_subjectMarks >=0 && _subjectMarks <= 100);
+
+        //Update student grade
+        cm[_ID].marks = _subjectMarks;
+
+        //subjects[_subjectId].graded = _graded;
+
+        //subjects[_subjectId].studentId = _studentId;
+
+        emit gradedEvent(_ID);
+        }
     }
 
     /*function finalise (uint _subjectId) public {

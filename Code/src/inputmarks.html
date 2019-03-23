@@ -28,19 +28,6 @@
               <!----th>IC No: </th>
               <td id="studentsIc"></td-->
             </table>
-            <!--table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Student ID</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Marks</th>
-                  <th scole="col">Grade</th>
-                </tr>
-              </thead>
-              <tbody id="studentsSubjects">
-              </tbody>
-            </table-->
             <!----div>
               <table>
                 <th>Number of subjects enrolled: </th>
@@ -52,9 +39,6 @@
             </div-->
             <form onSubmit="App.submitbmGrade(); return false;">
               <div class="form-group">
-                <!--label for="subjectsSelect">Select Subject</label>
-                <select class="form-control" id="subjectsSelect">
-                </select-->
                 <br/>
                 <label for="bm-marks">Enter BM Marks:</label>
                 <input id="bm-marks" type="text" class="form-control"></input>
@@ -65,12 +49,89 @@
             </form>
             <form onSubmit="App.submitbiGrade(); return false;">
               <div class="form-group">
-                <!--label for="subjectsSelect">Select Subject</label>
-                <select class="form-control" id="subjectsSelect">
-                </select-->
                 <br/>
                 <label for="bi-marks">Enter BI Marks:</label>
                 <input id="bi-marks" type="text" class="form-control"></input>
+              </div>
+              <br/>
+              <button type="submit" class="btn btn-primary">Submit Grade</button>
+              <hr />
+            </form>
+            <form onSubmit="App.submitsjGrade(); return false;">
+              <div class="form-group">
+                <br/>
+                <label for="sj-marks">Enter Sejarah Marks:</label>
+                <input id="sj-marks" type="text" class="form-control"></input>
+              </div>
+              <br/>
+              <button type="submit" class="btn btn-primary">Submit Grade</button>
+              <hr />
+            </form>
+            <form onSubmit="App.submitmaGrade(); return false;">
+              <div class="form-group">
+                <br/>
+                <label for="ma-marks">Enter Mathematics Marks:</label>
+                <input id="ma-marks" type="text" class="form-control"></input>
+              </div>
+              <br/>
+              <button type="submit" class="btn btn-primary">Submit Grade</button>
+              <hr />
+            </form>
+            <!--form onSubmit="App.submitpmGrade(); return false;">
+              <div class="form-group">
+                <br/>
+                <label for="pm-marks">Enter Pendidikan Moral Marks:</label>
+                <input id="pm-marks" type="text" class="form-control"></input>
+              </div>
+              <br/>
+              <button type="submit" class="btn btn-primary">Submit Grade</button>
+              <hr />
+            </form-->
+            <form onSubmit="App.submitpiGrade(); return false;">
+              <div class="form-group">
+                <br/>
+                <label for="pi-marks">Enter Pendidikan Islam Marks:</label>
+                <input id="pi-marks" type="text" class="form-control"></input>
+              </div>
+              <br/>
+              <button type="submit" class="btn btn-primary">Submit Grade</button>
+              <hr />
+            </form>
+            <form onSubmit="App.submitamGrade(); return false;">
+              <div class="form-group">
+                <br/>
+                <label for="am-marks">Enter Add Maths Marks:</label>
+                <input id="am-marks" type="text" class="form-control"></input>
+              </div>
+              <br/>
+              <button type="submit" class="btn btn-primary">Submit Grade</button>
+              <hr />
+            </form>
+            <form onSubmit="App.submitpyGrade(); return false;">
+              <div class="form-group">
+                <br/>
+                <label for="py-marks">Enter Physics Marks:</label>
+                <input id="py-marks" type="text" class="form-control"></input>
+              </div>
+              <br/>
+              <button type="submit" class="btn btn-primary">Submit Grade</button>
+              <hr />
+            </form>
+            <form onSubmit="App.submitblGrade(); return false;">
+              <div class="form-group">
+                <br/>
+                <label for="bl-marks">Enter Biology Marks:</label>
+                <input id="bl-marks" type="text" class="form-control"></input>
+              </div>
+              <br/>
+              <button type="submit" class="btn btn-primary">Submit Grade</button>
+              <hr />
+            </form>
+            <form onSubmit="App.submitcmGrade(); return false;">
+              <div class="form-group">
+                <br/>
+                <label for="cm-marks">Enter Chemistry Marks:</label>
+                <input id="cm-marks" type="text" class="form-control"></input>
               </div>
               <br/>
               <button type="submit" class="btn btn-primary">Submit Grade</button>
