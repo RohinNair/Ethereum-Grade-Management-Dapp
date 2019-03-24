@@ -179,10 +179,10 @@ App = {
     var subjectMarks = $('#bm-marks').val()
     //subject Identifier
     var subjectIdentifier = 1;
-    //var graded = true;
-    //var studId = 1;
+    //Indicate subject has been graded and cannot overwrite
+    var graded = true;
     App.contracts.Grade.deployed().then(function(instance2) {
-      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, { from: App.account });
+      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, graded, { from: App.account });
     }).then(function(marks) {
       // Wait for grades to update
       $("#content").hide();
@@ -198,10 +198,10 @@ App = {
     var subjectMarks = $('#bi-marks').val()
     //subject Identifier
     var subjectIdentifier = 2;
-    //var graded = true;
-    //var studId = 1;
+    //Indicate subject has been graded and cannot overwrite
+    var graded = true;
     App.contracts.Grade.deployed().then(function(instance2) {
-      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, { from: App.account });
+      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, graded, { from: App.account });
     }).then(function(marks) {
       // Wait for grades to update
       $("#content").hide();
@@ -217,10 +217,10 @@ App = {
     var subjectMarks = $('#sj-marks').val()
     //subject Identifier
     var subjectIdentifier = 3;
-    //var graded = true;
-    //var studId = 1;
+    //Indicate subject has been graded and cannot overwrite
+    var graded = true;
     App.contracts.Grade.deployed().then(function(instance2) {
-      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, { from: App.account });
+      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, graded, { from: App.account });
     }).then(function(marks) {
       // Wait for grades to update
       $("#content").hide();
@@ -236,10 +236,10 @@ App = {
     var subjectMarks = $('#ma-marks').val()
     //subject Identifier
     var subjectIdentifier = 4;
-    //var graded = true;
-    //var studId = 1;
+    //Indicate subject has been graded and cannot overwrite
+    var graded = true;
     App.contracts.Grade.deployed().then(function(instance2) {
-      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, { from: App.account });
+      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, graded, { from: App.account });
     }).then(function(marks) {
       // Wait for grades to update
       $("#content").hide();
@@ -255,10 +255,10 @@ App = {
     var subjectMarks = $('#pm-marks').val()
     //subject Identifier
     var subjectIdentifier = 5;
-    //var graded = true;
-    //var studId = 1;
+    //Indicate subject has been graded and cannot overwrite
+    var graded = true;
     App.contracts.Grade.deployed().then(function(instance2) {
-      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, { from: App.account });
+      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, graded, { from: App.account });
     }).then(function(marks) {
       // Wait for grades to update
       $("#content").hide();
@@ -274,10 +274,10 @@ App = {
     var subjectMarks = $('#pi-marks').val()
     //subject Identifier
     var subjectIdentifier = 6;
-    //var graded = true;
-    //var studId = 1;
+    //Indicate subject has been graded and cannot overwrite
+    var graded = true;
     App.contracts.Grade.deployed().then(function(instance2) {
-      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, { from: App.account });
+      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, graded, { from: App.account });
     }).then(function(marks) {
       // Wait for grades to update
       $("#content").hide();
@@ -293,10 +293,10 @@ App = {
     var subjectMarks = $('#am-marks').val()
     //subject Identifier
     var subjectIdentifier = 7;
-    //var graded = true;
-    //var studId = 1;
+    //Indicate subject has been graded and cannot overwrite
+    var graded = true;
     App.contracts.Grade.deployed().then(function(instance2) {
-      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, { from: App.account });
+      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, graded, { from: App.account });
     }).then(function(marks) {
       // Wait for grades to update
       $("#content").hide();
@@ -312,10 +312,10 @@ App = {
     var subjectMarks = $('#py-marks').val()
     //subject Identifier
     var subjectIdentifier = 8;
-    //var graded = true;
-    //var studId = 1;
+    //Indicate subject has been graded and cannot overwrite
+    var graded = true;
     App.contracts.Grade.deployed().then(function(instance2) {
-      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, { from: App.account });
+      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, graded, { from: App.account });
     }).then(function(marks) {
       // Wait for grades to update
       $("#content").hide();
@@ -331,10 +331,10 @@ App = {
     var subjectMarks = $('#bl-marks').val()
     //subject Identifier
     var subjectIdentifier = 9;
-    //var graded = true;
-    //var studId = 1;
+    //Indicate subject has been graded and cannot overwrite
+    var graded = true;
     App.contracts.Grade.deployed().then(function(instance2) {
-      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, { from: App.account });
+      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, graded, { from: App.account });
     }).then(function(marks) {
       // Wait for grades to update
       $("#content").hide();
@@ -350,10 +350,10 @@ App = {
     var subjectMarks = $('#cm-marks').val()
     //subject Identifier
     var subjectIdentifier = 10;
-    //var graded = true;
-    //var studId = 1;
+    //Indicate subject has been graded and cannot overwrite
+    var graded = true;
     App.contracts.Grade.deployed().then(function(instance2) {
-      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, { from: App.account });
+      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, graded, { from: App.account });
     }).then(function(marks) {
       // Wait for grades to update
       $("#content").hide();
