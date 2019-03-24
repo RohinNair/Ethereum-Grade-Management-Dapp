@@ -97,75 +97,8 @@ App = {
         subCount.append(subCountTemplate);*/
 
       })
-
-      for (var i = 2; i <= 2; i++) {
-        gradeInstance2.bm(i).then(function(bms) {
-          var bmid = bms[0];
-          var studentid = bms[1];
-          var studentName = bms[2];
-          var marks = bms[3];
-          //var studentID = subject[4];
-          var grade ="-";
-
-            //calculate grade
-          if(marks>=90 && marks<=100){
-            grade = "A+";
-          }
-          else
-          if(marks>=80 && marks<=89){
-            grade = "A";
-          }
-          else
-          if(marks>=76 && marks<=79){
-            grade = "A-";
-          }
-          else
-          if(marks>=70 && marks<=75){
-            grade = "B+";
-          }
-          else
-          if(marks>=66 && marks<=69){
-            grade = "B";
-          }
-          else
-          if(marks>=60 && marks<=65){
-            grade = "C+";
-          }
-          else
-          if(marks>=50 && marks<=59){
-            grade = "C";
-          }
-          else
-          if(marks>=45 && marks<=49){
-            grade = "D";
-          }
-          else
-          if(marks>=40 && marks<=4){
-            grade = "E";
-          }
-          else
-          if(marks>=1 && marks<=39){
-            grade = "G";
-          }
-
-          // Render Student Subjects
-          var studentTemplate = "<tr><th>" + bmid + "</th><td>" + studentid + "</td><td>" + studentName + "</td><td>" + marks + "</td><td>" + grade + "</td></tr>"
-          studentsSubjects.append(studentTemplate);
-
-          // Render Student Selection Menu
-          //var subjectOption = "<option value='" + id + "' >" + name + "</ option>"
-          //subjectsSelect.append(subjectOption);
-
-          //var totalMarks = total;
-          //studentsTotalMarks.append(total);
-        });
-      }
       return gradeInstance2.graders(App.account);
   }).then(function(finalised) {
-    // Do not allow a teacher to grade
-    if(finalised) {
-      $('form').hide();
-    }
       loader.hide();
       content.show();
     }).catch(function(error) {
