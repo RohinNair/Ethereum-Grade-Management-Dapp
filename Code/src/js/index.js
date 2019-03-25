@@ -65,42 +65,39 @@ App = {
     // Load contract data
     App.contracts.Grade.deployed().then(function(instance) {
       gradeInstance = instance;
-      return gradeInstance.studentsCount();
-    }).then(function(studentsCount) {
-      var studentsName = $("#studentsName");
-      studentsName.empty();
+      return gradeInstance.bmCount();
+    }).then(function(bmCount) {
 
       var studentsResults = $("#studentsResults");
       studentsResults.empty();
 
-      var studentsSelect = $('#studentsSelect');
-      studentsSelect.empty();
+      for (var i = 1; i <= bmCount; i++) {
+        gradeInstance.bm(i).then(function(bms) {
+          var bmid = bms[0];
+          var studentid = bms[1];
+          var studentName = bms[2];
+          links1 = [
+            "",
+            '<a href="./inputmarks1.html">Grade</a>',
+            '<a href="./inputmarks2.html">Grade</a>'
+          ];
 
-      //var studentsCheck = document.getElementById("admission");
+          links2 = [
+            "",
+            '<a href="./displaymarks1.html">View</a>',
+            '<a href="./displaymarks2.html">View</a>'
+          ];
 
-      gradeInstance.students(1).then(function(student) {
-        var name = student[1];
-
-        var nameTemplate = "<th>" + name + "</th>"
-        studentsName.append(nameTemplate);
-      })
-
-      for (var i = 1; i <= studentsCount; i++) {
-        gradeInstance.students(i).then(function(student) {
-          var id = student[0];
-          var name = student[1];
-          var icno = student[2];
-          //var marks = student[3];
-          var str = "Grade Student";
-          var goto = str.link("./index2.html")
+          var goto1 = links1[bmid];
+          var goto2 = links2[bmid];
 
           // Render Student Grade Result
-          var studentTemplate = "<tr><th>" + id + "</th><td>" + name + "</td><td>" + icno + "</td><td>" + goto + "</td></tr>"
+          var studentTemplate = "<tr><th>" + bmid + "</th><td>" + studentid + "</td><td>" + studentName + "</td><td>" + goto1 + "</td><td>" + goto2 + "</td></tr>"
           studentsResults.append(studentTemplate);
 
           // Render Student Selection Menu
-          var studentOption = "<option value='" + id + "' >" + name + "</ option>"
-          studentsSelect.append(studentOption);
+          /*var studentOption = "<option value='" + id + "' >" + name + "</ option>"
+          studentsSelect.append(studentOption);*/
         });
       }
       return gradeInstance.graders(App.account);

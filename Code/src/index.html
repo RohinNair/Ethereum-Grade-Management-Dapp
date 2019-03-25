@@ -8,7 +8,7 @@
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="icon" href="https://cdn.icon-icons.com/icons2/1804/PNG/512/iconfinder-499-student-education-graduate-learning-4212915_114945.png">
+    <link rel="icon" href="css/img/tabico.png">
   </head>
   <body>
     <div class="container" style="width: auto;">
@@ -21,39 +21,21 @@
             <p class="text-center">Loading...</p>
           </div>
           <div id="content" style="display: none;">
-            <!--table>
-              <th>Student Name: </th>
-              <th id="studentsName"></th>
-              <br/>
-            </table-->
             <table class="table">
               <thead>
                 <tr>
                   <th scope="col">#</th>
+                  <th scope="col">ID</th>
                   <th scope="col">Name</th>
-                  <th scope="col">IC No.</th>
-                  <th scope="col">Grades</th>
+                  <th scope="col">Grade Student</th>
+                  <th scope="col">View Grades</th>
                 </tr>
               </thead>
               <tbody id="studentsResults">
               </tbody>
             </table>
             <hr/>
-            <!----form onSubmit="App.submitGrade(); return false;">
-              <div class="form-group">
-                <label for="studentsSelect">Select Student</label>
-                <select class="form-control" id="studentsSelect">
-                </select>
-                <br/>
-                <label for="student-marks">Enter Marks</label>
-                <input id="student-marks" type="text" class="form-control"></input>
-              </div>
-              <br/>
-              <button type="submit" class="btn btn-primary">Submit Grade</button>
-              <hr />
-            </form-->
             <p id="accountAddress" class="text-center"></p>
-            <!--a href="./index2.html">Subjects</a-->
             <br/>
           </div>
         </div>
@@ -66,6 +48,6 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/web3.min.js"></script>
     <script src="js/truffle-contract.js"></script>
-    <script src="js/app.js"></script>
+    <script src="js/index.js"></script>
   </body>
 </html>

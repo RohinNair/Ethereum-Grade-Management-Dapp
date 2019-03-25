@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Student Grade Report</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="css/img/tabico.png">
+  </head>
+  <body>
+    <div class="container" style="width: auto;">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="text-center">Student Grading</h1>
+          <hr/>
+          <br/>
+          <div id="loader">
+            <p class="text-center">Loading...</p>
+          </div>
+          <div id="content" style="display: none;">
+            <table>
+              <th>Student Name: &nbsp;</th>
+              <td id="studentsName"></td>
+              <th>&nbsp;&nbsp;&nbsp;</th>
+              <!----th>IC No: </th>
+              <td id="studentsIc"></td-->
+            </table>
+            <!----div>
+              <table>
+                <th>Number of subjects enrolled: </th>
+                <td id="subCount"></td>
+                <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>Total Marks: </th>
+                <td id="studentsTotalMarks"></td>
+              </table>
+            </div-->
+            <form onSubmit="App.submitbmGrade(); return false;">
+              <div class="form-group" id="bahasaMalaysia">
+                <br/>
+                <label for="bm-marks">Enter BM Marks:</label>
+                <input id="bm-marks" type="text" class="form-control"></input>
+              <br/>
+              <button type="submit" class="btn btn-primary">Submit Grade</button>
+              <hr />
+            </div>
+            </form>
+            <form onSubmit="App.submitbiGrade(); return false;">
+              <div class="form-group">
+                <br/>
+                <label for="bi-marks">Enter BI Marks:</label>
+                <input id="bi-marks" type="text" class="form-control"></input>
+              </div>
+              <br/>
+              <button type="submit" class="btn btn-primary">Submit Grade</button>
+              <hr />
+            </form>
+            <form onSubmit="App.submitsjGrade(); return false;">
+              <div class="form-group">
+                <br/>
+                <label for="sj-marks">Enter Sejarah Marks:</label>
+                <input id="sj-marks" type="text" class="form-control"></input>
+              </div>
+              <br/>
+              <button type="submit" class="btn btn-primary">Submit Grade</button>
+              <hr />
+            </form>
+            <form onSubmit="App.submitmaGrade(); return false;">
+              <div class="form-group">
+                <br/>
+                <label for="ma-marks">Enter Mathematics Marks:</label>
+                <input id="ma-marks" type="text" class="form-control"></input>
+              </div>
+              <br/>
+              <button type="submit" class="btn btn-primary">Submit Grade</button>
+              <hr />
+            </form>
+            <!--form onSubmit="App.submitpmGrade(); return false;">
+              <div class="form-group">
+                <br/>
+                <label for="pm-marks">Enter Pendidikan Moral Marks:</label>
+                <input id="pm-marks" type="text" class="form-control"></input>
+              </div>
+              <br/>
+              <button type="submit" class="btn btn-primary">Submit Grade</button>
+              <hr />
+            </form-->
+            <form onSubmit="App.submitpiGrade(); return false;">
+              <div class="form-group">
+                <br/>
+                <label for="pi-marks">Enter Pendidikan Islam Marks:</label>
+                <input id="pi-marks" type="text" class="form-control"></input>
+              </div>
+              <br/>
+              <button type="submit" class="btn btn-primary">Submit Grade</button>
+              <hr />
+            </form>
+            <form onSubmit="App.submitamGrade(); return false;">
+              <div class="form-group">
+                <br/>
+                <label for="am-marks">Enter Add Maths Marks:</label>
+                <input id="am-marks" type="text" class="form-control"></input>
+              </div>
+              <br/>
+              <button type="submit" class="btn btn-primary">Submit Grade</button>
+              <hr />
+            </form>
+            <form onSubmit="App.submitpyGrade(); return false;">
+              <div class="form-group">
+                <br/>
+                <label for="py-marks">Enter Physics Marks:</label>
+                <input id="py-marks" type="text" class="form-control"></input>
+              </div>
+              <br/>
+              <button type="submit" class="btn btn-primary">Submit Grade</button>
+              <hr />
+            </form>
+            <form onSubmit="App.submitblGrade(); return false;">
+              <div class="form-group">
+                <br/>
+                <label for="bl-marks">Enter Biology Marks:</label>
+                <input id="bl-marks" type="text" class="form-control"></input>
+              </div>
+              <br/>
+              <button type="submit" class="btn btn-primary">Submit Grade</button>
+              <hr />
+            </form>
+            <form onSubmit="App.submitcmGrade(); return false;">
+              <div class="form-group">
+                <br/>
+                <label for="cm-marks">Enter Chemistry Marks:</label>
+                <input id="cm-marks" type="text" class="form-control"></input>
+              </div>
+              <br/>
+              <button type="submit" class="btn btn-primary">Submit Grade</button>
+              <hr />
+            </form>
+            <!--form onSubmit="App.finaliseGrade(); return false;">
+              <div class="form-group">
+                <p><font color="red">I hereby finalize the grades entered above. I understand that by clicking the button below, the grades above will be permanently stored
+                    in the system and cannot be modified in the event of a mistake.</font></p>
+              <button type="submit" class="btn btn-primary">Finalize Grades</button>
+              </div>
+            </form-->
+            <p id="accountAddress" class="text-center"></p>
+            </form>
+            <br/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/inputmarks/inputmarks1.js"></script>
+  </body>
+</html>
