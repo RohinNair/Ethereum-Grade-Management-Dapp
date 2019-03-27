@@ -85,7 +85,6 @@ App = {
       gradeInstance2.bm(1).then(function(bms) {
         var name = bms[2];
         //var ic = student[2];
-        //var subjectTaken = student[3];
 
         var nameTemplate = "<td>" + name + "</td>"
         studentsName.append(nameTemplate);
