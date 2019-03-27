@@ -103,9 +103,6 @@ contract Grade {
 
     mapping(uint => Chemistry) public cm;
 
-    //This code doesn't serve any purpose
-    //But when I delete it the program doesn't work
-    //So it stays
     mapping(address => bool) public graders;
 
     //Store Subject Count
@@ -134,59 +131,74 @@ contract Grade {
         uint indexed _Id
     );
 
+    /*Subject Codes =
+
+        BM = 1
+        BI = 2
+        SJ = 3
+        MA = 4
+        PM = 5
+        PI = 6
+        AM = 7
+        PY = 8
+        BL = 9
+        CM = 10*/
+
     //Constructor
     constructor () public {
-        enrollBM(1, "Adam");
-        enrollBM(2, "Steve");
-        enrollBI(1, "Adam");
-        enrollBI(2, "Steve");
-        enrollSJ(1, "Adam");
-        enrollSJ(2, "Steve");
-        enrollMA(1, "Adam");
-        enrollMA(2, "Steve");
-        enrollPI(1, "Adam");
-        enrollPM(2, "Steve");
-        enrollAM(1, "Adam");
+        /*enrollAM(1, "Adam");
         enrollAM(2, "Steve");
         enrollPY(1, "Adam");
         enrollPY(2, "Steve");
         enrollBL(1, "Adam");
         enrollBL(2, "Steve");
         enrollCM(1, "Adam");
-        enrollCM(2, "Steve");
+        enrollCM(2, "Steve");*/
+        enrollCore(1, 1, "Adam");
+        enrollCore(1, 2, "Steve");
+        enrollCore(2, 1, "Adam");
+        enrollCore(2, 2, "Steve");
+        enrollCore(3, 1, "Adam");
+        enrollCore(3, 2, "Steve");
+        enrollCore(4, 1, "Adam");
+        enrollCore(4, 2, "Steve");
+        enrollCore(6, 1, "Adam");
+        enrollCore(5, 2, "Steve");
     }
 
-    function enrollBM (uint _studentID, string memory _studentName) private {
-        bmCount++;
-        bm[bmCount] = BahasaMalaysia(bmCount, _studentID, _studentName, 0, false);
+    function enrollCore(uint _subjectCode, uint _studentID, string memory _studentName) private {
+        if (_subjectCode == 1) {
+            bmCount++;
+            bm[bmCount] = BahasaMalaysia(bmCount, _studentID, _studentName, 0, false);
+        }
+
+        if (_subjectCode == 2) {
+            biCount++;
+            bi[biCount] = BahasaInggeris(biCount, _studentID, _studentName, 0, false);
+        }
+
+        if (_subjectCode == 3) {
+            sjCount++;
+            sj[sjCount] = Sejarah(sjCount, _studentID, _studentName, 0, false);
+        }
+
+        if (_subjectCode == 4) {
+            maCount++;
+            ma[maCount] = Mathematics(maCount, _studentID, _studentName, 0, false);
+        }
+
+        if (_subjectCode == 5) {
+            pmCount++;
+            pm[pmCount] = PendidikanMoral(pmCount, _studentID, _studentName, 0, false);
+        }
+
+        if (_subjectCode == 6) {
+            piCount++;
+            pi[piCount] = PendidikanIslam(piCount, _studentID, _studentName, 0, false);
+        }
     }
 
-    function enrollBI (uint _studentID, string memory _studentName) private {
-        biCount++;
-        bi[biCount] = BahasaInggeris(biCount, _studentID, _studentName, 0, false);
-    }
-
-    function enrollSJ (uint _studentID, string memory _studentName) private {
-        sjCount++;
-        sj[sjCount] = Sejarah(sjCount, _studentID, _studentName, 0, false);
-    }
-
-    function enrollMA (uint _studentID, string memory _studentName) private {
-        maCount++;
-        ma[maCount] = Mathematics(maCount, _studentID, _studentName, 0, false);
-    }
-
-    function enrollPM (uint _studentID, string memory _studentName) private {
-        pmCount++;
-        pm[pmCount] = PendidikanMoral(pmCount, _studentID, _studentName, 0, false);
-    }
-
-    function enrollPI (uint _studentID, string memory _studentName) private {
-        piCount++;
-        pi[piCount] = PendidikanIslam(piCount, _studentID, _studentName, 0, false);
-    }
-
-    function enrollAM (uint _studentID, string memory _studentName) private {
+    /*function enrollAM (uint _studentID, string memory _studentName) private {
         amCount++;
         am[amCount] = AddMaths(amCount, _studentID, _studentName, 0, false);
     }
@@ -204,7 +216,7 @@ contract Grade {
     function enrollCM (uint _studentID, string memory _studentName) private {
         cmCount++;
         cm[cmCount] = Chemistry(cmCount, _studentID, _studentName, 0, false);
-    }
+    }*/
 
     function grade (uint _ID, uint _subjectMarks, uint _subjectIdentifier, bool _graded) public {
         //Require that the subject hasn't been graded before

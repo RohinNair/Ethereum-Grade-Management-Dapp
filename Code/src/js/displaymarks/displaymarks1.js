@@ -128,13 +128,13 @@ App = {
       var maMarks = $("#maMarks");
       maMarks.empty();
 
-      //var pmMarks = $("#pmMarks");
-      //pmMarks.empty();
+      var pmMarks = $("#pmMarks");
+      pmMarks.empty();
 
       var piMarks = $("#piMarks");
       piMarks.empty();
 
-      var amMarks = $("#amMarks");
+      /*var amMarks = $("#amMarks");
       amMarks.empty();
 
       var pyMarks = $("#pyMarks");
@@ -144,7 +144,7 @@ App = {
       blMarks.empty();
 
       var cmMarks = $("#cmMarks");
-      cmMarks.empty();
+      cmMarks.empty();*/
 
       gradeInstance2.bm(1).then(function(bms) {
         var name = bms[2];
@@ -215,7 +215,7 @@ App = {
         });
       }
 
-      /*for (var i = 1; i <= 1; i++) {
+      for (var i = 1; i <= 1; i++) {
         gradeInstance2.pm(i).then(function(pms) {
           var subjectName = "Pendidikan Moral";
           var pmmarks = pms[3];
@@ -228,7 +228,7 @@ App = {
           var pmTemplate = "<tr><td>" + subjectName + "</td><td>" + pmmarks + "</td><td>" + pmgrade + "</td></tr>"
           pmMarks.append(pmTemplate);
         });
-      }*/
+      }
 
       for (var i = 1; i <= 1; i++) {
         gradeInstance2.pi(i).then(function(pis) {
@@ -245,7 +245,7 @@ App = {
         });
       }
 
-      for (var i = 1; i <= 1; i++) {
+      /*for (var i = 1; i <= 1; i++) {
         gradeInstance2.am(i).then(function(ams) {
           var subjectName = "Add Maths";
           var ammarks = ams[3];
@@ -303,7 +303,7 @@ App = {
           var cmTemplate = "<tr><td>" + subjectName + "</td><td>" + cmmarks + "</td><td>" + cmgrade + "</td></tr>"
           cmMarks.append(cmTemplate);
         });
-      }
+      }*/
       return gradeInstance2.graders(App.account);
   }).then(function(finalised) {
     // Do not allow a teacher to grade

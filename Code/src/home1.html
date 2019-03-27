@@ -6,8 +6,6 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
 
   <title>Student Grade Management System</title>
 
@@ -64,7 +62,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
               <h6 class="collapse-header">Main Functions:</h6>
               <a class="collapse-item" href="home.html">Manage Student Grades</a>
-              <a class="collapse-item" href="enrollelectives1.html">Enroll Students</a>
+              <a class="collapse-item" href="#">Enroll Students</a>
             </div>
           </div>
         </li>
@@ -110,13 +108,37 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-          <br/>
-          <!-- Page Heading -->
-          <h1 class="h1 mb-4 text-gray-800">Home Page</h1>
-          <br/>
-          <p class="p mb-4 text-gray-800">Welcome to the Student Grade Management System Powered by the Ethereum Blockchain. To get started
-          click on one of the options from the side menu.
-          </p>
+            <div class="container" style="width: auto;">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <br/>
+                    <h1 class="text-center">Student Grade Management System</h1>
+                    <hr/>
+                    <br/>
+                    <div id="loader">
+                      <p class="text-center">Loading...</p>
+                    </div>
+                    <div id="content" style="display: none;">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Grade Student</th>
+                            <th scope="col">View Grades</th>
+                          </tr>
+                        </thead>
+                        <tbody id="studentsResults">
+                        </tbody>
+                      </table>
+                      <hr/>
+                      <p id="accountAddress" class="text-center"></p>
+                      <br/>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
         </div>
         <!-- /.container-fluid -->
@@ -149,6 +171,10 @@
 
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin-2.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/web3.min.js"></script>
+  <script src="js/truffle-contract.js"></script>
+  <script src="js/index.js"></script>
 
 </body>
 

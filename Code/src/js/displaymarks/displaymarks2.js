@@ -131,8 +131,8 @@ App = {
       var pmMarks = $("#pmMarks");
       pmMarks.empty();
 
-      //var piMarks = $("#piMarks");
-      //piMarks.empty();
+      var piMarks = $("#piMarks");
+      piMarks.empty();
 
       var amMarks = $("#amMarks");
       amMarks.empty();
@@ -220,6 +220,7 @@ App = {
           var subjectName = "Pendidikan Moral";
           var pmmarks = pms[3];
           var pmgrade ="-";
+          var subCount = pms[0];
 
           //calculate grade
           pmgrade = App.calculateGrade(pmmarks);
@@ -230,7 +231,7 @@ App = {
         });
       }
 
-      /*for (var i = 1; i <= 1; i++) {
+      for (var i = 1; i <= 1; i++) {
         gradeInstance2.pi(i).then(function(pis) {
           var subjectName = "Pendidikan Islam";
           var pimarks = pis[3];
@@ -243,7 +244,7 @@ App = {
           var piTemplate = "<tr><td>" + subjectName + "</td><td>" + pimarks + "</td><td>" + pigrade + "</td></tr>"
           piMarks.append(piTemplate);
         });
-      }*/
+      }
 
       for (var i = 2; i <= 2; i++) {
         gradeInstance2.am(i).then(function(ams) {
