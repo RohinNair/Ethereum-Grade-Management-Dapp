@@ -134,10 +134,10 @@ App = {
       var piMarks = $("#piMarks");
       piMarks.empty();
 
-      /*var amMarks = $("#amMarks");
+      var amMarks = $("#amMarks");
       amMarks.empty();
 
-      var pyMarks = $("#pyMarks");
+      /*var pyMarks = $("#pyMarks");
       pyMarks.empty();
 
       var blMarks = $("#blMarks");
@@ -245,7 +245,7 @@ App = {
         });
       }
 
-      /*for (var i = 1; i <= 1; i++) {
+      for (var i = 1; i <= 1; i++) {
         gradeInstance2.am(i).then(function(ams) {
           var subjectName = "Add Maths";
           var ammarks = ams[3];
@@ -260,7 +260,7 @@ App = {
         });
       }
 
-      for (var i = 1; i <= 1; i++) {
+      /*for (var i = 1; i <= 1; i++) {
         gradeInstance2.py(i).then(function(pys) {
           var subjectName = "Physics";
           var pymarks = pys[3];

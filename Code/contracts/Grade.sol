@@ -56,6 +56,7 @@ contract Grade {
         string studentName;
         uint marks;
         bool graded;
+        bool elective;
     }
 
     struct Physics {
@@ -64,6 +65,7 @@ contract Grade {
         string studentName;
         uint marks;
         bool graded;
+        bool elective;
     }
 
     struct Biology {
@@ -72,6 +74,7 @@ contract Grade {
         string studentName;
         uint marks;
         bool graded;
+        bool elective;
     }
 
     struct Chemistry {
@@ -80,6 +83,7 @@ contract Grade {
         string studentName;
         uint marks;
         bool graded;
+        bool elective;
     }
 
     //Read/write students
@@ -104,6 +108,8 @@ contract Grade {
     mapping(uint => Chemistry) public cm;
 
     mapping(address => bool) public graders;
+
+    mapping(address => bool) public electives;
 
     //Store Subject Count
 
@@ -219,10 +225,10 @@ contract Grade {
     }*/
 
     function grade (uint _ID, uint _subjectMarks, uint _subjectIdentifier, bool _graded) public {
+        if(_subjectIdentifier == 1) {
         //Require that the subject hasn't been graded before
         require(bm[_ID].graded == false);
 
-        if(_subjectIdentifier == 1) {
         //Require a valid subject
         require(_ID> 0 && _ID <= bmCount);
 
@@ -407,6 +413,29 @@ contract Grade {
         cm[_ID].graded = _graded;
 
         emit gradedEvent(_ID);
+        }
+    }
+
+    function elective (uint _ID, uint _studentID, string memory _studentName) public {
+        //Add Maths
+        if(_ID == 1) {
+            amCount++;
+            am[amCount] = AddMaths(amCount, _studentID, _studentName, 0, false, true);
+        }
+
+        //Biology
+        if(_ID == 2) {
+
+        }
+
+        //Physics
+        if(_ID == 3) {
+
+        }
+
+        //Chemistry
+        if(_ID == 4) {
+
         }
     }
 

@@ -114,17 +114,12 @@ App = {
       console.warn(error);
     });
   },
-  submitbmGrade: function() {
-    //student within subject instance
-    var subjectId = 1;
-    //value of marks input
-    var subjectMarks = $('#bm-marks').val()
-    //subject Identifier
-    var subjectIdentifier = 1;
-    //Indicate subject has been graded and cannot overwrite
-    var graded = true;
+  enrollElectives: function() {
+    var electiveId = $('#electivesSelect').val();
+    var studentId = 1;
+    var studentName = "Adam";
     App.contracts.Grade.deployed().then(function(instance2) {
-      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, graded, { from: App.account });
+      return instance2.elective(electiveId, studentId, studentName, { from: App.account });
     }).then(function(marks) {
       // Wait for grades to update
       $("bahasaMalaysia").hide();
