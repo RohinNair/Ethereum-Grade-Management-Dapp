@@ -66,12 +66,9 @@ App = {
     App.contracts.Grade.deployed().then(function(instance2) {
       gradeInstance2 = instance2;
       return gradeInstance2.bmCount();
-    }).then(function(bmCount) {
+    }).then(function() {
       var studentsName = $("#studentsName");
       studentsName.empty();
-
-      //var studentsSubjects = $("#studentsSubjects");
-      //studentsSubjects.empty();
 
       var subjectsSelect = $('#subjectsSelect');
       subjectsSelect.empty();
