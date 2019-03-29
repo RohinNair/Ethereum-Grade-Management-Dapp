@@ -247,7 +247,7 @@ App = {
 
       for (var i = 1; i <= 1; i++) {
         gradeInstance2.am(i).then(function(ams) {
-          var subjectName = "Add Maths";
+          var subjectName = "Additional Mathematics";
           var ammarks = ams[3];
           var amgrade ="-";
 
