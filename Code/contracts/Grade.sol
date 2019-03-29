@@ -418,7 +418,11 @@ contract Grade {
 
     function elective (uint _ID, uint _studentID, string memory _studentName) public {
         //Add Maths
+        //Require subject has not been enrolled already
         if(_ID == 1) {
+            for (uint i = 0; i < amCount; i++) {
+                require(am[i].elective != true);
+            }
             amCount++;
             am[amCount] = AddMaths(amCount, _studentID, _studentName, 0, false, true);
         }
