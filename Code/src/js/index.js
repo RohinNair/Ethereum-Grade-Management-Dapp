@@ -95,17 +95,10 @@ App = {
           var studentTemplate = "<tr><th>" + bmid + "</th><td>" + studentid + "</td><td>" + studentName + "</td><td>" + goto1 + "</td><td>" + goto2 + "</td></tr>"
           studentsResults.append(studentTemplate);
 
-          // Render Student Selection Menu
-          /*var studentOption = "<option value='" + id + "' >" + name + "</ option>"
-          studentsSelect.append(studentOption);*/
         });
       }
       return gradeInstance.graders(App.account);
-  }).then(function(studentsCheck) {
-    // Do not allow a teacher to grade
-    if(studentsCheck.checked == true) {
-      $('form').hide();
-    }
+  }).then(function() {
       loader.hide();
       content.show();
     }).catch(function(error) {
