@@ -112,7 +112,7 @@ App = {
     App.contracts.Grade.deployed().then(function(instance2) {
       gradeInstance2 = instance2;
       return gradeInstance2.bmCount();
-    }).then(function(bmCount) {
+    }).then(function() {
       var studentsName = $("#studentsName");
       studentsName.empty();
 
@@ -137,18 +137,17 @@ App = {
       var amMarks = $("#amMarks");
       amMarks.empty();
 
-      /*var pyMarks = $("#pyMarks");
+      var pyMarks = $("#pyMarks");
       pyMarks.empty();
 
       var blMarks = $("#blMarks");
       blMarks.empty();
 
       var cmMarks = $("#cmMarks");
-      cmMarks.empty();*/
+      cmMarks.empty();
 
       gradeInstance2.bm(1).then(function(bms) {
         var name = bms[2];
-        //var ic = student[2];
 
         var nameTemplate = "<td>" + name + "</td>"
         studentsName.append(nameTemplate);
@@ -260,7 +259,7 @@ App = {
         });
       }
 
-      /*for (var i = 1; i <= 1; i++) {
+      for (var i = 1; i <= 1; i++) {
         gradeInstance2.py(i).then(function(pys) {
           var subjectName = "Physics";
           var pymarks = pys[3];
@@ -303,32 +302,15 @@ App = {
           var cmTemplate = "<tr><td>" + subjectName + "</td><td>" + cmmarks + "</td><td>" + cmgrade + "</td></tr>"
           cmMarks.append(cmTemplate);
         });
-      }*/
+      }
       return gradeInstance2.graders(App.account);
-  }).then(function(finalised) {
-    // Do not allow a teacher to grade
-    if(finalised) {
-      $('form').hide();
-    }
+  }).then(function() {
       loader.hide();
       content.show();
     }).catch(function(error) {
       console.warn(error);
     });
   },
-
-  /*finaliseGrade: function() {
-    var subjectId = $('#subjectsSelect').val();
-    App.contracts.Grade.deployed().then(function(instance2) {
-      return instance2.finalise(subjectId, { from: App.account });
-    }).then(function(marks) {
-      // Wait for grades to update
-      $("#content").hide();
-      $("#loader").show();
-    }).catch(function(err) {
-      console.error(err);
-    });
-  }*/
 };
 
 $(function() {
