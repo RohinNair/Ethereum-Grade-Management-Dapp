@@ -67,9 +67,8 @@ App = {
       gradeInstance = instance;
       return gradeInstance.bmCount();
     }).then(function(bmCount) {
-
-      var studentsResults = $("#studentsResults");
-      studentsResults.empty();
+      var studentsMenu = $("#studentsMenu");
+      studentsMenu.empty();
 
       for (var i = 1; i <= bmCount; i++) {
         gradeInstance.bm(i).then(function(bms) {
@@ -81,20 +80,17 @@ App = {
             '<a href="./inputmarks1.html">Grade</a>',
             '<a href="./inputmarks2.html">Grade</a>'
           ];
-
           links2 = [
             "",
             '<a href="./displaymarks1.html">View</a>',
             '<a href="./displaymarks2.html">View</a>'
           ];
-
           var goto1 = links1[bmid];
           var goto2 = links2[bmid];
-
           // Render Student Grade Result
-          var studentTemplate = "<tr><th>" + bmid + "</th><td>" + studentid + "</td><td>" + studentName + "</td><td>" + goto1 + "</td><td>" + goto2 + "</td></tr>"
-          studentsResults.append(studentTemplate);
-
+          var studentTemplate = "<tr><th>" + bmid + "</th><td>" + studentid + "</td><td>" 
+                                + studentName + "</td><td>" + goto1 + "</td><td>" + goto2 + "</td></tr>"
+          studentsMenu.append(studentTemplate);
         });
       }
       return gradeInstance.graders(App.account);
