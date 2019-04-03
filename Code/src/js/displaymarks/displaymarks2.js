@@ -112,7 +112,7 @@ App = {
     App.contracts.Grade.deployed().then(function(instance2) {
       gradeInstance2 = instance2;
       return gradeInstance2.bmCount();
-    }).then(function(bmCount) {
+    }).then(function() {
       var studentsName = $("#studentsName");
       studentsName.empty();
 
@@ -306,45 +306,13 @@ App = {
         });
       }
       return gradeInstance2.graders(App.account);
-  }).then(function(finalised) {
-    // Do not allow a teacher to grade
-    if(finalised) {
-      $('form').hide();
-    }
+  }).then(function() {
       loader.hide();
       content.show();
     }).catch(function(error) {
       console.warn(error);
     });
   },
-  /*submitGrade: function() {
-    var subjectId = 1;
-    var subjectMarks = $('#subject-marks').val()
-    //var graded = true;
-    var subjectIdentifier = 1;
-    //var studId = 1;
-    App.contracts.Grade.deployed().then(function(instance2) {
-      return instance2.grade(subjectId, subjectMarks, subjectIdentifier, { from: App.account });
-    }).then(function(marks) {
-      // Wait for grades to update
-      $("#content").hide();
-      $("#loader").show();
-    }).catch(function(err) {
-      console.error(err);
-    });
-  },*/
-  /*finaliseGrade: function() {
-    var subjectId = $('#subjectsSelect').val();
-    App.contracts.Grade.deployed().then(function(instance2) {
-      return instance2.finalise(subjectId, { from: App.account });
-    }).then(function(marks) {
-      // Wait for grades to update
-      $("#content").hide();
-      $("#loader").show();
-    }).catch(function(err) {
-      console.error(err);
-    });
-  }*/
 };
 
 $(function() {
