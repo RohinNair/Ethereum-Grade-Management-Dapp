@@ -1,7 +1,7 @@
 pragma solidity ^0.5.0;
 
 contract Grade {
-    //Modelling a Student
+    //Modelling Subjects
     struct BahasaMalaysia {
         uint BMID;
         uint studentID;
@@ -86,6 +86,12 @@ contract Grade {
         bool elective;
     }
 
+    struct UserAcc {
+        uint UAID;
+        string username;
+        string password;
+    }
+
     //Read/write students
     mapping(uint => BahasaMalaysia) public bm;
 
@@ -111,6 +117,8 @@ contract Grade {
 
     mapping(address => bool) public electives;
 
+    mapping(uint => UserAcc) public userAcc;
+
     //Store Subject Count
 
     uint public bmCount;
@@ -133,6 +141,8 @@ contract Grade {
 
     uint public cmCount;
 
+    uint public userAccCount;
+
     event gradedEvent (
         uint indexed _Id
     );
@@ -149,6 +159,12 @@ contract Grade {
         PY = 8
         BL = 9
         CM = 10*/
+
+        /*User Accounts =
+
+        Student = Adam97/6367c48dd193d56ea7b0baad25b19455e529f5ee(abc123)
+        University = Nathan68/fe98a77a071167088b8aa1465639c92224456363(nathan68123)
+        Teacher*/
 
     //Constructor
     constructor () public {
@@ -170,7 +186,22 @@ contract Grade {
         enrollCore(4, 2, "Steve");
         enrollCore(6, 1, "Adam");
         enrollCore(5, 2, "Steve");
+        enrollElective(7);
+        enrollElective(7);
+        enrollElective(8);
+        enrollElective(8);
+        enrollElective(9);
+        enrollElective(9);
+        enrollElective(10);
+        enrollElective(10);
+        /*userLogin("Adam97", "abc123");
+        userLogin("Nathan68", "123abc");*/
     }
+
+    /*function userLogin(string memory _userName, string memory _password) private {
+        userAccCount++;
+        userAcc[userAccCount] = UserAcc(userAccCount, _userName, _password);
+    }*/
 
     function enrollCore(uint _subjectCode, uint _studentID, string memory _studentName) private {
         if (_subjectCode == 1) {
@@ -204,25 +235,75 @@ contract Grade {
         }
     }
 
-    /*function enrollAM (uint _studentID, string memory _studentName) private {
-        amCount++;
-        am[amCount] = AddMaths(amCount, _studentID, _studentName, 0, false);
+    function enrollElective(uint _subjectCode) private {
+        if (_subjectCode == 7) {
+            amCount++;
+            am[amCount] = AddMaths(amCount, 0, "-", 0, false, false);
+        }
+
+        if (_subjectCode == 8) {
+            blCount++;
+            bl[blCount] = Biology(blCount, 0, "-", 0, false, false);
+        }
+
+        if (_subjectCode == 9) {
+            pyCount++;
+            py[pyCount] = Physics(pyCount, 0, "-", 0, false, false);
+        }
+
+        if (_subjectCode == 10) {
+            cmCount++;
+            cm[cmCount] = Chemistry(cmCount, 0, "-", 0, false, false);
+        }
     }
 
-    function enrollPY (uint _studentID, string memory _studentName) private {
-        pyCount++;
-        py[pyCount] = Physics(pyCount, _studentID, _studentName, 0, false);
-    }
+    function elective (uint _ID, uint _studentID, string memory _studentName) public {
+        //Add Maths
+        if(_ID == 1) {
+        //Require subject has not been enrolled already
+            for (uint i = 0; i < amCount; i++) {
+                require(am[i].elective != true);
+            }
+            am[_studentID].studentID = _studentID;
+            am[_studentID].studentName = _studentName;
+            am[_studentID].elective = true;
+            //emit gradedEvent(_ID);
+        }
 
-    function enrollBL (uint _studentID, string memory _studentName) private {
-        blCount++;
-        bl[blCount] = Biology(blCount, _studentID, _studentName, 0, false);
-    }
+        //Biology
+        if(_ID == 2) {
+        //Require subject has not been enrolled already
+            for (uint i = 0; i < blCount; i++) {
+                require(bl[i].elective != true);
+            }
+            bl[_studentID].studentID = _studentID;
+            bl[_studentID].studentName = _studentName;
+            bl[_studentID].elective = true;
+            //emit gradedEvent(_ID);
+        }
 
-    function enrollCM (uint _studentID, string memory _studentName) private {
-        cmCount++;
-        cm[cmCount] = Chemistry(cmCount, _studentID, _studentName, 0, false);
-    }*/
+        //Physics
+        if(_ID == 3) {
+        //Require subject has not been enrolled already
+            for (uint i = 0; i < pyCount; i++) {
+                require(py[i].elective != true);
+            }
+            py[_studentID].studentID = _studentID;
+            py[_studentID].studentName = _studentName;
+            py[_studentID].elective = true;
+        }
+
+        //Chemistry
+        if(_ID == 4) {
+        //Require subject has not been enrolled already
+            for (uint i = 0; i < cmCount; i++) {
+                require(cm[i].elective != true);
+            }
+            cm[_studentID].studentID = _studentID;
+            cm[_studentID].studentName = _studentName;
+            cm[_studentID].elective = true;
+        }
+    }
 
     function grade (uint _ID, uint _subjectMarks, uint _subjectIdentifier, bool _graded) public {
         if(_subjectIdentifier == 1) {
@@ -416,32 +497,6 @@ contract Grade {
         }
     }
 
-    function elective (uint _ID, uint _studentID, string memory _studentName) public {
-        //Add Maths
-        //Require subject has not been enrolled already
-        if(_ID == 1) {
-            for (uint i = 0; i < amCount; i++) {
-                require(am[i].elective != true);
-            }
-            amCount++;
-            am[amCount] = AddMaths(amCount, _studentID, _studentName, 0, false, true);
-        }
-
-        //Biology
-        if(_ID == 2) {
-
-        }
-
-        //Physics
-        if(_ID == 3) {
-
-        }
-
-        //Chemistry
-        if(_ID == 4) {
-
-        }
-    }
 
     /*function finalise (uint _subjectId) public {
         //Require that they haven't graded a student before

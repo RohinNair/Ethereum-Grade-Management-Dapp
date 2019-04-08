@@ -249,13 +249,16 @@ App = {
           var subjectName = "Additional Mathematics";
           var ammarks = ams[3];
           var amgrade ="-";
+          var amenrol = ams[5];
 
+          if(amenrol){
           //calculate grade
           amgrade = App.calculateGrade(ammarks);
 
           // Render Add Maths Grades
           var amTemplate = "<tr><td>" + subjectName + "</td><td>" + ammarks + "</td><td>" + amgrade + "</td></tr>"
           amMarks.append(amTemplate);
+          }
         });
       }
 
@@ -264,13 +267,16 @@ App = {
           var subjectName = "Physics";
           var pymarks = pys[3];
           var pygrade ="-";
+          var pyenrol = pys[5];
 
+          if(pyenrol){
           //calculate grade
           pygrade = App.calculateGrade(pymarks);
 
           // Render Physics Grades
           var pyTemplate = "<tr><td>" + subjectName + "</td><td>" + pymarks + "</td><td>" + pygrade + "</td></tr>"
           pyMarks.append(pyTemplate);
+          }
         });
       }
 
@@ -279,13 +285,16 @@ App = {
           var subjectName = "Biology";
           var blmarks = bls[3];
           var blgrade ="-";
+          var blenrol = bls[5];
 
+          if(blenrol){
           //calculate grade
           blgrade = App.calculateGrade(blmarks);
 
           // Render Biology Grades
           var blTemplate = "<tr><td>" + subjectName + "</td><td>" + blmarks + "</td><td>" + blgrade + "</td></tr>"
           blMarks.append(blTemplate);
+          }
         });
       }
 
@@ -294,13 +303,16 @@ App = {
           var subjectName = "Chemistry";
           var cmmarks = cms[3];
           var cmgrade ="-";
+          var cmenrol = cms[5];
 
+          if(cmenrol){
           //calculate grade
           cmgrade = App.calculateGrade(cmmarks);
 
           // Render Chemistry Grades
           var cmTemplate = "<tr><td>" + subjectName + "</td><td>" + cmmarks + "</td><td>" + cmgrade + "</td></tr>"
           cmMarks.append(cmTemplate);
+          }
         });
       }
       return gradeInstance2.graders(App.account);
