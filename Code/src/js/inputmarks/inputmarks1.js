@@ -66,12 +66,9 @@ App = {
     App.contracts.Grade.deployed().then(function(instance2) {
       gradeInstance2 = instance2;
       return gradeInstance2.bmCount();
-    }).then(function(bmCount) {
+    }).then(function() {
       var studentsName = $("#studentsName");
       studentsName.empty();
-
-      /*var studentsIc = $("#studentsIc");
-      studentsIc.empty();*/
 
       var studentsSubjects = $("#studentsSubjects");
       studentsSubjects.empty();
@@ -79,26 +76,15 @@ App = {
       var subjectsSelect = $('#subjectsSelect');
       subjectsSelect.empty();
 
-      /*var studentsTotalMarks = $('#studentsTotalMarks');
-      studentsTotalMarks.empty();*/
-
       gradeInstance2.bm(1).then(function(bms) {
         var name = bms[2];
-        //var ic = student[2];
-        //var subjectTaken = student[3];
 
         var nameTemplate = "<td>" + name + "</td>"
         studentsName.append(nameTemplate);
 
-        /*var icTemplate = "<td>" + ic + "</td>"
-        studentsIc.append(icTemplate);
-
-        var subCountTemplate = subjectTaken
-        subCount.append(subCountTemplate);*/
-
       })
       return gradeInstance2.graders(App.account);
-  }).then(function(finalised) {
+  }).then(function() {
       loader.hide();
       content.show();
     }).catch(function(error) {
@@ -116,10 +102,10 @@ App = {
     var graded = true;
     App.contracts.Grade.deployed().then(function(instance2) {
       return instance2.grade(subjectId, subjectMarks, subjectIdentifier, graded, { from: App.account });
-    }).then(function(marks) {
+    }).then(function() {
       // Wait for grades to update
-      $("bahasaMalaysia").hide();
-      //$("#loader").show();
+      $("#content").hide();
+      $("#loader").show();
     }).catch(function(err) {
       console.error(err);
     });
@@ -135,7 +121,7 @@ App = {
     var graded = true;
     App.contracts.Grade.deployed().then(function(instance2) {
       return instance2.grade(subjectId, subjectMarks, subjectIdentifier, graded, { from: App.account });
-    }).then(function(marks) {
+    }).then(function() {
       // Wait for grades to update
       $("#content").hide();
       $("#loader").show();
@@ -154,7 +140,7 @@ App = {
     var graded = true;
     App.contracts.Grade.deployed().then(function(instance2) {
       return instance2.grade(subjectId, subjectMarks, subjectIdentifier, graded, { from: App.account });
-    }).then(function(marks) {
+    }).then(function() {
       // Wait for grades to update
       $("#content").hide();
       $("#loader").show();
@@ -173,7 +159,7 @@ App = {
     var graded = true;
     App.contracts.Grade.deployed().then(function(instance2) {
       return instance2.grade(subjectId, subjectMarks, subjectIdentifier, graded, { from: App.account });
-    }).then(function(marks) {
+    }).then(function() {
       // Wait for grades to update
       $("#content").hide();
       $("#loader").show();
@@ -192,7 +178,7 @@ App = {
     var graded = true;
     App.contracts.Grade.deployed().then(function(instance2) {
       return instance2.grade(subjectId, subjectMarks, subjectIdentifier, graded, { from: App.account });
-    }).then(function(marks) {
+    }).then(function() {
       // Wait for grades to update
       $("#content").hide();
       $("#loader").show();
@@ -211,7 +197,7 @@ App = {
     var graded = true;
     App.contracts.Grade.deployed().then(function(instance2) {
       return instance2.grade(subjectId, subjectMarks, subjectIdentifier, graded, { from: App.account });
-    }).then(function(marks) {
+    }).then(function() {
       // Wait for grades to update
       $("#content").hide();
       $("#loader").show();
@@ -230,7 +216,7 @@ App = {
     var graded = true;
     App.contracts.Grade.deployed().then(function(instance2) {
       return instance2.grade(subjectId, subjectMarks, subjectIdentifier, graded, { from: App.account });
-    }).then(function(marks) {
+    }).then(function() {
       // Wait for grades to update
       $("#content").hide();
       $("#loader").show();
@@ -249,7 +235,7 @@ App = {
     var graded = true;
     App.contracts.Grade.deployed().then(function(instance2) {
       return instance2.grade(subjectId, subjectMarks, subjectIdentifier, graded, { from: App.account });
-    }).then(function(marks) {
+    }).then(function() {
       // Wait for grades to update
       $("#content").hide();
       $("#loader").show();
@@ -268,7 +254,7 @@ App = {
     var graded = true;
     App.contracts.Grade.deployed().then(function(instance2) {
       return instance2.grade(subjectId, subjectMarks, subjectIdentifier, graded, { from: App.account });
-    }).then(function(marks) {
+    }).then(function() {
       // Wait for grades to update
       $("#content").hide();
       $("#loader").show();
@@ -287,8 +273,7 @@ App = {
     var graded = true;
     App.contracts.Grade.deployed().then(function(instance2) {
       return instance2.grade(subjectId, subjectMarks, subjectIdentifier, graded, { from: App.account });
-    }).then(function(marks) {
-      // Wait for grades to update
+    }).then(function() {
       $("#content").hide();
       $("#loader").show();
     }).catch(function(err) {

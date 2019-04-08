@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Student Enrollment</title>
+
+    <!-- Bootstrap -->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="icon" href="css/img/tabico.png">
+    <style>
+      .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: whitesmoke;
+        color: black;
+        text-align: center;
+      }
+      </style>
+  </head>
+  <body>
+    <div class="container" style="width: auto;">
+      <div class="row">
+        <div class="col-lg-12">
+          <br/>
+          <h1 class="text-center">Enroll Student</h1>
+          <hr/>
+          <div id="loader">
+            <p class="text-center">Loading...</p>
+          </div>
+          <div id="content" style="display: none;">
+            <table>
+              <th>Student Name: &nbsp;</th>
+              <td id="studentsName"></td>
+              <th>&nbsp;&nbsp;&nbsp;</th>
+              <!----th>IC No: </th>
+              <td id="studentsIc"></td-->
+            </table>
+            <hr />
+            <form onSubmit="App.enrollElectives(); return false;">
+              <div class="form-group">
+                <label for="electivesSelect">Select Subject</label>
+                <select class="form-control" id="electivesSelect">
+                </select>
+                <br/>
+              <button type="submit" class="btn btn-primary">Enroll Student</button>
+              <hr />
+            </div>
+            </form>
+            <!--form onSubmit="App.finaliseGrade(); return false;">
+              <div class="form-group">
+                <p><font color="red">I hereby finalize the grades entered above. I understand that by clicking the button below, the grades above will be permanently stored
+                    in the system and cannot be modified in the event of a mistake.</font></p>
+              <button type="submit" class="btn btn-primary">Finalize Grades</button>
+              </div>
+            </form-->
+            <p id="accountAddress" class="text-center"></p>
+            </form>
+            <br/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/enrollelectives/enrollelectives2.js"></script>
+    <div class="footer">
+      <small>Developed by Rohindhran Nair - 2018</small>
+    </div>
+  </body>
+</html>

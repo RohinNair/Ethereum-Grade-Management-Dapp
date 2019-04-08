@@ -112,7 +112,7 @@ App = {
     App.contracts.Grade.deployed().then(function(instance2) {
       gradeInstance2 = instance2;
       return gradeInstance2.bmCount();
-    }).then(function(bmCount) {
+    }).then(function() {
       var studentsName = $("#studentsName");
       studentsName.empty();
 
@@ -128,8 +128,8 @@ App = {
       var maMarks = $("#maMarks");
       maMarks.empty();
 
-      //var pmMarks = $("#pmMarks");
-      //pmMarks.empty();
+      var pmMarks = $("#pmMarks");
+      pmMarks.empty();
 
       var piMarks = $("#piMarks");
       piMarks.empty();
@@ -148,7 +148,6 @@ App = {
 
       gradeInstance2.bm(1).then(function(bms) {
         var name = bms[2];
-        //var ic = student[2];
 
         var nameTemplate = "<td>" + name + "</td>"
         studentsName.append(nameTemplate);
@@ -215,48 +214,59 @@ App = {
         });
       }
 
-      /*for (var i = 1; i <= 1; i++) {
+      for (var i = 1; i <= 1; i++) {
         gradeInstance2.pm(i).then(function(pms) {
           var subjectName = "Pendidikan Moral";
+          var pmstudent = pms[2];
           var pmmarks = pms[3];
           var pmgrade ="-";
+          var pmenrol = pms[5];
 
+          if(pmenrol && pmstudent == "Adam"){
           //calculate grade
           pmgrade = App.calculateGrade(pmmarks);
 
           // Render Pendidikan Moral Grades
           var pmTemplate = "<tr><td>" + subjectName + "</td><td>" + pmmarks + "</td><td>" + pmgrade + "</td></tr>"
           pmMarks.append(pmTemplate);
+          }
         });
-      }*/
+      }
 
       for (var i = 1; i <= 1; i++) {
         gradeInstance2.pi(i).then(function(pis) {
           var subjectName = "Pendidikan Islam";
+          var pistudent = pis[2];
           var pimarks = pis[3];
           var pigrade ="-";
+          var pienrol = pis[5];
 
+          if(pienrol && pistudent == "Adam"){
           //calculate grade
           pigrade = App.calculateGrade(pimarks);
 
           // Render Pendidikan Islam Grades
           var piTemplate = "<tr><td>" + subjectName + "</td><td>" + pimarks + "</td><td>" + pigrade + "</td></tr>"
           piMarks.append(piTemplate);
+          }
         });
       }
 
       for (var i = 1; i <= 1; i++) {
         gradeInstance2.am(i).then(function(ams) {
-          var subjectName = "Add Maths";
+          var subjectName = "Additional Mathematics";
           var ammarks = ams[3];
           var amgrade ="-";
+          var amenrol = ams[5];
 
+          if(amenrol){
           //calculate grade
           amgrade = App.calculateGrade(ammarks);
 
           // Render Add Maths Grades
           var amTemplate = "<tr><td>" + subjectName + "</td><td>" + ammarks + "</td><td>" + amgrade + "</td></tr>"
           amMarks.append(amTemplate);
+          }
         });
       }
 
@@ -265,13 +275,16 @@ App = {
           var subjectName = "Physics";
           var pymarks = pys[3];
           var pygrade ="-";
+          var pyenrol = pys[5];
 
+          if(pyenrol){
           //calculate grade
           pygrade = App.calculateGrade(pymarks);
 
           // Render Physics Grades
           var pyTemplate = "<tr><td>" + subjectName + "</td><td>" + pymarks + "</td><td>" + pygrade + "</td></tr>"
           pyMarks.append(pyTemplate);
+          }
         });
       }
 
@@ -280,13 +293,16 @@ App = {
           var subjectName = "Biology";
           var blmarks = bls[3];
           var blgrade ="-";
+          var blenrol = bls[5];
 
+          if(blenrol){
           //calculate grade
           blgrade = App.calculateGrade(blmarks);
 
           // Render Biology Grades
           var blTemplate = "<tr><td>" + subjectName + "</td><td>" + blmarks + "</td><td>" + blgrade + "</td></tr>"
           blMarks.append(blTemplate);
+          }
         });
       }
 
@@ -295,40 +311,26 @@ App = {
           var subjectName = "Chemistry";
           var cmmarks = cms[3];
           var cmgrade ="-";
+          var cmenrol = cms[5];
 
+          if(cmenrol){
           //calculate grade
           cmgrade = App.calculateGrade(cmmarks);
 
           // Render Chemistry Grades
           var cmTemplate = "<tr><td>" + subjectName + "</td><td>" + cmmarks + "</td><td>" + cmgrade + "</td></tr>"
           cmMarks.append(cmTemplate);
+          }
         });
       }
       return gradeInstance2.graders(App.account);
-  }).then(function(finalised) {
-    // Do not allow a teacher to grade
-    if(finalised) {
-      $('form').hide();
-    }
+  }).then(function() {
       loader.hide();
       content.show();
     }).catch(function(error) {
       console.warn(error);
     });
   },
-
-  /*finaliseGrade: function() {
-    var subjectId = $('#subjectsSelect').val();
-    App.contracts.Grade.deployed().then(function(instance2) {
-      return instance2.finalise(subjectId, { from: App.account });
-    }).then(function(marks) {
-      // Wait for grades to update
-      $("#content").hide();
-      $("#loader").show();
-    }).catch(function(err) {
-      console.error(err);
-    });
-  }*/
 };
 
 $(function() {

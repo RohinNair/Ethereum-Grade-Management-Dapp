@@ -1,7 +1,7 @@
 pragma solidity ^0.5.0;
 
 contract Grade {
-    //Modelling a Student
+    //Modelling Subjects
     struct BahasaMalaysia {
         uint BMID;
         uint studentID;
@@ -40,6 +40,7 @@ contract Grade {
         string studentName;
         uint marks;
         bool graded;
+        bool elective;
     }
 
     struct PendidikanIslam {
@@ -48,6 +49,7 @@ contract Grade {
         string studentName;
         uint marks;
         bool graded;
+        bool elective;
     }
 
     struct AddMaths {
@@ -56,6 +58,7 @@ contract Grade {
         string studentName;
         uint marks;
         bool graded;
+        bool elective;
     }
 
     struct Physics {
@@ -64,6 +67,7 @@ contract Grade {
         string studentName;
         uint marks;
         bool graded;
+        bool elective;
     }
 
     struct Biology {
@@ -72,6 +76,7 @@ contract Grade {
         string studentName;
         uint marks;
         bool graded;
+        bool elective;
     }
 
     struct Chemistry {
@@ -80,6 +85,13 @@ contract Grade {
         string studentName;
         uint marks;
         bool graded;
+        bool elective;
+    }
+
+    struct UserAcc {
+        uint UAID;
+        string username;
+        string password;
     }
 
     //Read/write students
@@ -103,10 +115,11 @@ contract Grade {
 
     mapping(uint => Chemistry) public cm;
 
-    //This code doesn't serve any purpose
-    //But when I delete it the program doesn't work
-    //So it stays
     mapping(address => bool) public graders;
+
+    mapping(address => bool) public electives;
+
+    mapping(uint => UserAcc) public userAcc;
 
     //Store Subject Count
 
@@ -130,87 +143,197 @@ contract Grade {
 
     uint public cmCount;
 
+    uint public userAccCount;
+
     event gradedEvent (
         uint indexed _Id
     );
 
+    /*Subject Codes =
+
+        BM = 1
+        BI = 2
+        SJ = 3
+        MA = 4
+        PM = 5
+        PI = 6
+        AM = 7
+        PY = 8
+        BL = 9
+        CM = 10*/
+
+        /*User Accounts =
+
+        Student = Adam97/6367c48dd193d56ea7b0baad25b19455e529f5ee(abc123)
+        University = Nathan68/fe98a77a071167088b8aa1465639c92224456363(nathan68123)
+        Teacher*/
+
     //Constructor
     constructor () public {
-        enrollBM(1, "Adam");
-        enrollBM(2, "Steve");
-        enrollBI(1, "Adam");
-        enrollBI(2, "Steve");
-        enrollSJ(1, "Adam");
-        enrollSJ(2, "Steve");
-        enrollMA(1, "Adam");
-        enrollMA(2, "Steve");
-        enrollPI(1, "Adam");
-        enrollPM(2, "Steve");
-        enrollAM(1, "Adam");
-        enrollAM(2, "Steve");
-        enrollPY(1, "Adam");
-        enrollPY(2, "Steve");
-        enrollBL(1, "Adam");
-        enrollBL(2, "Steve");
-        enrollCM(1, "Adam");
-        enrollCM(2, "Steve");
+        enrollCore(1, 1, "Adam");
+        enrollCore(1, 2, "Steve");
+        enrollCore(2, 1, "Adam");
+        enrollCore(2, 2, "Steve");
+        enrollCore(3, 1, "Adam");
+        enrollCore(3, 2, "Steve");
+        enrollCore(4, 1, "Adam");
+        enrollCore(4, 2, "Steve");
+        enrollElective(5);
+        enrollElective(5);
+        enrollElective(6);
+        enrollElective(6);
+        enrollElective(7);
+        enrollElective(7);
+        enrollElective(8);
+        enrollElective(8);
+        enrollElective(9);
+        enrollElective(9);
+        enrollElective(10);
+        enrollElective(10);
+        /*userLogin("Adam97", "abc123");
+        userLogin("Nathan68", "123abc");*/
     }
 
-    function enrollBM (uint _studentID, string memory _studentName) private {
-        bmCount++;
-        bm[bmCount] = BahasaMalaysia(bmCount, _studentID, _studentName, 0, false);
+    /*function userLogin(string memory _userName, string memory _password) private {
+        userAccCount++;
+        userAcc[userAccCount] = UserAcc(userAccCount, _userName, _password);
+    }*/
+
+    function enrollCore(uint _subjectCode, uint _studentID, string memory _studentName) private {
+        if (_subjectCode == 1) {
+            bmCount++;
+            bm[bmCount] = BahasaMalaysia(bmCount, _studentID, _studentName, 0, false);
+        }
+
+        if (_subjectCode == 2) {
+            biCount++;
+            bi[biCount] = BahasaInggeris(biCount, _studentID, _studentName, 0, false);
+        }
+
+        if (_subjectCode == 3) {
+            sjCount++;
+            sj[sjCount] = Sejarah(sjCount, _studentID, _studentName, 0, false);
+        }
+
+        if (_subjectCode == 4) {
+            maCount++;
+            ma[maCount] = Mathematics(maCount, _studentID, _studentName, 0, false);
+        }
     }
 
-    function enrollBI (uint _studentID, string memory _studentName) private {
-        biCount++;
-        bi[biCount] = BahasaInggeris(biCount, _studentID, _studentName, 0, false);
+    function enrollElective(uint _subjectCode) private {
+        if (_subjectCode == 5) {
+            pmCount++;
+            pm[pmCount] = PendidikanMoral(pmCount, 0, "-", 0, false, false);
+        }
+
+        if (_subjectCode == 6) {
+            piCount++;
+            pi[piCount] = PendidikanIslam(piCount, 0, "-", 0, false, false);
+        }
+
+        if (_subjectCode == 7) {
+            amCount++;
+            am[amCount] = AddMaths(amCount, 0, "-", 0, false, false);
+        }
+
+        if (_subjectCode == 8) {
+            blCount++;
+            bl[blCount] = Biology(blCount, 0, "-", 0, false, false);
+        }
+
+        if (_subjectCode == 9) {
+            pyCount++;
+            py[pyCount] = Physics(pyCount, 0, "-", 0, false, false);
+        }
+
+        if (_subjectCode == 10) {
+            cmCount++;
+            cm[cmCount] = Chemistry(cmCount, 0, "-", 0, false, false);
+        }
     }
 
-    function enrollSJ (uint _studentID, string memory _studentName) private {
-        sjCount++;
-        sj[sjCount] = Sejarah(sjCount, _studentID, _studentName, 0, false);
-    }
+    function elective (uint _ID, uint _studentID, string memory _studentName) public {
+        //Add Maths
+        if(_ID == 1) {
+        //Require subject has not been enrolled already
+            for (uint i = 0; i < amCount; i++) {
+                require(am[i].elective != true);
+            }
+        am[_studentID].studentID = _studentID;
+        am[_studentID].studentName = _studentName;
+        am[_studentID].elective = true;
+        emit gradedEvent(_ID);
+        }
 
-    function enrollMA (uint _studentID, string memory _studentName) private {
-        maCount++;
-        ma[maCount] = Mathematics(maCount, _studentID, _studentName, 0, false);
-    }
+        //Biology
+        if(_ID == 2) {
+        //Require subject has not been enrolled already
+            for (uint i = 0; i < blCount; i++) {
+                require(bl[i].elective != true);
+            }
+        bl[_studentID].studentID = _studentID;
+        bl[_studentID].studentName = _studentName;
+        bl[_studentID].elective = true;
+        emit gradedEvent(_ID);
+        }
 
-    function enrollPM (uint _studentID, string memory _studentName) private {
-        pmCount++;
-        pm[pmCount] = PendidikanMoral(pmCount, _studentID, _studentName, 0, false);
-    }
+        //Physics
+        if(_ID == 3) {
+        //Require subject has not been enrolled already
+            for (uint i = 0; i < pyCount; i++) {
+                require(py[i].elective != true);
+            }
+        py[_studentID].studentID = _studentID;
+        py[_studentID].studentName = _studentName;
+        py[_studentID].elective = true;
+        emit gradedEvent(_ID);
+        }
 
-    function enrollPI (uint _studentID, string memory _studentName) private {
-        piCount++;
-        pi[piCount] = PendidikanIslam(piCount, _studentID, _studentName, 0, false);
-    }
+        //Chemistry
+        if(_ID == 4) {
+        //Require subject has not been enrolled already
+            for (uint i = 0; i < cmCount; i++) {
+                require(cm[i].elective != true);
+            }
+        cm[_studentID].studentID = _studentID;
+        cm[_studentID].studentName = _studentName;
+        cm[_studentID].elective = true;
+        emit gradedEvent(_ID);
+        }
 
-    function enrollAM (uint _studentID, string memory _studentName) private {
-        amCount++;
-        am[amCount] = AddMaths(amCount, _studentID, _studentName, 0, false);
-    }
+        //Pendidikan Moral
+        if(_ID == 5) {
+        //Require subject has not been enrolled already
+            for (uint i = 0; i < pmCount; i++) {
+                require(pm[i].elective != true);
+            }
 
-    function enrollPY (uint _studentID, string memory _studentName) private {
-        pyCount++;
-        py[pyCount] = Physics(pyCount, _studentID, _studentName, 0, false);
-    }
+        pm[_studentID].studentID = _studentID;
+        pm[_studentID].studentName = _studentName;
+        pm[_studentID].elective = true;
+        emit gradedEvent(_ID);
+        }
 
-    function enrollBL (uint _studentID, string memory _studentName) private {
-        blCount++;
-        bl[blCount] = Biology(blCount, _studentID, _studentName, 0, false);
-    }
+        //Pendidikan Islam
+        if(_ID == 6) {
+        //Require subject has not been enrolled already
+            for (uint i = 0; i < piCount; i++) {
+                require(pi[i].elective != true);
+            }
 
-    function enrollCM (uint _studentID, string memory _studentName) private {
-        cmCount++;
-        cm[cmCount] = Chemistry(cmCount, _studentID, _studentName, 0, false);
+        pi[_studentID].studentID = _studentID;
+        pi[_studentID].studentName = _studentName;
+        pi[_studentID].elective = true;
+        emit gradedEvent(_ID);
+        }
     }
 
     function grade (uint _ID, uint _subjectMarks, uint _subjectIdentifier, bool _graded) public {
+        if(_subjectIdentifier == 1) {
         //Require that the subject hasn't been graded before
         require(bm[_ID].graded == false);
 
-        if(_subjectIdentifier == 1) {
         //Require a valid subject
         require(_ID> 0 && _ID <= bmCount);
 
@@ -397,6 +520,7 @@ contract Grade {
         emit gradedEvent(_ID);
         }
     }
+
 
     /*function finalise (uint _subjectId) public {
         //Require that they haven't graded a student before

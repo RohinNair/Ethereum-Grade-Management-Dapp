@@ -7,16 +7,27 @@
     <title>Student Grade Report</title>
 
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="icon" href="css/img/tabico.png">
+    <style>
+      .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: whitesmoke;
+        color: black;
+        text-align: center;
+      }
+      </style>
   </head>
   <body>
     <div class="container" style="width: auto;">
       <div class="row">
         <div class="col-lg-12">
+          <br/>
           <h1 class="text-center">Student Grading</h1>
           <hr/>
-          <br/>
           <div id="loader">
             <p class="text-center">Loading...</p>
           </div>
@@ -28,6 +39,7 @@
               <!----th>IC No: </th>
               <td id="studentsIc"></td-->
             </table>
+            <hr />
             <!----div>
               <table>
                 <th>Number of subjects enrolled: </th>
@@ -40,8 +52,8 @@
             <form onSubmit="App.submitbmGrade(); return false;">
               <div class="form-group" id="bahasaMalaysia">
                 <br/>
-                <label for="bm-marks">Enter BM Marks:</label>
-                <input id="bm-marks" type="text" class="form-control"></input>
+                <label for="bm-marks">Bahasa Malaysia</label>
+                <input id="bm-marks" type="text" class="form-control" placeholder="Enter Bahasa Malaysia Marks" maxlength="5"></input>
               <br/>
               <button type="submit" class="btn btn-primary">Submit Grade</button>
               <hr />
@@ -50,32 +62,32 @@
             <form onSubmit="App.submitbiGrade(); return false;">
               <div class="form-group">
                 <br/>
-                <label for="bi-marks">Enter BI Marks:</label>
-                <input id="bi-marks" type="text" class="form-control"></input>
-              </div>
+                <label for="bi-marks">Bahasa Inggeris</label>
+                <input id="bi-marks" type="text" class="form-control" placeholder="Enter Bahasa Inggeris Marks" maxlength="5"></input>
               <br/>
               <button type="submit" class="btn btn-primary">Submit Grade</button>
               <hr />
+            </div>
             </form>
             <form onSubmit="App.submitsjGrade(); return false;">
               <div class="form-group">
                 <br/>
-                <label for="sj-marks">Enter Sejarah Marks:</label>
-                <input id="sj-marks" type="text" class="form-control"></input>
-              </div>
+                <label for="sj-marks">Sejarah</label>
+                <input id="sj-marks" type="text" class="form-control" placeholder="Enter Sejarah Marks" maxlength="5"></input>
               <br/>
               <button type="submit" class="btn btn-primary">Submit Grade</button>
               <hr />
+            </div>
             </form>
             <form onSubmit="App.submitmaGrade(); return false;">
               <div class="form-group">
                 <br/>
-                <label for="ma-marks">Enter Mathematics Marks:</label>
-                <input id="ma-marks" type="text" class="form-control"></input>
-              </div>
+                <label for="ma-marks">Mathematics</label>
+                <input id="ma-marks" type="text" class="form-control" placeholder="Enter Mathematics Marks" maxlength="5"></input>
               <br/>
               <button type="submit" class="btn btn-primary">Submit Grade</button>
               <hr />
+            </div>
             </form>
             <!--form onSubmit="App.submitpmGrade(); return false;">
               <div class="form-group">
@@ -90,52 +102,52 @@
             <form onSubmit="App.submitpiGrade(); return false;">
               <div class="form-group">
                 <br/>
-                <label for="pi-marks">Enter Pendidikan Islam Marks:</label>
-                <input id="pi-marks" type="text" class="form-control"></input>
-              </div>
+                <label for="pi-marks">Pendidikan Islam</label>
+                <input id="pi-marks" type="text" class="form-control" placeholder="Enter Pendidikan Islam Marks" maxlength="5"></input>
               <br/>
               <button type="submit" class="btn btn-primary">Submit Grade</button>
               <hr />
+            </div>
             </form>
             <form onSubmit="App.submitamGrade(); return false;">
               <div class="form-group">
                 <br/>
-                <label for="am-marks">Enter Add Maths Marks:</label>
-                <input id="am-marks" type="text" class="form-control"></input>
-              </div>
+                <label for="am-marks">Additional Mathematics</label>
+                <input id="am-marks" type="text" class="form-control" placeholder="Enter Additional Mathematics Marks" maxlength="5"></input>
               <br/>
               <button type="submit" class="btn btn-primary">Submit Grade</button>
               <hr />
+            </div>
             </form>
             <form onSubmit="App.submitpyGrade(); return false;">
               <div class="form-group">
                 <br/>
-                <label for="py-marks">Enter Physics Marks:</label>
-                <input id="py-marks" type="text" class="form-control"></input>
-              </div>
+                <label for="py-marks">Physics</label>
+                <input id="py-marks" type="text" class="form-control" placeholder="Enter Physics Marks" maxlength="5"></input>
               <br/>
               <button type="submit" class="btn btn-primary">Submit Grade</button>
               <hr />
+            </div>
             </form>
             <form onSubmit="App.submitblGrade(); return false;">
               <div class="form-group">
                 <br/>
-                <label for="bl-marks">Enter Biology Marks:</label>
-                <input id="bl-marks" type="text" class="form-control"></input>
-              </div>
+                <label for="bl-marks">Biology</label>
+                <input id="bl-marks" type="text" class="form-control" placeholder="Enter Biology Marks" maxlength="5"></input>
               <br/>
               <button type="submit" class="btn btn-primary">Submit Grade</button>
               <hr />
+            </div>
             </form>
             <form onSubmit="App.submitcmGrade(); return false;">
               <div class="form-group">
                 <br/>
-                <label for="cm-marks">Enter Chemistry Marks:</label>
-                <input id="cm-marks" type="text" class="form-control"></input>
-              </div>
+                <label for="cm-marks">Chemistry</label>
+                <input id="cm-marks" type="text" class="form-control" placeholder="Enter Chemistry Marks" maxlength="5"></input>
               <br/>
               <button type="submit" class="btn btn-primary">Submit Grade</button>
               <hr />
+            </div>
             </form>
             <!--form onSubmit="App.finaliseGrade(); return false;">
               <div class="form-group">
@@ -159,5 +171,8 @@
     <script src="js/web3.min.js"></script>
     <script src="js/truffle-contract.js"></script>
     <script src="js/inputmarks/inputmarks1.js"></script>
+    <div class="footer">
+      <small>Developed by Rohindhran Nair - 2018</small>
+    </div>
   </body>
 </html>
