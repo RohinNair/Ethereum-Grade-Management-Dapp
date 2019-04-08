@@ -172,7 +172,7 @@ App = {
   },
   submitpmGrade: function() {
     //student within subject instance
-    var subjectId = 1;
+    var subjectId = 2;
     //value of marks input
     var subjectMarks = $('#pm-marks').val()
     //subject Identifier

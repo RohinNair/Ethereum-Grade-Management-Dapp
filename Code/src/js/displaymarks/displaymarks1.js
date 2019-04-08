@@ -217,30 +217,38 @@ App = {
       for (var i = 1; i <= 1; i++) {
         gradeInstance2.pm(i).then(function(pms) {
           var subjectName = "Pendidikan Moral";
+          var pmstudent = pms[2];
           var pmmarks = pms[3];
           var pmgrade ="-";
+          var pmenrol = pms[5];
 
+          if(pmenrol && pmstudent == "Adam"){
           //calculate grade
           pmgrade = App.calculateGrade(pmmarks);
 
           // Render Pendidikan Moral Grades
           var pmTemplate = "<tr><td>" + subjectName + "</td><td>" + pmmarks + "</td><td>" + pmgrade + "</td></tr>"
           pmMarks.append(pmTemplate);
+          }
         });
       }
 
       for (var i = 1; i <= 1; i++) {
         gradeInstance2.pi(i).then(function(pis) {
           var subjectName = "Pendidikan Islam";
+          var pistudent = pis[2];
           var pimarks = pis[3];
           var pigrade ="-";
+          var pienrol = pis[5];
 
+          if(pienrol && pistudent == "Adam"){
           //calculate grade
           pigrade = App.calculateGrade(pimarks);
 
           // Render Pendidikan Islam Grades
           var piTemplate = "<tr><td>" + subjectName + "</td><td>" + pimarks + "</td><td>" + pigrade + "</td></tr>"
           piMarks.append(piTemplate);
+          }
         });
       }
 

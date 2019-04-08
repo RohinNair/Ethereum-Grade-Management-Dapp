@@ -83,7 +83,7 @@ App = {
         studentsName.append(nameTemplate);
 
       });
-      for (var i = 1; i <= 4; i++) {
+      for (var i = 1; i <= 6; i++) {
         var id = i;
         var subject;
 
@@ -98,6 +98,14 @@ App = {
         }
         if (id == 4) {
           subject = "Chemistry";
+        }
+
+        if (id == 5) {
+          subject = "Pendidikan Moral";
+        }
+
+        if (id == 6) {
+          subject = "Pendidikan Islam";
         }
 
         var electivesOption = "<option value='" + id + "' >" + subject + "</ option>"
