@@ -104,7 +104,7 @@ App = {
         electivesSelect.append(electivesOption);
     }
       return gradeInstance2.graders(App.account);
-  }).then(function(finalised) {
+  }).then(function() {
       loader.hide();
       content.show();
     }).catch(function(error) {
@@ -117,7 +117,7 @@ App = {
     var studentName = "Steve";
     App.contracts.Grade.deployed().then(function(instance2) {
       return instance2.elective(electiveId, studentId, studentName, { from: App.account });
-    }).then(function(marks) {
+    }).then(function() {
       // Wait for grades to update
       $("bahasaMalaysia").hide();
       //$("#loader").show();
@@ -129,7 +129,7 @@ App = {
     var subjectId = $('#subjectsSelect').val();
     App.contracts.Grade.deployed().then(function(instance2) {
       return instance2.finalise(subjectId, { from: App.account });
-    }).then(function(marks) {
+    }).then(function() {
       // Wait for grades to update
       $("#content").hide();
       $("#loader").show();
