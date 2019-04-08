@@ -104,8 +104,8 @@ App = {
       return instance2.grade(subjectId, subjectMarks, subjectIdentifier, graded, { from: App.account });
     }).then(function() {
       // Wait for grades to update
-      $("bahasaMalaysia").hide();
-      //$("#loader").show();
+      $("#content").hide();
+      $("#loader").show();
     }).catch(function(err) {
       console.error(err);
     });

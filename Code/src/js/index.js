@@ -87,7 +87,7 @@ App = {
           ];
           var goto1 = links1[bmid];
           var goto2 = links2[bmid];
-          // Render Student Grade Result
+          // Render Student Menu
           var studentTemplate = "<tr><th>" + bmid + "</th><td>" + studentid + "</td><td>" 
                                 + studentName + "</td><td>" + goto1 + "</td><td>" + goto2 + "</td></tr>"
           studentsMenu.append(studentTemplate);
