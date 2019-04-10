@@ -257,9 +257,8 @@ contract Grade {
         //Add Maths
         if(_ID == 1) {
         //Require subject has not been enrolled already
-            for (uint i = 0; i < amCount; i++) {
-                require(am[i].elective != true);
-            }
+        require(am[_studentID].elective == false);
+        
         am[_studentID].studentID = _studentID;
         am[_studentID].studentName = _studentName;
         am[_studentID].elective = true;
@@ -269,9 +268,8 @@ contract Grade {
         //Biology
         if(_ID == 2) {
         //Require subject has not been enrolled already
-            for (uint i = 0; i < blCount; i++) {
-                require(bl[i].elective != true);
-            }
+        require(bl[_studentID].elective == false);
+
         bl[_studentID].studentID = _studentID;
         bl[_studentID].studentName = _studentName;
         bl[_studentID].elective = true;
@@ -281,9 +279,8 @@ contract Grade {
         //Physics
         if(_ID == 3) {
         //Require subject has not been enrolled already
-            for (uint i = 0; i < pyCount; i++) {
-                require(py[i].elective != true);
-            }
+        require(py[_studentID].elective == false);
+
         py[_studentID].studentID = _studentID;
         py[_studentID].studentName = _studentName;
         py[_studentID].elective = true;
@@ -293,9 +290,8 @@ contract Grade {
         //Chemistry
         if(_ID == 4) {
         //Require subject has not been enrolled already
-            for (uint i = 0; i < cmCount; i++) {
-                require(cm[i].elective != true);
-            }
+        require(cm[_studentID].elective == false);
+
         cm[_studentID].studentID = _studentID;
         cm[_studentID].studentName = _studentName;
         cm[_studentID].elective = true;
@@ -305,9 +301,7 @@ contract Grade {
         //Pendidikan Moral
         if(_ID == 5) {
         //Require subject has not been enrolled already
-            for (uint i = 0; i < pmCount; i++) {
-                require(pm[i].elective != true);
-            }
+        require(pm[_studentID].elective == false);
 
         pm[_studentID].studentID = _studentID;
         pm[_studentID].studentName = _studentName;
@@ -318,9 +312,7 @@ contract Grade {
         //Pendidikan Islam
         if(_ID == 6) {
         //Require subject has not been enrolled already
-            for (uint i = 0; i < piCount; i++) {
-                require(pi[i].elective != true);
-            }
+        require(pi[_studentID].elective == false);
 
         pi[_studentID].studentID = _studentID;
         pi[_studentID].studentName = _studentName;
@@ -448,6 +440,9 @@ contract Grade {
         //Require that the subject hasn't been graded before
         require(am[_ID].graded == false);
 
+        //Require that the student is enrolled in the elective
+        require(am[_ID].elective == true);
+
         //Require a valid subject
         require(_ID> 0 && _ID <= amCount);
 
@@ -466,6 +461,9 @@ contract Grade {
         if(_subjectIdentifier == 8) {
         //Require that the subject hasn't been graded before
         require(py[_ID].graded == false);
+
+        //Require that the student is enrolled in the elective
+        require(py[_ID].elective == true);
 
         //Require a valid subject
         require(_ID> 0 && _ID <= pyCount);
@@ -486,6 +484,9 @@ contract Grade {
         //Require that the subject hasn't been graded before
         require(bl[_ID].graded == false);
 
+        //Require that the student is enrolled in the elective
+        require(bl[_ID].elective == true);
+
         //Require a valid subject
         require(_ID> 0 && _ID <= blCount);
 
@@ -504,6 +505,9 @@ contract Grade {
         if(_subjectIdentifier == 10) {
         //Require that the subject hasn't been graded before
         require(cm[_ID].graded == false);
+
+        //Require that the student is enrolled in the elective
+        require(cm[_ID].elective == true);
 
         //Require a valid subject
         require(_ID> 0 && _ID <= cmCount);
