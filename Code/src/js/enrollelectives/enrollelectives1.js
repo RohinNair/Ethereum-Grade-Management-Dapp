@@ -121,10 +121,11 @@ App = {
   },
   enrollElectives: function() {
     var electiveId = $('#electivesSelect').val();
-    var studentId = 1;
+    var subjectInstanceId = 1;
+    var studentId = 970224042242;
     var studentName = "Adam";
     App.contracts.Grade.deployed().then(function(instance2) {
-      return instance2.elective(electiveId, studentId, studentName, { from: App.account });
+      return instance2.elective(electiveId, subjectInstanceId, studentId, studentName, { from: App.account });
     }).then(function() {
       $("#content").hide();
       $("#loader").show();

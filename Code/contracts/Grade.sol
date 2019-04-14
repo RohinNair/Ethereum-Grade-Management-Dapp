@@ -143,7 +143,15 @@ contract Grade {
 
     uint public cmCount;
 
-    uint public userAccCount;
+    uint public totalSub1;
+
+    uint public totalSub2;
+
+    uint public totalMarks1;
+
+    uint public totalMarks2;
+
+    //uint public userAccCount;
 
     event gradedEvent (
         uint indexed _Id
@@ -170,14 +178,14 @@ contract Grade {
 
     //Constructor
     constructor () public {
-        enrollCore(1, 1, "Adam");
-        enrollCore(1, 2, "Steve");
-        enrollCore(2, 1, "Adam");
-        enrollCore(2, 2, "Steve");
-        enrollCore(3, 1, "Adam");
-        enrollCore(3, 2, "Steve");
-        enrollCore(4, 1, "Adam");
-        enrollCore(4, 2, "Steve");
+        enrollCore(1, 970224042242, "Adam");
+        enrollCore(1, 970113014543, "Steve");
+        enrollCore(2, 970224042242, "Adam");
+        enrollCore(2, 970113014543, "Steve");
+        enrollCore(3, 970224042242, "Adam");
+        enrollCore(3, 970113014543, "Steve");
+        enrollCore(4, 970224042242, "Adam");
+        enrollCore(4, 970113014543, "Steve");
         enrollElective(5);
         enrollElective(5);
         enrollElective(6);
@@ -203,21 +211,45 @@ contract Grade {
         if (_subjectCode == 1) {
             bmCount++;
             bm[bmCount] = BahasaMalaysia(bmCount, _studentID, _studentName, 0, false);
+            if (bmCount == 1){
+                totalSub1++;
+            }
+            if (bmCount == 2){
+                totalSub2++;
+            }
         }
 
         if (_subjectCode == 2) {
             biCount++;
             bi[biCount] = BahasaInggeris(biCount, _studentID, _studentName, 0, false);
+            if (biCount == 1){
+                totalSub1++;
+            }
+            if (biCount == 2){
+                totalSub2++;
+            }
         }
 
         if (_subjectCode == 3) {
             sjCount++;
             sj[sjCount] = Sejarah(sjCount, _studentID, _studentName, 0, false);
+            if (sjCount == 1){
+                totalSub1++;
+            }
+            if (sjCount == 2){
+                totalSub2++;
+            }
         }
 
         if (_subjectCode == 4) {
             maCount++;
             ma[maCount] = Mathematics(maCount, _studentID, _studentName, 0, false);
+            if (maCount == 1){
+                totalSub1++;
+            }
+            if (maCount == 2){
+                totalSub2++;
+            }
         }
     }
 
@@ -253,26 +285,38 @@ contract Grade {
         }
     }
 
-    function elective (uint _ID, uint _studentID, string memory _studentName) public {
+    function elective (uint _ID, uint _subjectInstanceId, uint _studentID, string memory _studentName) public {
         //Add Maths
         if(_ID == 1) {
         //Require subject has not been enrolled already
-        require(am[_studentID].elective == false);
+        require(am[_subjectInstanceId].elective == false);
         
-        am[_studentID].studentID = _studentID;
-        am[_studentID].studentName = _studentName;
-        am[_studentID].elective = true;
+        am[_subjectInstanceId].studentID = _studentID;
+        am[_subjectInstanceId].studentName = _studentName;
+        am[_subjectInstanceId].elective = true;
+        if (_subjectInstanceId == 1){
+                totalSub1++;
+        }
+        if (_subjectInstanceId == 2){
+                totalSub2++;
+        }
         emit gradedEvent(_ID);
         }
 
         //Biology
         if(_ID == 2) {
         //Require subject has not been enrolled already
-        require(bl[_studentID].elective == false);
+        require(bl[_subjectInstanceId].elective == false);
 
-        bl[_studentID].studentID = _studentID;
-        bl[_studentID].studentName = _studentName;
-        bl[_studentID].elective = true;
+        bl[_subjectInstanceId].studentID = _studentID;
+        bl[_subjectInstanceId].studentName = _studentName;
+        bl[_subjectInstanceId].elective = true;
+        if (_subjectInstanceId == 1){
+                totalSub1++;
+        }
+        if (_subjectInstanceId == 2){
+                totalSub2++;
+        }
         emit gradedEvent(_ID);
         }
 
@@ -281,42 +325,66 @@ contract Grade {
         //Require subject has not been enrolled already
         require(py[_studentID].elective == false);
 
-        py[_studentID].studentID = _studentID;
-        py[_studentID].studentName = _studentName;
-        py[_studentID].elective = true;
+        py[_subjectInstanceId].studentID = _studentID;
+        py[_subjectInstanceId].studentName = _studentName;
+        py[_subjectInstanceId].elective = true;
+        if (_subjectInstanceId == 1){
+                totalSub1++;
+        }
+        if (_subjectInstanceId == 2){
+                totalSub2++;
+        }
         emit gradedEvent(_ID);
         }
 
         //Chemistry
         if(_ID == 4) {
         //Require subject has not been enrolled already
-        require(cm[_studentID].elective == false);
+        require(cm[_subjectInstanceId].elective == false);
 
-        cm[_studentID].studentID = _studentID;
-        cm[_studentID].studentName = _studentName;
-        cm[_studentID].elective = true;
+        cm[_subjectInstanceId].studentID = _studentID;
+        cm[_subjectInstanceId].studentName = _studentName;
+        cm[_subjectInstanceId].elective = true;
+        if (_subjectInstanceId == 1){
+                totalSub1++;
+        }
+        if (_subjectInstanceId == 2){
+                totalSub2++;
+        }
         emit gradedEvent(_ID);
         }
 
         //Pendidikan Moral
         if(_ID == 5) {
         //Require subject has not been enrolled already
-        require(pm[_studentID].elective == false);
+        require(pm[_subjectInstanceId].elective == false);
 
-        pm[_studentID].studentID = _studentID;
-        pm[_studentID].studentName = _studentName;
-        pm[_studentID].elective = true;
+        pm[_subjectInstanceId].studentID = _studentID;
+        pm[_subjectInstanceId].studentName = _studentName;
+        pm[_subjectInstanceId].elective = true;
+        if (_subjectInstanceId == 1){
+                totalSub1++;
+        }
+        if (_subjectInstanceId == 2){
+                totalSub2++;
+        }
         emit gradedEvent(_ID);
         }
 
         //Pendidikan Islam
         if(_ID == 6) {
         //Require subject has not been enrolled already
-        require(pi[_studentID].elective == false);
+        require(pi[_subjectInstanceId].elective == false);
 
-        pi[_studentID].studentID = _studentID;
-        pi[_studentID].studentName = _studentName;
-        pi[_studentID].elective = true;
+        pi[_subjectInstanceId].studentID = _studentID;
+        pi[_subjectInstanceId].studentName = _studentName;
+        pi[_subjectInstanceId].elective = true;
+        if (_subjectInstanceId == 1){
+                totalSub1++;
+        }
+        if (_subjectInstanceId == 2){
+                totalSub2++;
+        }
         emit gradedEvent(_ID);
         }
     }

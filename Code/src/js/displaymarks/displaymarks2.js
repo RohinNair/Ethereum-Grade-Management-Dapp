@@ -111,10 +111,21 @@ App = {
     // Load contract data
     App.contracts.Grade.deployed().then(function(instance2) {
       gradeInstance2 = instance2;
-      return gradeInstance2.bmCount();
-    }).then(function() {
+      return gradeInstance2.totalSub2();
+    }).then(function(totalSub2) {
       var studentsName = $("#studentsName");
       studentsName.empty();
+
+      var studentsId = $("#studentsId");
+      studentsId.empty();
+
+      var subCount = $("#subCount");
+      subCount.empty();
+
+      var subs = totalSub2;
+
+      var subTemplate = "<td>" + subs + "</td>"
+      subCount.append(subTemplate);
 
       var bmMarks = $("#bmMarks");
       bmMarks.empty();
@@ -152,6 +163,14 @@ App = {
 
         var nameTemplate = "<td>" + name + "</td>"
         studentsName.append(nameTemplate);
+
+      })
+
+      gradeInstance2.bm(2).then(function(bms) {
+        var Id = bms[1];
+
+        var IdTemplate = "<td>" + Id + "</td>"
+        studentsId.append(IdTemplate);
 
       })
 
@@ -234,7 +253,7 @@ App = {
         });
       }
 
-      for (var i = 1; i <= 1; i++) {
+      for (var i = 1; i <= 2; i++) {
         gradeInstance2.pi(i).then(function(pis) {
           var subjectName = "Pendidikan Islam";
           var pistudent = pis[2];

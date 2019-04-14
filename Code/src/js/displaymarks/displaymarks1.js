@@ -111,10 +111,21 @@ App = {
     // Load contract data
     App.contracts.Grade.deployed().then(function(instance2) {
       gradeInstance2 = instance2;
-      return gradeInstance2.bmCount();
-    }).then(function() {
+      return gradeInstance2.totalSub1();
+    }).then(function(totalSub1) {
       var studentsName = $("#studentsName");
       studentsName.empty();
+
+      var studentsId = $("#studentsId");
+      studentsId.empty();
+
+      var subCount = $("#subCount");
+      subCount.empty();
+
+      var subs = totalSub1;
+
+      var subTemplate = "<td>" + subs + "</td>"
+      subCount.append(subTemplate);
 
       var bmMarks = $("#bmMarks");
       bmMarks.empty();
@@ -151,6 +162,14 @@ App = {
 
         var nameTemplate = "<td>" + name + "</td>"
         studentsName.append(nameTemplate);
+
+      })
+
+      gradeInstance2.bm(1).then(function(bms) {
+        var Id = bms[1];
+
+        var IdTemplate = "<td>" + Id + "</td>"
+        studentsId.append(IdTemplate);
 
       })
 
