@@ -143,9 +143,10 @@ App = {
       //Hide PM Input Box Once Graded
       gradeInstance2.pm(1).then(function(pms) {
         var graded = pms[4];
+        var enrolled = pms[5];
 
         if(!enrolled){
-          pendidikanIslam.hide();
+          pendidikanMoral.hide();
         }
         if(graded) {
           pendidikanMoral.hide();
