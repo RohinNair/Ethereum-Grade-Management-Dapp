@@ -122,8 +122,11 @@ App = {
       var subCount = $("#subCount");
       subCount.empty();
 
-      var studentsTotalMarks = $("#studentsTotalMarks");
-      studentsTotalMarks.empty();
+      var totalMarks = $("#totalMarks");
+      totalMarks.empty();
+
+      var marksPercentage = $("#marksPercentage");
+      marksPercentage.empty();
 
       var bmMarks = $("#bmMarks");
       bmMarks.empty();
@@ -155,39 +158,35 @@ App = {
       var cmMarks = $("#cmMarks");
       cmMarks.empty();
       
-      //Display Student Name
+      //Display Student Details
       gradeInstance2.bm(1).then(function(bms) {
+        var Id = bms[1];
         var name = bms[2];
 
         var nameTemplate = "<td>" + name + "</td>"
         studentsName.append(nameTemplate);
-
-      })
-
-      //Display Student ID
-      gradeInstance2.bm(1).then(function(bms) {
-        var Id = bms[1];
 
         var IdTemplate = "<td>" + Id + "</td>"
         studentsId.append(IdTemplate);
 
       })
 
-      //Display Number of Subjects taken
+      //Display Student Statistics
       gradeInstance2.ss(1).then(function(ss) {
         var subs = ss[1];
+        var total = ss[2];
+        var average = 0;
+
+        average = (total/subs);
 
         var subTemplate = "<td>" + subs + "</td>"
         subCount.append(subTemplate);
 
-      })
-
-      //Display Total Marks for Student
-      gradeInstance2.ss(1).then(function(ss) {
-        var total = ss[2];
-
         var totalTemplate = "<td>" + total + "</td>"
-        studentsTotalMarks.append(totalTemplate);
+        totalMarks.append(totalTemplate);
+
+        var percentageTemplate = "<td>" + average + " %" + "</td>"
+        marksPercentage.append(percentageTemplate);
 
       })
 
