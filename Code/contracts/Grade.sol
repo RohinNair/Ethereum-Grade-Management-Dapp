@@ -88,11 +88,17 @@ contract Grade {
         bool elective;
     }
 
-    struct UserAcc {
+    struct StudentStats {
+        uint studId;
+        uint totalSubs;
+        uint totalMarks;
+    }
+
+    /*struct UserAcc {
         uint UAID;
         string username;
         string password;
-    }
+    }*/
 
     //Read/write students
     mapping(uint => BahasaMalaysia) public bm;
@@ -119,7 +125,9 @@ contract Grade {
 
     mapping(address => bool) public electives;
 
-    mapping(uint => UserAcc) public userAcc;
+    mapping (uint => StudentStats) public ss;
+
+    //mapping(uint => UserAcc) public userAcc;
 
     //Store Subject Count
 
@@ -142,6 +150,8 @@ contract Grade {
     uint public blCount;
 
     uint public cmCount;
+
+    uint public ssCount;
 
     uint public totalSub1;
 
@@ -178,6 +188,8 @@ contract Grade {
 
     //Constructor
     constructor () public {
+        studStats(0, 0);
+        studStats(0, 0);
         enrollCore(1, 970224042242, "Adam");
         enrollCore(1, 970113014543, "Steve");
         enrollCore(2, 970224042242, "Adam");
@@ -207,15 +219,22 @@ contract Grade {
         userAcc[userAccCount] = UserAcc(userAccCount, _userName, _password);
     }*/
 
+    function studStats(uint _totalSubs, uint _totalMarks) private {
+        ssCount++;
+        ss[ssCount] = StudentStats(ssCount, _totalSubs, _totalMarks);
+    }
+
     function enrollCore(uint _subjectCode, uint _studentID, string memory _studentName) private {
         if (_subjectCode == 1) {
             bmCount++;
             bm[bmCount] = BahasaMalaysia(bmCount, _studentID, _studentName, 0, false);
             if (bmCount == 1){
                 totalSub1++;
+                ss[bmCount].totalSubs = totalSub1;
             }
             if (bmCount == 2){
                 totalSub2++;
+                ss[bmCount].totalSubs = totalSub2;
             }
         }
 
@@ -224,9 +243,11 @@ contract Grade {
             bi[biCount] = BahasaInggeris(biCount, _studentID, _studentName, 0, false);
             if (biCount == 1){
                 totalSub1++;
+                ss[biCount].totalSubs = totalSub1;
             }
             if (biCount == 2){
                 totalSub2++;
+                ss[biCount].totalSubs = totalSub2;
             }
         }
 
@@ -235,9 +256,11 @@ contract Grade {
             sj[sjCount] = Sejarah(sjCount, _studentID, _studentName, 0, false);
             if (sjCount == 1){
                 totalSub1++;
+                ss[sjCount].totalSubs = totalSub1;
             }
             if (sjCount == 2){
                 totalSub2++;
+                ss[sjCount].totalSubs = totalSub2;
             }
         }
 
@@ -246,9 +269,11 @@ contract Grade {
             ma[maCount] = Mathematics(maCount, _studentID, _studentName, 0, false);
             if (maCount == 1){
                 totalSub1++;
+                ss[maCount].totalSubs = totalSub1;
             }
             if (maCount == 2){
                 totalSub2++;
+                ss[maCount].totalSubs = totalSub2;
             }
         }
     }
@@ -294,11 +319,19 @@ contract Grade {
         am[_subjectInstanceId].studentID = _studentID;
         am[_subjectInstanceId].studentName = _studentName;
         am[_subjectInstanceId].elective = true;
-        if (_subjectInstanceId == 1){
+        /*if (_subjectInstanceId == 1){
                 totalSub1++;
         }
         if (_subjectInstanceId == 2){
                 totalSub2++;
+        }*/
+        if (_subjectInstanceId == 1){
+                totalSub1++;
+                ss[_subjectInstanceId].totalSubs = totalSub1;
+        }
+        if (_subjectInstanceId == 2){
+                totalSub2++;
+                ss[_subjectInstanceId].totalSubs = totalSub2;
         }
         emit gradedEvent(_ID);
         }
@@ -313,9 +346,11 @@ contract Grade {
         bl[_subjectInstanceId].elective = true;
         if (_subjectInstanceId == 1){
                 totalSub1++;
+                ss[_subjectInstanceId].totalSubs = totalSub1;
         }
         if (_subjectInstanceId == 2){
                 totalSub2++;
+                ss[_subjectInstanceId].totalSubs = totalSub2;
         }
         emit gradedEvent(_ID);
         }
@@ -330,9 +365,11 @@ contract Grade {
         py[_subjectInstanceId].elective = true;
         if (_subjectInstanceId == 1){
                 totalSub1++;
+                ss[_subjectInstanceId].totalSubs = totalSub1;
         }
         if (_subjectInstanceId == 2){
                 totalSub2++;
+                ss[_subjectInstanceId].totalSubs = totalSub2;
         }
         emit gradedEvent(_ID);
         }
@@ -347,9 +384,11 @@ contract Grade {
         cm[_subjectInstanceId].elective = true;
         if (_subjectInstanceId == 1){
                 totalSub1++;
+                ss[_subjectInstanceId].totalSubs = totalSub1;
         }
         if (_subjectInstanceId == 2){
                 totalSub2++;
+                ss[_subjectInstanceId].totalSubs = totalSub2;
         }
         emit gradedEvent(_ID);
         }
@@ -364,9 +403,11 @@ contract Grade {
         pm[_subjectInstanceId].elective = true;
         if (_subjectInstanceId == 1){
                 totalSub1++;
+                ss[_subjectInstanceId].totalSubs = totalSub1;
         }
         if (_subjectInstanceId == 2){
                 totalSub2++;
+                ss[_subjectInstanceId].totalSubs = totalSub2;
         }
         emit gradedEvent(_ID);
         }
@@ -381,9 +422,11 @@ contract Grade {
         pi[_subjectInstanceId].elective = true;
         if (_subjectInstanceId == 1){
                 totalSub1++;
+                ss[_subjectInstanceId].totalSubs = totalSub1;
         }
         if (_subjectInstanceId == 2){
                 totalSub2++;
+                ss[_subjectInstanceId].totalSubs = totalSub2;
         }
         emit gradedEvent(_ID);
         }

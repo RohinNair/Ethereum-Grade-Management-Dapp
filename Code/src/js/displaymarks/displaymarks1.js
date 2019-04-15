@@ -122,11 +122,6 @@ App = {
       var subCount = $("#subCount");
       subCount.empty();
 
-      var subs = totalSub1;
-
-      var subTemplate = "<td>" + subs + "</td>"
-      subCount.append(subTemplate);
-
       var bmMarks = $("#bmMarks");
       bmMarks.empty();
       
@@ -170,6 +165,14 @@ App = {
 
         var IdTemplate = "<td>" + Id + "</td>"
         studentsId.append(IdTemplate);
+
+      })
+
+      gradeInstance2.ss(1).then(function(ss) {
+        var subs = ss[1];
+
+        var subTemplate = "<td>" + subs + "</td>"
+        subCount.append(subTemplate);
 
       })
 
