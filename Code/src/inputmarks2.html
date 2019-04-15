@@ -40,15 +40,6 @@
               <td id="studentsIc"></td-->
             </table>
             <hr />
-            <!----div>
-              <table>
-                <th>Number of subjects enrolled: </th>
-                <td id="subCount"></td>
-                <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                <th>Total Marks: </th>
-                <td id="studentsTotalMarks"></td>
-              </table>
-            </div-->
             <form onSubmit="App.submitbmGrade(); return false;">
               <div class="form-group" id="bahasaMalaysia">
                 <br/>
@@ -60,7 +51,7 @@
             </div>
             </form>
             <form onSubmit="App.submitbiGrade(); return false;">
-              <div class="form-group">
+              <div class="form-group" id="bahasaInggeris">
                 <br/>
                 <label for="bi-marks">Bahasa Inggeris</label>
                 <input id="bi-marks" type="text" class="form-control" placeholder="Enter Bahasa Inggeris Marks" maxlength="5"></input>
@@ -70,7 +61,7 @@
             </div>
             </form>
             <form onSubmit="App.submitsjGrade(); return false;">
-              <div class="form-group">
+              <div class="form-group" id="sejarah">
                 <br/>
                 <label for="sj-marks">Sejarah</label>
                 <input id="sj-marks" type="text" class="form-control" placeholder="Enter Sejarah Marks" maxlength="5"></input>
@@ -80,7 +71,7 @@
             </div>
             </form>
             <form onSubmit="App.submitmaGrade(); return false;">
-              <div class="form-group">
+              <div class="form-group" id="mathematics">
                 <br/>
                 <label for="ma-marks">Mathematics</label>
                 <input id="ma-marks" type="text" class="form-control" placeholder="Enter Mathematics Marks" maxlength="5"></input>
@@ -90,17 +81,17 @@
             </div>
             </form>
             <form onSubmit="App.submitpmGrade(); return false;">
-              <div class="form-group">
+              <div class="form-group" id="pendidikanMoral">
                 <br/>
                 <label for="pm-marks">Pendidikan Moral</label>
-                <input id="pm-marks" type="text" class="form-control" placeholder="Enter Pendidikan Moral Marks" maxlength="5"></input>
+                <input id="pm-marks" type="text" class="form-control" placeholder="Enter Pendidikan Moral Marks"></input>
               <br/>
               <button type="submit" class="btn btn-primary">Submit Grade</button>
               <hr />
             </div>
             </form>
             <form onSubmit="App.submitpiGrade(); return false;">
-              <div class="form-group">
+              <div class="form-group" id="pendidikanIslam">
                 <br/>
                 <label for="pi-marks">Pendidikan Islam</label>
                 <input id="pi-marks" type="text" class="form-control" placeholder="Enter Pendidikan Islam Marks" maxlength="5"></input>
@@ -110,7 +101,7 @@
             </div>
             </form>
             <form onSubmit="App.submitamGrade(); return false;">
-              <div class="form-group">
+              <div class="form-group" id="addMaths">
                 <br/>
                 <label for="am-marks">Additional Mathematics</label>
                 <input id="am-marks" type="text" class="form-control" placeholder="Enter Additional Mathematics Marks" maxlength="5"></input>
@@ -120,7 +111,7 @@
             </div>
             </form>
             <form onSubmit="App.submitpyGrade(); return false;">
-              <div class="form-group">
+              <div class="form-group" id="physics">
                 <br/>
                 <label for="py-marks">Physics</label>
                 <input id="py-marks" type="text" class="form-control" placeholder="Enter Physics Marks" maxlength="5"></input>
@@ -130,7 +121,7 @@
             </div>
             </form>
             <form onSubmit="App.submitblGrade(); return false;">
-              <div class="form-group">
+              <div class="form-group" id="biology">
                 <br/>
                 <label for="bl-marks">Biology</label>
                 <input id="bl-marks" type="text" class="form-control" placeholder="Enter Biology Marks" maxlength="5"></input>
@@ -140,7 +131,7 @@
             </div>
             </form>
             <form onSubmit="App.submitcmGrade(); return false;">
-              <div class="form-group">
+              <div class="form-group" id="chemistry">
                 <br/>
                 <label for="cm-marks">Chemistry</label>
                 <input id="cm-marks" type="text" class="form-control" placeholder="Enter Chemistry Marks" maxlength="5"></input>

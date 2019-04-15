@@ -76,14 +76,149 @@ App = {
       var subjectsSelect = $('#subjectsSelect');
       subjectsSelect.empty();
 
-      /*var studentsTotalMarks = $('#studentsTotalMarks');
-      studentsTotalMarks.empty();*/
+      var bahasaMalaysia = $('#bahasaMalaysia');
+
+      var bahasaInggeris = $('#bahasaInggeris');
+
+      var sejarah = $('#sejarah');
+
+      var mathematics = $('#mathematics');
+
+      var pendidikanMoral = $('#pendidikanMoral');
+
+      var pendidikanIslam = $('#pendidikanIslam');
+
+      var addMaths = $('#addMaths');
+
+      var physics = $('#physics');
+
+      var biology = $('#biology');
+
+      var chemistry = $('#chemistry');
 
       gradeInstance2.bm(2).then(function(bms) {
         var name = bms[2];
 
         var nameTemplate = "<td>" + name + "</td>"
         studentsName.append(nameTemplate);
+
+      })
+      //Hide BM Input Box Once Graded
+      gradeInstance2.bm(2).then(function(bms) {
+        var graded = bms[4];
+
+        if(graded) {
+          bahasaMalaysia.hide();
+        }
+
+      })
+      //Hide BI Input Box Once Graded
+      gradeInstance2.bi(2).then(function(bis) {
+        var graded = bis[4];
+
+        if(graded) {
+          bahasaInggeris.hide();
+        }
+
+      })
+      //Hide SJ Input Box Once Graded
+      gradeInstance2.sj(2).then(function(sjs) {
+        var graded = sjs[4];
+
+        if(graded) {
+          sejarah.hide();
+        }
+
+      })
+      //Hide MA Input Box Once Graded
+      gradeInstance2.ma(2).then(function(mas) {
+        var graded = mas[4];
+
+        if(graded) {
+          mathematics.hide();
+        }
+
+      })
+      
+      //Hide PM Input Box Once Graded
+      gradeInstance2.pm(2).then(function(pms) {
+        var graded = pms[4];
+        var enrolled = pms[5];
+
+        if(!enrolled){
+          pendidikanMoral.hide();
+        }
+        if(graded) {
+          pendidikanMoral.hide();
+        }
+
+      })
+      //Hide PI Input Box Once Graded
+      gradeInstance2.pi(2).then(function(pis) {
+        var graded = pis[4];
+        var enrolled = pis[5];
+
+        if(!enrolled){
+          pendidikanIslam.hide();
+        }
+        if(graded) {
+          pendidikanIslam.hide();
+        }
+
+      })
+      //Hide AM Input Box Once Graded
+      gradeInstance2.am(2).then(function(ams) {
+        var graded = ams[4];
+        var enrolled = ams[5];
+
+        if(!enrolled){
+          addMaths.hide();
+        }
+        if(graded) {
+          addMaths.hide();
+        }
+
+      })
+      //Hide PY Input Box Once Graded
+      gradeInstance2.py(2).then(function(pys) {
+        var graded = pys[4];
+        var enrolled = pys[5];
+
+        if(!enrolled){
+          physics.hide();
+        }
+
+        if(graded) {
+          physics.hide();
+        }
+
+      })
+      //Hide BL Input Box Once Graded
+      gradeInstance2.bl(2).then(function(bls) {
+        var graded = bls[4];
+        var enrolled = bls[5];
+
+        if(!enrolled){
+          biology.hide();
+        }
+
+        if(graded) {
+          biology.hide();
+        }
+
+      })
+      //Hide CM Input Box Once Graded
+      gradeInstance2.cm(2).then(function(cms) {
+        var graded = cms[4];
+        var enrolled = cms[5];
+
+        if(!enrolled){
+          chemistry.hide();
+        }
+
+        if(graded) {
+          chemistry.hide();
+        }
 
       })
       return gradeInstance2.graders(App.account);
@@ -189,7 +324,7 @@ App = {
       console.error(err);
     });
   },
-  /*submitpiGrade: function() {
+  submitpiGrade: function() {
     //student within subject instance
     var subjectId = 2;
     //value of marks input
@@ -207,7 +342,7 @@ App = {
     }).catch(function(err) {
       console.error(err);
     });
-  },*/
+  },
   submitamGrade: function() {
     //student within subject instance
     var subjectId = 2;
