@@ -112,7 +112,7 @@ App = {
     App.contracts.Grade.deployed().then(function(instance2) {
       gradeInstance2 = instance2;
       return gradeInstance2.totalSub1();
-    }).then(function(totalSub1) {
+    }).then(function() {
       var studentsName = $("#studentsName");
       studentsName.empty();
 
