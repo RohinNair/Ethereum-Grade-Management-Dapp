@@ -122,6 +122,9 @@ App = {
       var subCount = $("#subCount");
       subCount.empty();
 
+      var studentsTotalMarks = $("#studentsTotalMarks");
+      studentsTotalMarks.empty();
+
       var bmMarks = $("#bmMarks");
       bmMarks.empty();
       
@@ -152,6 +155,7 @@ App = {
       var cmMarks = $("#cmMarks");
       cmMarks.empty();
 
+      //Display Student Name
       gradeInstance2.bm(2).then(function(bms) {
         var name = bms[2];
         //var ic = student[2];
@@ -161,6 +165,7 @@ App = {
 
       })
 
+      //Display Student ID
       gradeInstance2.bm(2).then(function(bms) {
         var Id = bms[1];
 
@@ -168,12 +173,22 @@ App = {
         studentsId.append(IdTemplate);
 
       })
-
+      
+      //Display Number of Subjects taken
       gradeInstance2.ss(2).then(function(ss) {
         var subs = ss[1];
 
         var subTemplate = "<td>" + subs + "</td>"
         subCount.append(subTemplate);
+
+      })
+
+      //Display Total Marks for Student
+      gradeInstance2.ss(2).then(function(ss) {
+        var total = ss[2];
+
+        var totalTemplate = "<td>" + total + "</td>"
+        studentsTotalMarks.append(totalTemplate);
 
       })
 

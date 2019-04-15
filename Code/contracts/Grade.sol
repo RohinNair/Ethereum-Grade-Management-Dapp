@@ -449,6 +449,9 @@ contract Grade {
         //Indicated subject has been graded
         bm[_ID].graded = _graded;
 
+        //Total the Marks
+        ss[_ID].totalMarks += _subjectMarks;
+
         emit gradedEvent(_ID);
         }
 
@@ -467,6 +470,9 @@ contract Grade {
 
         //Indicated subject has been graded
         bi[_ID].graded = _graded;
+
+        //Total the Marks
+        ss[_ID].totalMarks += _subjectMarks;
 
         emit gradedEvent(_ID);
         }
@@ -487,6 +493,9 @@ contract Grade {
         //Indicated subject has been graded
         sj[_ID].graded = _graded;
 
+        //Total the Marks
+        ss[_ID].totalMarks += _subjectMarks;
+
         emit gradedEvent(_ID);
         }
 
@@ -505,6 +514,9 @@ contract Grade {
 
         //Indicated subject has been graded
         ma[_ID].graded = _graded;
+
+        //Total the Marks
+        ss[_ID].totalMarks += _subjectMarks;
 
         emit gradedEvent(_ID);
         }
@@ -525,6 +537,9 @@ contract Grade {
         //Indicated subject has been graded
         pm[_ID].graded = _graded;
 
+        //Total the Marks
+        ss[_ID].totalMarks += _subjectMarks;
+
         emit gradedEvent(_ID);
         }
 
@@ -543,6 +558,9 @@ contract Grade {
 
         //Indicated subject has been graded
         pi[_ID].graded = _graded;
+
+        //Total the Marks
+        ss[_ID].totalMarks += _subjectMarks;
 
         emit gradedEvent(_ID);
         }
@@ -566,6 +584,9 @@ contract Grade {
         //Indicated subject has been graded
         am[_ID].graded = _graded;
 
+        //Total the Marks
+        ss[_ID].totalMarks += _subjectMarks;
+
         emit gradedEvent(_ID);
         }
 
@@ -587,6 +608,9 @@ contract Grade {
 
         //Indicated subject has been graded
         py[_ID].graded = _graded;
+
+        //Total the Marks
+        ss[_ID].totalMarks += _subjectMarks;
 
         emit gradedEvent(_ID);
         }
@@ -610,6 +634,9 @@ contract Grade {
         //Indicated subject has been graded
         bl[_ID].graded = _graded;
 
+        //Total the Marks
+        ss[_ID].totalMarks += _subjectMarks;
+
         emit gradedEvent(_ID);
         }
 
@@ -631,6 +658,9 @@ contract Grade {
 
         //Indicated subject has been graded
         cm[_ID].graded = _graded;
+
+        //Total the Marks
+        ss[_ID].totalMarks += _subjectMarks;
 
         emit gradedEvent(_ID);
         }
