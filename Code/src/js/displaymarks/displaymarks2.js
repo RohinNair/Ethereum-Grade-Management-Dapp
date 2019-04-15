@@ -111,10 +111,25 @@ App = {
     // Load contract data
     App.contracts.Grade.deployed().then(function(instance2) {
       gradeInstance2 = instance2;
-      return gradeInstance2.bmCount();
-    }).then(function() {
+      return gradeInstance2.totalSub2();
+    }).then(function(totalSub2) {
       var studentsName = $("#studentsName");
       studentsName.empty();
+
+      var studentsId = $("#studentsId");
+      studentsId.empty();
+
+      var subCount = $("#subCount");
+      subCount.empty();
+
+      var studentsTotalMarks = $("#studentsTotalMarks");
+      studentsTotalMarks.empty();
+
+      var totalMarks = $("#totalMarks");
+      totalMarks.empty();
+
+      var marksPercentage = $("#marksPercentage");
+      marksPercentage.empty();
 
       var bmMarks = $("#bmMarks");
       bmMarks.empty();
@@ -146,14 +161,37 @@ App = {
       var cmMarks = $("#cmMarks");
       cmMarks.empty();
 
+      //Display Student Name
       gradeInstance2.bm(2).then(function(bms) {
+        var Id = bms[1];
         var name = bms[2];
-        //var ic = student[2];
 
         var nameTemplate = "<td>" + name + "</td>"
         studentsName.append(nameTemplate);
 
+        var IdTemplate = "<td>" + Id + "</td>"
+        studentsId.append(IdTemplate);
+
       })
+      
+     //Display Student Statistics
+     gradeInstance2.ss(2).then(function(ss) {
+      var subs = ss[1];
+      var total = ss[2];
+      var average = 0;
+
+      average = (total/subs);
+
+      var subTemplate = "<td>" + subs + "</td>"
+      subCount.append(subTemplate);
+
+      var totalTemplate = "<td>" + total + "</td>"
+      totalMarks.append(totalTemplate);
+
+      var percentageTemplate = "<td>" + average + " %" + "</td>"
+      marksPercentage.append(percentageTemplate);
+
+    })
 
       for (var i = 2; i <= 2; i++) {
         gradeInstance2.bm(i).then(function(bms) {
@@ -234,7 +272,7 @@ App = {
         });
       }
 
-      for (var i = 1; i <= 1; i++) {
+      for (var i = 1; i <= 2; i++) {
         gradeInstance2.pi(i).then(function(pis) {
           var subjectName = "Pendidikan Islam";
           var pistudent = pis[2];

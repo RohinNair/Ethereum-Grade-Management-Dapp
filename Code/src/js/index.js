@@ -75,6 +75,11 @@ App = {
           var bmid = bms[0];
           var studentid = bms[1];
           var studentName = bms[2];
+          links0 = [
+            "",
+            '<a href="./enrollelectives1.html">Enroll</a>',
+            '<a href="./enrollelectives2.html">Enroll</a>'
+          ];
           links1 = [
             "",
             '<a href="./inputmarks1.html">Grade</a>',
@@ -85,11 +90,12 @@ App = {
             '<a href="./displaymarks1.html">View</a>',
             '<a href="./displaymarks2.html">View</a>'
           ];
+          var goto0 = links0[bmid];
           var goto1 = links1[bmid];
           var goto2 = links2[bmid];
           // Render Student Menu
           var studentTemplate = "<tr><th>" + bmid + "</th><td>" + studentid + "</td><td>" 
-                                + studentName + "</td><td>" + goto1 + "</td><td>" + goto2 + "</td></tr>"
+                                + studentName + "</td><td>" + goto0 + "</td><td>" + goto1 + "</td><td>" + goto2 + "</td></tr>"
           studentsMenu.append(studentTemplate);
         });
       }

@@ -88,11 +88,17 @@ contract Grade {
         bool elective;
     }
 
-    struct UserAcc {
+    struct StudentStats {
+        uint studId;
+        uint totalSubs;
+        uint totalMarks;
+    }
+
+    /*struct UserAcc {
         uint UAID;
         string username;
         string password;
-    }
+    }*/
 
     //Read/write students
     mapping(uint => BahasaMalaysia) public bm;
@@ -119,7 +125,9 @@ contract Grade {
 
     mapping(address => bool) public electives;
 
-    mapping(uint => UserAcc) public userAcc;
+    mapping (uint => StudentStats) public ss;
+
+    //mapping(uint => UserAcc) public userAcc;
 
     //Store Subject Count
 
@@ -143,7 +151,17 @@ contract Grade {
 
     uint public cmCount;
 
-    uint public userAccCount;
+    uint public ssCount;
+
+    uint public totalSub1;
+
+    uint public totalSub2;
+
+    uint public totalMarks1;
+
+    uint public totalMarks2;
+
+    //uint public userAccCount;
 
     event gradedEvent (
         uint indexed _Id
@@ -170,14 +188,16 @@ contract Grade {
 
     //Constructor
     constructor () public {
-        enrollCore(1, 1, "Adam");
-        enrollCore(1, 2, "Steve");
-        enrollCore(2, 1, "Adam");
-        enrollCore(2, 2, "Steve");
-        enrollCore(3, 1, "Adam");
-        enrollCore(3, 2, "Steve");
-        enrollCore(4, 1, "Adam");
-        enrollCore(4, 2, "Steve");
+        studStats(0, 0);
+        studStats(0, 0);
+        enrollCore(1, 970224042242, "Adam");
+        enrollCore(1, 970113014543, "Steve");
+        enrollCore(2, 970224042242, "Adam");
+        enrollCore(2, 970113014543, "Steve");
+        enrollCore(3, 970224042242, "Adam");
+        enrollCore(3, 970113014543, "Steve");
+        enrollCore(4, 970224042242, "Adam");
+        enrollCore(4, 970113014543, "Steve");
         enrollElective(5);
         enrollElective(5);
         enrollElective(6);
@@ -199,25 +219,62 @@ contract Grade {
         userAcc[userAccCount] = UserAcc(userAccCount, _userName, _password);
     }*/
 
+    function studStats(uint _totalSubs, uint _totalMarks) private {
+        ssCount++;
+        ss[ssCount] = StudentStats(ssCount, _totalSubs, _totalMarks);
+    }
+
     function enrollCore(uint _subjectCode, uint _studentID, string memory _studentName) private {
         if (_subjectCode == 1) {
             bmCount++;
             bm[bmCount] = BahasaMalaysia(bmCount, _studentID, _studentName, 0, false);
+            if (bmCount == 1){
+                totalSub1++;
+                ss[bmCount].totalSubs = totalSub1;
+            }
+            if (bmCount == 2){
+                totalSub2++;
+                ss[bmCount].totalSubs = totalSub2;
+            }
         }
 
         if (_subjectCode == 2) {
             biCount++;
             bi[biCount] = BahasaInggeris(biCount, _studentID, _studentName, 0, false);
+            if (biCount == 1){
+                totalSub1++;
+                ss[biCount].totalSubs = totalSub1;
+            }
+            if (biCount == 2){
+                totalSub2++;
+                ss[biCount].totalSubs = totalSub2;
+            }
         }
 
         if (_subjectCode == 3) {
             sjCount++;
             sj[sjCount] = Sejarah(sjCount, _studentID, _studentName, 0, false);
+            if (sjCount == 1){
+                totalSub1++;
+                ss[sjCount].totalSubs = totalSub1;
+            }
+            if (sjCount == 2){
+                totalSub2++;
+                ss[sjCount].totalSubs = totalSub2;
+            }
         }
 
         if (_subjectCode == 4) {
             maCount++;
             ma[maCount] = Mathematics(maCount, _studentID, _studentName, 0, false);
+            if (maCount == 1){
+                totalSub1++;
+                ss[maCount].totalSubs = totalSub1;
+            }
+            if (maCount == 2){
+                totalSub2++;
+                ss[maCount].totalSubs = totalSub2;
+            }
         }
     }
 
@@ -253,78 +310,124 @@ contract Grade {
         }
     }
 
-    function elective (uint _ID, uint _studentID, string memory _studentName) public {
+    function elective (uint _ID, uint _subjectInstanceId, uint _studentID, string memory _studentName) public {
         //Add Maths
         if(_ID == 1) {
         //Require subject has not been enrolled already
-            for (uint i = 0; i < amCount; i++) {
-                require(am[i].elective != true);
-            }
-        am[_studentID].studentID = _studentID;
-        am[_studentID].studentName = _studentName;
-        am[_studentID].elective = true;
+        require(am[_subjectInstanceId].elective == false);
+        
+        am[_subjectInstanceId].studentID = _studentID;
+        am[_subjectInstanceId].studentName = _studentName;
+        am[_subjectInstanceId].elective = true;
+        /*if (_subjectInstanceId == 1){
+                totalSub1++;
+        }
+        if (_subjectInstanceId == 2){
+                totalSub2++;
+        }*/
+        if (_subjectInstanceId == 1){
+                totalSub1++;
+                ss[_subjectInstanceId].totalSubs = totalSub1;
+        }
+        if (_subjectInstanceId == 2){
+                totalSub2++;
+                ss[_subjectInstanceId].totalSubs = totalSub2;
+        }
         emit gradedEvent(_ID);
         }
 
         //Biology
         if(_ID == 2) {
         //Require subject has not been enrolled already
-            for (uint i = 0; i < blCount; i++) {
-                require(bl[i].elective != true);
-            }
-        bl[_studentID].studentID = _studentID;
-        bl[_studentID].studentName = _studentName;
-        bl[_studentID].elective = true;
+        require(bl[_subjectInstanceId].elective == false);
+
+        bl[_subjectInstanceId].studentID = _studentID;
+        bl[_subjectInstanceId].studentName = _studentName;
+        bl[_subjectInstanceId].elective = true;
+        if (_subjectInstanceId == 1){
+                totalSub1++;
+                ss[_subjectInstanceId].totalSubs = totalSub1;
+        }
+        if (_subjectInstanceId == 2){
+                totalSub2++;
+                ss[_subjectInstanceId].totalSubs = totalSub2;
+        }
         emit gradedEvent(_ID);
         }
 
         //Physics
         if(_ID == 3) {
         //Require subject has not been enrolled already
-            for (uint i = 0; i < pyCount; i++) {
-                require(py[i].elective != true);
-            }
-        py[_studentID].studentID = _studentID;
-        py[_studentID].studentName = _studentName;
-        py[_studentID].elective = true;
+        require(py[_studentID].elective == false);
+
+        py[_subjectInstanceId].studentID = _studentID;
+        py[_subjectInstanceId].studentName = _studentName;
+        py[_subjectInstanceId].elective = true;
+        if (_subjectInstanceId == 1){
+                totalSub1++;
+                ss[_subjectInstanceId].totalSubs = totalSub1;
+        }
+        if (_subjectInstanceId == 2){
+                totalSub2++;
+                ss[_subjectInstanceId].totalSubs = totalSub2;
+        }
         emit gradedEvent(_ID);
         }
 
         //Chemistry
         if(_ID == 4) {
         //Require subject has not been enrolled already
-            for (uint i = 0; i < cmCount; i++) {
-                require(cm[i].elective != true);
-            }
-        cm[_studentID].studentID = _studentID;
-        cm[_studentID].studentName = _studentName;
-        cm[_studentID].elective = true;
+        require(cm[_subjectInstanceId].elective == false);
+
+        cm[_subjectInstanceId].studentID = _studentID;
+        cm[_subjectInstanceId].studentName = _studentName;
+        cm[_subjectInstanceId].elective = true;
+        if (_subjectInstanceId == 1){
+                totalSub1++;
+                ss[_subjectInstanceId].totalSubs = totalSub1;
+        }
+        if (_subjectInstanceId == 2){
+                totalSub2++;
+                ss[_subjectInstanceId].totalSubs = totalSub2;
+        }
         emit gradedEvent(_ID);
         }
 
         //Pendidikan Moral
         if(_ID == 5) {
         //Require subject has not been enrolled already
-            for (uint i = 0; i < pmCount; i++) {
-                require(pm[i].elective != true);
-            }
+        require(pm[_subjectInstanceId].elective == false);
 
-        pm[_studentID].studentID = _studentID;
-        pm[_studentID].studentName = _studentName;
-        pm[_studentID].elective = true;
+        pm[_subjectInstanceId].studentID = _studentID;
+        pm[_subjectInstanceId].studentName = _studentName;
+        pm[_subjectInstanceId].elective = true;
+        if (_subjectInstanceId == 1){
+                totalSub1++;
+                ss[_subjectInstanceId].totalSubs = totalSub1;
+        }
+        if (_subjectInstanceId == 2){
+                totalSub2++;
+                ss[_subjectInstanceId].totalSubs = totalSub2;
+        }
         emit gradedEvent(_ID);
         }
 
         //Pendidikan Islam
         if(_ID == 6) {
         //Require subject has not been enrolled already
-            for (uint i = 0; i < piCount; i++) {
-                require(pi[i].elective != true);
-            }
+        require(pi[_subjectInstanceId].elective == false);
 
-        pi[_studentID].studentID = _studentID;
-        pi[_studentID].studentName = _studentName;
-        pi[_studentID].elective = true;
+        pi[_subjectInstanceId].studentID = _studentID;
+        pi[_subjectInstanceId].studentName = _studentName;
+        pi[_subjectInstanceId].elective = true;
+        if (_subjectInstanceId == 1){
+                totalSub1++;
+                ss[_subjectInstanceId].totalSubs = totalSub1;
+        }
+        if (_subjectInstanceId == 2){
+                totalSub2++;
+                ss[_subjectInstanceId].totalSubs = totalSub2;
+        }
         emit gradedEvent(_ID);
         }
     }
@@ -346,6 +449,9 @@ contract Grade {
         //Indicated subject has been graded
         bm[_ID].graded = _graded;
 
+        //Total the Marks
+        ss[_ID].totalMarks += _subjectMarks;
+
         emit gradedEvent(_ID);
         }
 
@@ -364,6 +470,9 @@ contract Grade {
 
         //Indicated subject has been graded
         bi[_ID].graded = _graded;
+
+        //Total the Marks
+        ss[_ID].totalMarks += _subjectMarks;
 
         emit gradedEvent(_ID);
         }
@@ -384,6 +493,9 @@ contract Grade {
         //Indicated subject has been graded
         sj[_ID].graded = _graded;
 
+        //Total the Marks
+        ss[_ID].totalMarks += _subjectMarks;
+
         emit gradedEvent(_ID);
         }
 
@@ -402,6 +514,9 @@ contract Grade {
 
         //Indicated subject has been graded
         ma[_ID].graded = _graded;
+
+        //Total the Marks
+        ss[_ID].totalMarks += _subjectMarks;
 
         emit gradedEvent(_ID);
         }
@@ -422,6 +537,9 @@ contract Grade {
         //Indicated subject has been graded
         pm[_ID].graded = _graded;
 
+        //Total the Marks
+        ss[_ID].totalMarks += _subjectMarks;
+
         emit gradedEvent(_ID);
         }
 
@@ -441,12 +559,18 @@ contract Grade {
         //Indicated subject has been graded
         pi[_ID].graded = _graded;
 
+        //Total the Marks
+        ss[_ID].totalMarks += _subjectMarks;
+
         emit gradedEvent(_ID);
         }
 
         if(_subjectIdentifier == 7) {
         //Require that the subject hasn't been graded before
         require(am[_ID].graded == false);
+
+        //Require that the student is enrolled in the elective
+        require(am[_ID].elective == true);
 
         //Require a valid subject
         require(_ID> 0 && _ID <= amCount);
@@ -460,12 +584,18 @@ contract Grade {
         //Indicated subject has been graded
         am[_ID].graded = _graded;
 
+        //Total the Marks
+        ss[_ID].totalMarks += _subjectMarks;
+
         emit gradedEvent(_ID);
         }
 
         if(_subjectIdentifier == 8) {
         //Require that the subject hasn't been graded before
         require(py[_ID].graded == false);
+
+        //Require that the student is enrolled in the elective
+        require(py[_ID].elective == true);
 
         //Require a valid subject
         require(_ID> 0 && _ID <= pyCount);
@@ -479,12 +609,18 @@ contract Grade {
         //Indicated subject has been graded
         py[_ID].graded = _graded;
 
+        //Total the Marks
+        ss[_ID].totalMarks += _subjectMarks;
+
         emit gradedEvent(_ID);
         }
 
         if(_subjectIdentifier == 9) {
         //Require that the subject hasn't been graded before
         require(bl[_ID].graded == false);
+
+        //Require that the student is enrolled in the elective
+        require(bl[_ID].elective == true);
 
         //Require a valid subject
         require(_ID> 0 && _ID <= blCount);
@@ -498,12 +634,18 @@ contract Grade {
         //Indicated subject has been graded
         bl[_ID].graded = _graded;
 
+        //Total the Marks
+        ss[_ID].totalMarks += _subjectMarks;
+
         emit gradedEvent(_ID);
         }
 
         if(_subjectIdentifier == 10) {
         //Require that the subject hasn't been graded before
         require(cm[_ID].graded == false);
+
+        //Require that the student is enrolled in the elective
+        require(cm[_ID].elective == true);
 
         //Require a valid subject
         require(_ID> 0 && _ID <= cmCount);
@@ -516,6 +658,9 @@ contract Grade {
 
         //Indicated subject has been graded
         cm[_ID].graded = _graded;
+
+        //Total the Marks
+        ss[_ID].totalMarks += _subjectMarks;
 
         emit gradedEvent(_ID);
         }

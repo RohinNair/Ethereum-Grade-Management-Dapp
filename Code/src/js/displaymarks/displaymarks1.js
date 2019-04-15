@@ -111,10 +111,22 @@ App = {
     // Load contract data
     App.contracts.Grade.deployed().then(function(instance2) {
       gradeInstance2 = instance2;
-      return gradeInstance2.bmCount();
-    }).then(function() {
+      return gradeInstance2.totalSub1();
+    }).then(function(totalSub1) {
       var studentsName = $("#studentsName");
       studentsName.empty();
+
+      var studentsId = $("#studentsId");
+      studentsId.empty();
+
+      var subCount = $("#subCount");
+      subCount.empty();
+
+      var totalMarks = $("#totalMarks");
+      totalMarks.empty();
+
+      var marksPercentage = $("#marksPercentage");
+      marksPercentage.empty();
 
       var bmMarks = $("#bmMarks");
       bmMarks.empty();
@@ -145,12 +157,36 @@ App = {
 
       var cmMarks = $("#cmMarks");
       cmMarks.empty();
-
+      
+      //Display Student Details
       gradeInstance2.bm(1).then(function(bms) {
+        var Id = bms[1];
         var name = bms[2];
 
         var nameTemplate = "<td>" + name + "</td>"
         studentsName.append(nameTemplate);
+
+        var IdTemplate = "<td>" + Id + "</td>"
+        studentsId.append(IdTemplate);
+
+      })
+
+      //Display Student Statistics
+      gradeInstance2.ss(1).then(function(ss) {
+        var subs = ss[1];
+        var total = ss[2];
+        var average = 0;
+
+        average = (total/subs);
+
+        var subTemplate = "<td>" + subs + "</td>"
+        subCount.append(subTemplate);
+
+        var totalTemplate = "<td>" + total + "</td>"
+        totalMarks.append(totalTemplate);
+
+        var percentageTemplate = "<td>" + average + " %" + "</td>"
+        marksPercentage.append(percentageTemplate);
 
       })
 

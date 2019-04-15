@@ -121,10 +121,11 @@ App = {
   },
   enrollElectives: function() {
     var electiveId = $('#electivesSelect').val();
-    var studentId = 2;
+    var subjectInstanceId = 2;
+    var studentId = 970113014543;
     var studentName = "Steve";
     App.contracts.Grade.deployed().then(function(instance2) {
-      return instance2.elective(electiveId, studentId, studentName, { from: App.account });
+      return instance2.elective(electiveId, subjectInstanceId, studentId, studentName, { from: App.account });
     }).then(function() {
       // Wait for grades to update
       $("bahasaMalaysia").hide();
