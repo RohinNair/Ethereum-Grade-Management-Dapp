@@ -161,18 +161,18 @@ App = {
       var cmMarks = $("#cmMarks");
       cmMarks.empty();
 
-      //Display Student Name
-      gradeInstance2.bm(2).then(function(bms) {
-        var Id = bms[1];
-        var name = bms[2];
+    //Display Student Name
+    gradeInstance2.bm(2).then(function(bms) {
+      var Id = bms[1];
+      var name = bms[2];
 
-        var nameTemplate = "<td>" + name + "</td>"
-        studentsName.append(nameTemplate);
+      var nameTemplate = "<td>" + name + "</td>"
+      studentsName.append(nameTemplate);
 
-        var IdTemplate = "<td>" + Id + "</td>"
-        studentsId.append(IdTemplate);
+      var IdTemplate = "<td>" + Id + "</td>"
+      studentsId.append(IdTemplate);
 
-      })
+    })
       
      //Display Student Statistics
      gradeInstance2.ss(2).then(function(ss) {
