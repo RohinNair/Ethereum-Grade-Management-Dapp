@@ -319,12 +319,7 @@ contract Grade {
         am[_subjectInstanceId].studentID = _studentID;
         am[_subjectInstanceId].studentName = _studentName;
         am[_subjectInstanceId].elective = true;
-        /*if (_subjectInstanceId == 1){
-                totalSub1++;
-        }
-        if (_subjectInstanceId == 2){
-                totalSub2++;
-        }*/
+    
         if (_subjectInstanceId == 1){
                 totalSub1++;
                 ss[_subjectInstanceId].totalSubs = totalSub1;
@@ -344,6 +339,7 @@ contract Grade {
         bl[_subjectInstanceId].studentID = _studentID;
         bl[_subjectInstanceId].studentName = _studentName;
         bl[_subjectInstanceId].elective = true;
+
         if (_subjectInstanceId == 1){
                 totalSub1++;
                 ss[_subjectInstanceId].totalSubs = totalSub1;
@@ -363,6 +359,7 @@ contract Grade {
         py[_subjectInstanceId].studentID = _studentID;
         py[_subjectInstanceId].studentName = _studentName;
         py[_subjectInstanceId].elective = true;
+
         if (_subjectInstanceId == 1){
                 totalSub1++;
                 ss[_subjectInstanceId].totalSubs = totalSub1;
@@ -382,6 +379,7 @@ contract Grade {
         cm[_subjectInstanceId].studentID = _studentID;
         cm[_subjectInstanceId].studentName = _studentName;
         cm[_subjectInstanceId].elective = true;
+
         if (_subjectInstanceId == 1){
                 totalSub1++;
                 ss[_subjectInstanceId].totalSubs = totalSub1;
@@ -401,6 +399,7 @@ contract Grade {
         pm[_subjectInstanceId].studentID = _studentID;
         pm[_subjectInstanceId].studentName = _studentName;
         pm[_subjectInstanceId].elective = true;
+
         if (_subjectInstanceId == 1){
                 totalSub1++;
                 ss[_subjectInstanceId].totalSubs = totalSub1;
@@ -420,6 +419,7 @@ contract Grade {
         pi[_subjectInstanceId].studentID = _studentID;
         pi[_subjectInstanceId].studentName = _studentName;
         pi[_subjectInstanceId].elective = true;
+
         if (_subjectInstanceId == 1){
                 totalSub1++;
                 ss[_subjectInstanceId].totalSubs = totalSub1;
