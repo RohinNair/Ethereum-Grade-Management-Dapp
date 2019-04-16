@@ -40,13 +40,51 @@
               <td id="studentsIc"></td-->
             </table>
             <hr />
-            <form onSubmit="App.enrollElectives(); return false;">
-              <div class="form-group">
-                <label for="electivesSelect">Select Subject</label>
-                <select class="form-control" id="electivesSelect">
-                </select>
+            <form onSubmit="App.enrollPendidikanMoral(); return false;">
+              <div class="form-group" id="pendidikanMoral">
+                <label for="pendidikan-moral">Pendidikan Moral</label>
                 <br/>
-              <button type="submit" class="btn btn-primary">Enroll Student</button>
+              <button type="submit" class="btn btn-primary">Enroll</button>
+              <hr />
+            </div>
+            </form>
+            <form onSubmit="App.enrollPendidikanIslam(); return false;">
+              <div class="form-group" id="pendidikanIslam">
+                <label for="pendidikan-islam">Pendidikan Islam</label>
+                <br/>
+              <button type="submit" class="btn btn-primary">Enroll</button>
+              <hr />
+            </div>
+            </form>
+            <form onSubmit="App.enrollAddMaths(); return false;">
+              <div class="form-group" id="addMaths">
+                <label for="add-maths">Additional Mathematics</label>
+                <br/>
+              <button type="submit" class="btn btn-primary">Enroll</button>
+              <hr />
+            </div>
+            </form>
+            <form onSubmit="App.enrollPhysics(); return false;">
+              <div class="form-group" id="physics">
+                <label for="physics">Physics</label>
+                <br/>
+              <button type="submit" class="btn btn-primary">Enroll</button>
+              <hr />
+            </div>
+            </form>
+            <form onSubmit="App.enrollBiology(); return false;">
+              <div class="form-group" id="biology">
+                <label for="biology">Biology</label>
+                <br/>
+              <button type="submit" class="btn btn-primary">Enroll</button>
+              <hr />
+            </div>
+            </form>
+            <form onSubmit="App.enrollChemistry(); return false;">
+              <div class="form-group" id="chemistry">
+                <label for="chemistry">Chemistry</label>
+                <br/>
+              <button type="submit" class="btn btn-primary">Enroll</button>
               <hr />
             </div>
             </form>

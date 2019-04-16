@@ -70,11 +70,12 @@ App = {
       var studentsName = $("#studentsName");
       studentsName.empty();
 
-      var subjectsSelect = $('#subjectsSelect');
-      subjectsSelect.empty();
-
-      var electivesSelect = $("#electivesSelect");
-      electivesSelect.empty();
+      var pendidikanMoral = $("#pendidikanMoral");
+      var pendidikanIslam = $("#pendidikanIslam");
+      var addMaths = $("#addMaths");
+      var physics = $("#physics");
+      var biology = $("#biology");
+      var chemistry = $("#chemistry");
 
       gradeInstance2.bm(2).then(function(bms) {
         var name = bms[2];
@@ -83,34 +84,68 @@ App = {
         studentsName.append(nameTemplate);
 
       });
-      for (var i = 1; i <= 6; i++) {
-        var id = i;
-        var subject;
 
-        if (id == 1) {
-          subject = "Add Maths";
-        }
-        if (id == 2) {
-          subject = "Biology";
-        }
-        if (id == 3) {
-          subject = "Physics";
-        }
-        if (id == 4) {
-          subject = "Chemistry";
+      //Hide PM Option once Enrolled
+      gradeInstance2.pm(2).then(function(pms) {
+        var enrolled = pms[5];
+
+        if(enrolled) {
+          pendidikanMoral.hide();
+          pendidikanIslam.hide();
         }
 
-        if (id == 5) {
-          subject = "Pendidikan Moral";
+      })
+
+      //Hide PI Option once Enrolled
+      gradeInstance2.pi(2).then(function(pis) {
+        var enrolled = pis[5];
+
+        if(enrolled) {
+          pendidikanIslam.hide();
+          pendidikanMoral.hide();
         }
 
-        if (id == 6) {
-          subject = "Pendidikan Islam";
+      })
+
+      //Hide AM Option once Enrolled
+      gradeInstance2.am(2).then(function(ams) {
+        var enrolled = ams[5];
+
+        if(enrolled) {
+          addMaths.hide();
         }
 
-        var electivesOption = "<option value='" + id + "' >" + subject + "</ option>"
-        electivesSelect.append(electivesOption);
-    }
+      })
+
+      //Hide PY Option once Enrolled
+      gradeInstance2.py(2).then(function(pys) {
+        var enrolled = pys[5];
+
+        if(enrolled) {
+          physics.hide();
+        }
+
+      })
+
+      //Hide BL Option once Enrolled
+      gradeInstance2.bl(2).then(function(bls) {
+        var enrolled = bls[5];
+
+        if(enrolled) {
+          biology.hide();
+        }
+
+      })
+
+      //Hide CM Option once Enrolled
+      gradeInstance2.cm(2).then(function(cms) {
+        var enrolled = cms[5];
+
+        if(enrolled) {
+          chemistry.hide();
+        }
+
+      })
       return gradeInstance2.graders(App.account);
   }).then(function() {
       loader.hide();
@@ -119,17 +154,92 @@ App = {
       console.warn(error);
     });
   },
-  enrollElectives: function() {
-    var electiveId = $('#electivesSelect').val();
+  
+  enrollPendidikanMoral: function() {
+    var electiveId = 5;
     var subjectInstanceId = 2;
     var studentId = 970113014543;
     var studentName = "Steve";
     App.contracts.Grade.deployed().then(function(instance2) {
       return instance2.elective(electiveId, subjectInstanceId, studentId, studentName, { from: App.account });
     }).then(function() {
-      // Wait for grades to update
-      $("bahasaMalaysia").hide();
-      //$("#loader").show();
+      $("#content").hide();
+      $("#loader").show();
+    }).catch(function(err) {
+      console.error(err);
+    });
+  },
+
+  enrollPendidikanIslam: function() {
+    var electiveId = 6;
+    var subjectInstanceId = 2;
+    var studentId = 970113014543;
+    var studentName = "Steve";
+    App.contracts.Grade.deployed().then(function(instance2) {
+      return instance2.elective(electiveId, subjectInstanceId, studentId, studentName, { from: App.account });
+    }).then(function() {
+      $("#content").hide();
+      $("#loader").show();
+    }).catch(function(err) {
+      console.error(err);
+    });
+  },
+
+  enrollAddMaths: function() {
+    var electiveId = 7;
+    var subjectInstanceId = 2;
+    var studentId = 970113014543;
+    var studentName = "Steve";
+    App.contracts.Grade.deployed().then(function(instance2) {
+      return instance2.elective(electiveId, subjectInstanceId, studentId, studentName, { from: App.account });
+    }).then(function() {
+      $("#content").hide();
+      $("#loader").show();
+    }).catch(function(err) {
+      console.error(err);
+    });
+  },
+
+  enrollPhysics: function() {
+    var electiveId = 8;
+    var subjectInstanceId = 2;
+    var studentId = 970113014543;
+    var studentName = "Steve";
+    App.contracts.Grade.deployed().then(function(instance2) {
+      return instance2.elective(electiveId, subjectInstanceId, studentId, studentName, { from: App.account });
+    }).then(function() {
+      $("#content").hide();
+      $("#loader").show();
+    }).catch(function(err) {
+      console.error(err);
+    });
+  },
+
+  enrollBiology: function() {
+    var electiveId = 9;
+    var subjectInstanceId = 2;
+    var studentId = 970113014543;
+    var studentName = "Steve";
+    App.contracts.Grade.deployed().then(function(instance2) {
+      return instance2.elective(electiveId, subjectInstanceId, studentId, studentName, { from: App.account });
+    }).then(function() {
+      $("#content").hide();
+      $("#loader").show();
+    }).catch(function(err) {
+      console.error(err);
+    });
+  },
+
+  enrollChemistry: function() {
+    var electiveId = 10;
+    var subjectInstanceId = 2;
+    var studentId = 970113014543;
+    var studentName = "Steve";
+    App.contracts.Grade.deployed().then(function(instance2) {
+      return instance2.elective(electiveId, subjectInstanceId, studentId, studentName, { from: App.account });
+    }).then(function() {
+      $("#content").hide();
+      $("#loader").show();
     }).catch(function(err) {
       console.error(err);
     });
