@@ -1,4 +1,3 @@
-pragma solidity ^0.5.0;
 
 contract Grade {
     //Modelling Subjects
@@ -311,90 +310,8 @@ contract Grade {
     }
 
     function elective (uint _ID, uint _subjectInstanceId, uint _studentID, string memory _studentName) public {
-        //Add Maths
-        if(_ID == 1) {
-        //Require subject has not been enrolled already
-        require(am[_subjectInstanceId].elective == false);
-        
-        am[_subjectInstanceId].studentID = _studentID;
-        am[_subjectInstanceId].studentName = _studentName;
-        am[_subjectInstanceId].elective = true;
-    
-        if (_subjectInstanceId == 1){
-                totalSub1++;
-                ss[_subjectInstanceId].totalSubs = totalSub1;
-        }
-        if (_subjectInstanceId == 2){
-                totalSub2++;
-                ss[_subjectInstanceId].totalSubs = totalSub2;
-        }
-        emit gradedEvent(_ID);
-        }
-
-        //Biology
-        if(_ID == 2) {
-        //Require subject has not been enrolled already
-        require(bl[_subjectInstanceId].elective == false);
-
-        bl[_subjectInstanceId].studentID = _studentID;
-        bl[_subjectInstanceId].studentName = _studentName;
-        bl[_subjectInstanceId].elective = true;
-
-        if (_subjectInstanceId == 1){
-                totalSub1++;
-                ss[_subjectInstanceId].totalSubs = totalSub1;
-        }
-        if (_subjectInstanceId == 2){
-                totalSub2++;
-                ss[_subjectInstanceId].totalSubs = totalSub2;
-        }
-        emit gradedEvent(_ID);
-        }
-
-        //Physics
-        if(_ID == 3) {
-        //Require subject has not been enrolled already
-        require(py[_studentID].elective == false);
-
-        py[_subjectInstanceId].studentID = _studentID;
-        py[_subjectInstanceId].studentName = _studentName;
-        py[_subjectInstanceId].elective = true;
-
-        if (_subjectInstanceId == 1){
-                totalSub1++;
-                ss[_subjectInstanceId].totalSubs = totalSub1;
-        }
-        if (_subjectInstanceId == 2){
-                totalSub2++;
-                ss[_subjectInstanceId].totalSubs = totalSub2;
-        }
-        emit gradedEvent(_ID);
-        }
-
-        //Chemistry
-        if(_ID == 4) {
-        //Require subject has not been enrolled already
-        require(cm[_subjectInstanceId].elective == false);
-
-        cm[_subjectInstanceId].studentID = _studentID;
-        cm[_subjectInstanceId].studentName = _studentName;
-        cm[_subjectInstanceId].elective = true;
-
-        if (_subjectInstanceId == 1){
-                totalSub1++;
-                ss[_subjectInstanceId].totalSubs = totalSub1;
-        }
-        if (_subjectInstanceId == 2){
-                totalSub2++;
-                ss[_subjectInstanceId].totalSubs = totalSub2;
-        }
-        emit gradedEvent(_ID);
-        }
-
         //Pendidikan Moral
         if(_ID == 5) {
-        //Require subject has not been enrolled already
-        require(pm[_subjectInstanceId].elective == false);
 
         pm[_subjectInstanceId].studentID = _studentID;
         pm[_subjectInstanceId].studentName = _studentName;
@@ -413,8 +330,6 @@ contract Grade {
 
         //Pendidikan Islam
         if(_ID == 6) {
-        //Require subject has not been enrolled already
-        require(pi[_subjectInstanceId].elective == false);
 
         pi[_subjectInstanceId].studentID = _studentID;
         pi[_subjectInstanceId].studentName = _studentName;
@@ -430,12 +345,82 @@ contract Grade {
         }
         emit gradedEvent(_ID);
         }
+
+        //Add Maths
+        if(_ID == 7) {
+        
+        am[_subjectInstanceId].studentID = _studentID;
+        am[_subjectInstanceId].studentName = _studentName;
+        am[_subjectInstanceId].elective = true;
+    
+        if (_subjectInstanceId == 1){
+                totalSub1++;
+                ss[_subjectInstanceId].totalSubs = totalSub1;
+        }
+        if (_subjectInstanceId == 2){
+                totalSub2++;
+                ss[_subjectInstanceId].totalSubs = totalSub2;
+        }
+        emit gradedEvent(_ID);
+        }
+
+        //Physics
+        if(_ID == 8) {
+
+        py[_subjectInstanceId].studentID = _studentID;
+        py[_subjectInstanceId].studentName = _studentName;
+        py[_subjectInstanceId].elective = true;
+
+        if (_subjectInstanceId == 1){
+                totalSub1++;
+                ss[_subjectInstanceId].totalSubs = totalSub1;
+        }
+        if (_subjectInstanceId == 2){
+                totalSub2++;
+                ss[_subjectInstanceId].totalSubs = totalSub2;
+        }
+        emit gradedEvent(_ID);
+        }
+
+        //Biology
+        if(_ID == 9) {
+
+        bl[_subjectInstanceId].studentID = _studentID;
+        bl[_subjectInstanceId].studentName = _studentName;
+        bl[_subjectInstanceId].elective = true;
+
+        if (_subjectInstanceId == 1){
+                totalSub1++;
+                ss[_subjectInstanceId].totalSubs = totalSub1;
+        }
+        if (_subjectInstanceId == 2){
+                totalSub2++;
+                ss[_subjectInstanceId].totalSubs = totalSub2;
+        }
+        emit gradedEvent(_ID);
+        }
+
+        //Chemistry
+        if(_ID == 10) {
+
+        cm[_subjectInstanceId].studentID = _studentID;
+        cm[_subjectInstanceId].studentName = _studentName;
+        cm[_subjectInstanceId].elective = true;
+
+        if (_subjectInstanceId == 1){
+                totalSub1++;
+                ss[_subjectInstanceId].totalSubs = totalSub1;
+        }
+        if (_subjectInstanceId == 2){
+                totalSub2++;
+                ss[_subjectInstanceId].totalSubs = totalSub2;
+        }
+        emit gradedEvent(_ID);
+        }
     }
 
     function grade (uint _ID, uint _subjectMarks, uint _subjectIdentifier, bool _graded) public {
         if(_subjectIdentifier == 1) {
-        //Require that the subject hasn't been graded before
-        require(bm[_ID].graded == false);
 
         //Require a valid subject
         require(_ID> 0 && _ID <= bmCount);
@@ -456,8 +441,6 @@ contract Grade {
         }
 
         if(_subjectIdentifier == 2) {
-        //Require that the subject hasn't been graded before
-        require(bi[_ID].graded == false);
 
         //Require a valid subject
         require(_ID> 0 && _ID <= biCount);
@@ -478,8 +461,6 @@ contract Grade {
         }
 
         if(_subjectIdentifier == 3) {
-        //Require that the subject hasn't been graded before
-        require(sj[_ID].graded == false);
 
         //Require a valid subject
         require(_ID> 0 && _ID <= sjCount);
@@ -500,8 +481,6 @@ contract Grade {
         }
 
         if(_subjectIdentifier == 4) {
-        //Require that the subject hasn't been graded before
-        require(ma[_ID].graded == false);
 
         //Require a valid subject
         require(_ID> 0 && _ID <= maCount);
@@ -522,8 +501,6 @@ contract Grade {
         }
 
         if(_subjectIdentifier == 5) {
-        //Require that the subject hasn't been graded before
-        require(pm[_ID].graded == false);
 
         //Require a valid subject
         require(_ID> 0 && _ID <= pmCount);
@@ -544,8 +521,6 @@ contract Grade {
         }
 
         if(_subjectIdentifier == 6) {
-        //Require that the subject hasn't been graded before
-        require(pi[_ID].graded == false);
 
         //Require a valid subject
         require(_ID> 0 && _ID <= piCount);
@@ -566,11 +541,6 @@ contract Grade {
         }
 
         if(_subjectIdentifier == 7) {
-        //Require that the subject hasn't been graded before
-        require(am[_ID].graded == false);
-
-        //Require that the student is enrolled in the elective
-        require(am[_ID].elective == true);
 
         //Require a valid subject
         require(_ID> 0 && _ID <= amCount);
@@ -591,11 +561,6 @@ contract Grade {
         }
 
         if(_subjectIdentifier == 8) {
-        //Require that the subject hasn't been graded before
-        require(py[_ID].graded == false);
-
-        //Require that the student is enrolled in the elective
-        require(py[_ID].elective == true);
 
         //Require a valid subject
         require(_ID> 0 && _ID <= pyCount);
@@ -616,11 +581,6 @@ contract Grade {
         }
 
         if(_subjectIdentifier == 9) {
-        //Require that the subject hasn't been graded before
-        require(bl[_ID].graded == false);
-
-        //Require that the student is enrolled in the elective
-        require(bl[_ID].elective == true);
 
         //Require a valid subject
         require(_ID> 0 && _ID <= blCount);
@@ -641,11 +601,6 @@ contract Grade {
         }
 
         if(_subjectIdentifier == 10) {
-        //Require that the subject hasn't been graded before
-        require(cm[_ID].graded == false);
-
-        //Require that the student is enrolled in the elective
-        require(cm[_ID].elective == true);
 
         //Require a valid subject
         require(_ID> 0 && _ID <= cmCount);
