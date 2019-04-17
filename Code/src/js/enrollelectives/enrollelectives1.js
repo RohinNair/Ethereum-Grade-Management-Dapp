@@ -50,9 +50,11 @@ App = {
     var gradeInstance2;
     var loader = $("#loader");
     var content = $("#content");
+    var alt = $("#alt-text");
 
     loader.show();
     content.hide();
+    alt.hide();
 
     // Load account data
     web3.eth.getCoinbase(function(err, account) {
@@ -146,10 +148,19 @@ App = {
         }
 
       })
-      return gradeInstance2.graders(App.account);
-  }).then(function() {
+      return gradeInstance2.finalise1(App.account);
+  }).then(function(hasGraded) {
+    if(hasGraded){
+      loader.hide();
+      content.hide();
+      alt.show()
+    }
+    else{
       loader.hide();
       content.show();
+      alt.hide()
+    }
+
     }).catch(function(error) {
       console.warn(error);
     });
@@ -244,10 +255,10 @@ App = {
       console.error(err);
     });
   },
-  /*finaliseGrade: function() {
-    var subjectId = $('#subjectsSelect').val();
+  finaliseEnrollment: function() {
+    var studentInstance = 1
     App.contracts.Grade.deployed().then(function(instance2) {
-      return instance2.finalise(subjectId, { from: App.account });
+      return instance2.finalise(studentInstance, { from: App.account });
     }).then(function() {
       // Wait for grades to update
       $("#content").hide();
@@ -255,7 +266,7 @@ App = {
     }).catch(function(err) {
       console.error(err);
     });
-  }*/
+  }
 };
 
 $(function() {

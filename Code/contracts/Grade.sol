@@ -120,6 +120,10 @@ contract Grade {
 
     mapping(uint => Chemistry) public cm;
 
+    mapping(address => bool) public finalise1;
+
+    mapping(address => bool) public finalise2;
+
     mapping(address => bool) public graders;
 
     mapping(address => bool) public electives;
@@ -622,13 +626,16 @@ contract Grade {
     }
 
 
-    /*function finalise (uint _subjectId) public {
-        //Require that they haven't graded a student before
-        require(!graders[msg.sender]);
+    function finalise (uint _studentInstance) public {
 
-        //Record that teacher has graded
-        graders[msg.sender] = true;
+        if(_studentInstance == 1){
+            finalise1[msg.sender] = true;
+        }
+        if(_studentInstance == 2){
+            finalise2[msg.sender] = true;
+        }
+        
 
-        emit gradedEvent(_subjectId);
-    }*/
+        emit gradedEvent(_studentInstance);
+    }
 }
