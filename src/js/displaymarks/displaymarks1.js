@@ -128,6 +128,9 @@ App = {
       var marksPercentage = $("#marksPercentage");
       marksPercentage.empty();
 
+      var studentPointAverage = $("#studentPointAverage");
+      studentPointAverage.empty();
+
       var bmMarks = $("#bmMarks");
       bmMarks.empty();
       
@@ -175,9 +178,13 @@ App = {
       gradeInstance2.ss(1).then(function(ss) {
         var subs = ss[1];
         var total = ss[2];
+        var totalGPP = ss[3];
         var average = 0;
+        var studentAverage = 0;
 
         average = (total/subs);
+
+        studentAverage = (totalGPP/subs);
 
         var subTemplate = "<td>" + subs + "</td>"
         subCount.append(subTemplate);
@@ -187,6 +194,9 @@ App = {
 
         var percentageTemplate = "<td>" + average + " %" + "</td>"
         marksPercentage.append(percentageTemplate);
+
+        var studentAverageTemp = "<td>" + studentAverage + " %" + "</td>"
+        studentPointAverage.append(studentAverageTemp);
 
       })
 
