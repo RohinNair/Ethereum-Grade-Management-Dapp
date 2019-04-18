@@ -309,7 +309,7 @@ contract Grade {
                 totalSub2++;
                 ss[_subjectInstanceId].totalSubs = totalSub2;
         }
-        emit gradedEvent(_ID);
+        emit gradedEvent(_subjectInstanceId);
         }
 
         //Pendidikan Islam
@@ -327,7 +327,7 @@ contract Grade {
                 totalSub2++;
                 ss[_subjectInstanceId].totalSubs = totalSub2;
         }
-        emit gradedEvent(_ID);
+        emit gradedEvent(_subjectInstanceId);
         }
 
         //Add Maths
@@ -345,7 +345,7 @@ contract Grade {
                 totalSub2++;
                 ss[_subjectInstanceId].totalSubs = totalSub2;
         }
-        emit gradedEvent(_ID);
+        emit gradedEvent(_subjectInstanceId);
         }
 
         //Physics
@@ -363,7 +363,7 @@ contract Grade {
                 totalSub2++;
                 ss[_subjectInstanceId].totalSubs = totalSub2;
         }
-        emit gradedEvent(_ID);
+        emit gradedEvent(_subjectInstanceId);
         }
 
         //Biology
@@ -381,7 +381,7 @@ contract Grade {
                 totalSub2++;
                 ss[_subjectInstanceId].totalSubs = totalSub2;
         }
-        emit gradedEvent(_ID);
+        emit gradedEvent(_subjectInstanceId);
         }
 
         //Chemistry
@@ -399,7 +399,7 @@ contract Grade {
                 totalSub2++;
                 ss[_subjectInstanceId].totalSubs = totalSub2;
         }
-        emit gradedEvent(_ID);
+        emit gradedEvent(_subjectInstanceId);
         }
     }
 
@@ -627,34 +627,34 @@ contract Grade {
 
     function calculateGP (uint _studentID, uint _studentMarks) public {
         if (_studentMarks >= 90 && _studentMarks <= 100){
-            ss[_studentID].totalGPS += (_studentMarks * 0);
+            ss[_studentID].totalGPS += 0;
         }
         if (_studentMarks >= 80 && _studentMarks <= 89){
-            ss[_studentID].totalGPS += (_studentMarks * 1);
+            ss[_studentID].totalGPS += 1;
         }
         if (_studentMarks >= 75 && _studentMarks <= 79){
-            ss[_studentID].totalGPS += (_studentMarks * 2);
+            ss[_studentID].totalGPS += 2;
         }
         if (_studentMarks >= 70 && _studentMarks <= 74){
-            ss[_studentID].totalGPS += (_studentMarks * 3);
+            ss[_studentID].totalGPS += 3;
         }
         if (_studentMarks >= 65 && _studentMarks <= 69){
-            ss[_studentID].totalGPS += (_studentMarks * 4);
+            ss[_studentID].totalGPS += 4;
         }
         if (_studentMarks >= 60 && _studentMarks <= 64){
-            ss[_studentID].totalGPS += (_studentMarks * 5);
+            ss[_studentID].totalGPS += 5;
         }
         if (_studentMarks >= 50 && _studentMarks <= 59){
-            ss[_studentID].totalGPS += (_studentMarks * 6);
+            ss[_studentID].totalGPS += 6;
         }
         if (_studentMarks >= 40 && _studentMarks <= 49){
-            ss[_studentID].totalGPS += (_studentMarks * 7);
+            ss[_studentID].totalGPS += 7;
         }
         if (_studentMarks >= 30 && _studentMarks <= 39){
-            ss[_studentID].totalGPS += (_studentMarks * 8);
+            ss[_studentID].totalGPS += 8;
         }
         if (_studentMarks >= 0 && _studentMarks <= 29){
-            ss[_studentID].totalGPS += (_studentMarks * 9);
+            ss[_studentID].totalGPS += 9;
         }
     }
 
