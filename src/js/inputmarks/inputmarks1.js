@@ -70,12 +70,6 @@ App = {
       var studentsName = $("#studentsName");
       studentsName.empty();
 
-      /*var studentsSubjects = $("#studentsSubjects");
-      studentsSubjects.empty();
-
-      var subjectsSelect = $('#subjectsSelect');
-      subjectsSelect.empty();*/
-
       var bahasaMalaysia = $('#bahasaMalaysia');
 
       var bahasaInggeris = $('#bahasaInggeris');
