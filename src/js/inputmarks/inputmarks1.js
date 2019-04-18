@@ -70,11 +70,11 @@ App = {
       var studentsName = $("#studentsName");
       studentsName.empty();
 
-      var studentsSubjects = $("#studentsSubjects");
+      /*var studentsSubjects = $("#studentsSubjects");
       studentsSubjects.empty();
 
       var subjectsSelect = $('#subjectsSelect');
-      subjectsSelect.empty();
+      subjectsSelect.empty();*/
 
       var bahasaMalaysia = $('#bahasaMalaysia');
 
