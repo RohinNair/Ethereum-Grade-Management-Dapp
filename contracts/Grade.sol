@@ -92,6 +92,8 @@ contract Grade {
         uint totalSubs;
         uint totalMarks;
         uint totalGPS;
+        string studentRemarks;
+        bool remarked;
     }
 
     //Read/write students
@@ -204,7 +206,7 @@ contract Grade {
 
     function studStats(uint _totalSubs, uint _totalMarks, uint _totalGPS) private {
         ssCount++;
-        ss[ssCount] = StudentStats(ssCount, _totalSubs, _totalMarks, _totalGPS);
+        ss[ssCount] = StudentStats(ssCount, _totalSubs, _totalMarks, _totalGPS, "-", false);
     }
 
     function enrollCore(uint _subjectCode, uint _studentID, string memory _studentName) private {
@@ -656,6 +658,14 @@ contract Grade {
         if (_studentMarks >= 0 && _studentMarks <= 29){
             ss[_studentID].totalGPS += 9;
         }
+    }
+
+    function remarks (uint _studentID, string memory _studentRemark) public {
+
+        ss[_studentID].studentRemarks = _studentRemark;
+        ss[_studentID].remarked = true;
+
+        emit gradedEvent(_studentID);
     }
 
 

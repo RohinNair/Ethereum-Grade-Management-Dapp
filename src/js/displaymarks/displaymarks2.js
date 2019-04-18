@@ -131,6 +131,9 @@ App = {
       var studentPointAverage = $("#studentPointAverage");
       studentPointAverage.empty();
 
+      var studentRemarks = $("#studentRemarks");
+      studentRemarks.empty();
+
       var bmMarks = $("#bmMarks");
       bmMarks.empty();
       
@@ -181,6 +184,7 @@ App = {
       var totalGPP = ss[3];
       var average = 0;
       var studentAverage = 0;
+      var teacherRemarks = ss[4];
 
       average = (total/subs);
       var averageRounded = average.toFixed(2);
@@ -199,6 +203,9 @@ App = {
 
       var studentAverageTemp = "<td>" + studentAverageRounded + "</td>"
       studentPointAverage.append(studentAverageTemp);
+
+      var studentRemarksTemplate = "<td>" + teacherRemarks + "</td>"
+      studentRemarks.append(studentRemarksTemplate);
 
     })
 

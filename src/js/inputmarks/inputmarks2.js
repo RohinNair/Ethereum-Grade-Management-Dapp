@@ -96,6 +96,8 @@ App = {
 
       var chemistry = $('#chemistry');
 
+      var studentRemark = $('#studentRemark');
+
       gradeInstance2.bm(2).then(function(bms) {
         var name = bms[2];
 
@@ -221,6 +223,16 @@ App = {
         }
 
       })
+
+      gradeInstance2.ss(2).then(function(ss) {
+        var remarked = ss[5];
+
+        if(remarked){
+          studentRemark.hide();
+        }
+
+      })
+
       return gradeInstance2.graders(App.account);
   }).then(function() {
       loader.hide();
@@ -413,6 +425,20 @@ App = {
       return instance2.grade(subjectId, subjectMarks, subjectIdentifier, graded, { from: App.account });
     }).then(function() {
       // Wait for grades to update
+      $("#content").hide();
+      $("#loader").show();
+    }).catch(function(err) {
+      console.error(err);
+    });
+  },
+  submitStudentRemark: function() {
+    //student within subject instance
+    var studentID = 2;
+    //value of marks input
+    var studentRemark = $('#student-Remark').val()
+    App.contracts.Grade.deployed().then(function(instance2) {
+      return instance2.remarks(studentID, studentRemark, { from: App.account });
+    }).then(function() {
       $("#content").hide();
       $("#loader").show();
     }).catch(function(err) {
