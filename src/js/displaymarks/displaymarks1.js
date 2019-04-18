@@ -57,19 +57,19 @@ App = {
       grade = "A";
     }
     else
-    if(marks>=76 && marks<=79){
+    if(marks>=75 && marks<=79){
       grade = "A-";
     }
     else
-    if(marks>=70 && marks<=75){
+    if(marks>=70 && marks<=74){
       grade = "B+";
     }
     else
-    if(marks>=66 && marks<=69){
+    if(marks>=65 && marks<=69){
       grade = "B";
     }
     else
-    if(marks>=60 && marks<=65){
+    if(marks>=60 && marks<=64){
       grade = "C+";
     }
     else
@@ -77,15 +77,15 @@ App = {
       grade = "C";
     }
     else
-    if(marks>=45 && marks<=49){
+    if(marks>=40 && marks<=49){
       grade = "D";
     }
     else
-    if(marks>=40 && marks<=44){
+    if(marks>=30 && marks<=39){
       grade = "E";
     }
     else
-    if(marks>=1 && marks<=39){
+    if(marks>=1 && marks<=29){
       grade = "G";
     }
 
@@ -183,8 +183,10 @@ App = {
         var studentAverage = 0;
 
         average = (total/subs);
+        var averageRounded = average.toFixed(2);
 
         studentAverage = (totalGPP/subs);
+        var studentAverageRounded = studentAverage.toFixed(2);
 
         var subTemplate = "<td>" + subs + "</td>"
         subCount.append(subTemplate);
@@ -192,10 +194,10 @@ App = {
         var totalTemplate = "<td>" + total + "</td>"
         totalMarks.append(totalTemplate);
 
-        var percentageTemplate = "<td>" + average + " %" + "</td>"
+        var percentageTemplate = "<td>" + averageRounded + " %" + "</td>"
         marksPercentage.append(percentageTemplate);
 
-        var studentAverageTemp = "<td>" + studentAverage + " %" + "</td>"
+        var studentAverageTemp = "<td>" + studentAverageRounded + "</td>"
         studentPointAverage.append(studentAverageTemp);
 
       })
