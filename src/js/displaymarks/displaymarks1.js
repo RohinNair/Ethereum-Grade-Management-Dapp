@@ -285,10 +285,17 @@ App = {
           var marks = pm[3];
           var grade ="-";
           var enrol = pm[5];
+          var graded = pm[4];
 
           if(enrol && student == "Adam"){
-          //calculate grade
-          grade = App.calculateGrade(marks);
+
+            if(marks == 0 && graded){
+              grade = "Absent";
+            }
+            else{
+            //calculate grade
+            grade = App.calculateGrade(marks);
+            }
 
           // Render Pendidikan Moral Grades
           var Template = "<tr><td>" + subjectName + "</td><td>" + marks + "</td><td>" + grade + "</td></tr>"
@@ -302,14 +309,21 @@ App = {
           var marks = pi[3];
           var grade ="-";
           var enrol = pi[5];
+          var graded = pi[4];
 
           if(enrol && student == "Adam"){
-          //calculate grade
-          grade = App.calculateGrade(marks);
 
-          // Render Pendidikan Islam Grades
+            if(marks == 0 && graded){
+              grade = "Absent";
+            }
+            else{
+            //calculate grade
+            grade = App.calculateGrade(marks);
+            }
+
+          // Render Pendidikan Moral Grades
           var Template = "<tr><td>" + subjectName + "</td><td>" + marks + "</td><td>" + grade + "</td></tr>"
-          piMarks.append(Template);
+          pmMarks.append(Template);
           }
         });
 
@@ -319,10 +333,17 @@ App = {
           var marks = am[3];
           var grade ="-";
           var enrol = am[5];
+          var graded = am[4];
 
           if(enrol){
-          //calculate grade
-          grade = App.calculateGrade(marks);
+          
+            if(marks == 0 && graded){
+              grade = "Absent";
+            }
+            else{
+            //calculate grade
+            grade = App.calculateGrade(marks);
+            }
 
           // Render Add Maths Grades
           var Template = "<tr><td>" + subjectName + "</td><td>" + marks + "</td><td>" + grade + "</td></tr>"
@@ -336,10 +357,17 @@ App = {
           var marks = py[3];
           var grade ="-";
           var enrol = py[5];
+          var graded = py[4];
 
           if(enrol){
-          //calculate grade
-          grade = App.calculateGrade(marks);
+          
+            if(marks == 0 && graded){
+              grade = "Absent";
+            }
+            else{
+            //calculate grade
+            grade = App.calculateGrade(marks);
+            }
 
           // Render Physics Grades
           var Template = "<tr><td>" + subjectName + "</td><td>" + marks + "</td><td>" + grade + "</td></tr>"
@@ -353,10 +381,17 @@ App = {
           var marks = bl[3];
           var grade ="-";
           var enrol = bl[5];
+          var graded = bl[4];
 
           if(enrol){
-          //calculate grade
-          grade = App.calculateGrade(marks);
+          
+            if(marks == 0 && graded){
+              grade = "Absent";
+            }
+            else{
+            //calculate grade
+            grade = App.calculateGrade(marks);
+            }
 
           // Render Biology Grades
           var Template = "<tr><td>" + subjectName + "</td><td>" + marks + "</td><td>" + grade + "</td></tr>"
@@ -369,10 +404,17 @@ App = {
           var marks = cm[3];
           var grade ="-";
           var enrol = cm[5];
+          var graded = cm[4];
 
           if(enrol){
-          //calculate grade
-          grade = App.calculateGrade(marks);
+          
+            if(marks == 0 && graded){
+              grade = "Absent";
+            }
+            else{
+            //calculate grade
+            grade = App.calculateGrade(marks);
+            }
 
           // Render Chemistry Grades
           var Template = "<tr><td>" + subjectName + "</td><td>" + marks + "</td><td>" + grade + "</td></tr>"
