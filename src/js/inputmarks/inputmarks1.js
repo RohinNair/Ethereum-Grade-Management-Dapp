@@ -70,12 +70,6 @@ App = {
       var studentsName = $("#studentsName");
       studentsName.empty();
 
-      var studentsSubjects = $("#studentsSubjects");
-      studentsSubjects.empty();
-
-      var subjectsSelect = $('#subjectsSelect');
-      subjectsSelect.empty();
-
       var bahasaMalaysia = $('#bahasaMalaysia');
 
       var bahasaInggeris = $('#bahasaInggeris');
@@ -95,6 +89,8 @@ App = {
       var biology = $('#biology');
 
       var chemistry = $('#chemistry');
+
+      var studentRemark = $('#studentRemark');
 
       gradeInstance2.bm(1).then(function(bms) {
         var name = bms[2];
@@ -221,6 +217,16 @@ App = {
         }
 
       })
+
+      gradeInstance2.ss(1).then(function(ss) {
+        var remarked = ss[5];
+
+        if(remarked){
+          studentRemark.hide();
+        }
+
+      })
+
       return gradeInstance2.graders(App.account);
   }).then(function() {
       loader.hide();
@@ -411,6 +417,20 @@ App = {
     var graded = true;
     App.contracts.Grade.deployed().then(function(instance2) {
       return instance2.grade(subjectId, subjectMarks, subjectIdentifier, graded, { from: App.account });
+    }).then(function() {
+      $("#content").hide();
+      $("#loader").show();
+    }).catch(function(err) {
+      console.error(err);
+    });
+  },
+  submitStudentRemark: function() {
+    //student within subject instance
+    var studentID = 1;
+    //value of marks input
+    var studentRemark = $('#student-Remark').val()
+    App.contracts.Grade.deployed().then(function(instance2) {
+      return instance2.remarks(studentID, studentRemark, { from: App.account });
     }).then(function() {
       $("#content").hide();
       $("#loader").show();

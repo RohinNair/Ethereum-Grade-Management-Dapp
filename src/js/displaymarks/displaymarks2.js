@@ -57,19 +57,19 @@ App = {
       grade = "A";
     }
     else
-    if(marks>=76 && marks<=79){
+    if(marks>=75 && marks<=79){
       grade = "A-";
     }
     else
-    if(marks>=70 && marks<=75){
+    if(marks>=70 && marks<=74){
       grade = "B+";
     }
     else
-    if(marks>=66 && marks<=69){
+    if(marks>=65 && marks<=69){
       grade = "B";
     }
     else
-    if(marks>=60 && marks<=65){
+    if(marks>=60 && marks<=64){
       grade = "C+";
     }
     else
@@ -77,15 +77,15 @@ App = {
       grade = "C";
     }
     else
-    if(marks>=45 && marks<=49){
+    if(marks>=40 && marks<=49){
       grade = "D";
     }
     else
-    if(marks>=40 && marks<=44){
+    if(marks>=30 && marks<=39){
       grade = "E";
     }
     else
-    if(marks>=1 && marks<=39){
+    if(marks>=1 && marks<=29){
       grade = "G";
     }
 
@@ -122,14 +122,17 @@ App = {
       var subCount = $("#subCount");
       subCount.empty();
 
-      var studentsTotalMarks = $("#studentsTotalMarks");
-      studentsTotalMarks.empty();
-
       var totalMarks = $("#totalMarks");
       totalMarks.empty();
 
       var marksPercentage = $("#marksPercentage");
       marksPercentage.empty();
+
+      var studentPointAverage = $("#studentPointAverage");
+      studentPointAverage.empty();
+
+      var studentRemarks = $("#studentRemarks");
+      studentRemarks.empty();
 
       var bmMarks = $("#bmMarks");
       bmMarks.empty();
@@ -178,9 +181,16 @@ App = {
      gradeInstance2.ss(2).then(function(ss) {
       var subs = ss[1];
       var total = ss[2];
+      var totalGPP = ss[3];
       var average = 0;
+      var studentAverage = 0;
+      var teacherRemarks = ss[4];
 
       average = (total/subs);
+      var averageRounded = average.toFixed(2);
+
+      studentAverage = (totalGPP/subs);
+      var studentAverageRounded = studentAverage.toFixed(2);
 
       var subTemplate = "<td>" + subs + "</td>"
       subCount.append(subTemplate);
@@ -188,180 +198,236 @@ App = {
       var totalTemplate = "<td>" + total + "</td>"
       totalMarks.append(totalTemplate);
 
-      var percentageTemplate = "<td>" + average + " %" + "</td>"
+      var percentageTemplate = "<td>" + averageRounded + " %" + "</td>"
       marksPercentage.append(percentageTemplate);
+
+      var studentAverageTemp = "<td>" + studentAverageRounded + "</td>"
+      studentPointAverage.append(studentAverageTemp);
+
+      var studentRemarksTemplate = "<td>" + teacherRemarks + "</td>"
+      studentRemarks.append(studentRemarksTemplate);
 
     })
 
-      for (var i = 2; i <= 2; i++) {
-        gradeInstance2.bm(i).then(function(bms) {
-          var subjectName = "Bahasa Malaysia";
-          var bmmarks = bms[3];
-          var grade ="-";
+    gradeInstance2.bm(2).then(function(bm) {
+      var subjectName = "Bahasa Malaysia";
+      var marks = bm[3];
+      var grade ="-";
+      var graded = bm[4];
 
-          //calculate grade
-          grade = App.calculateGrade(bmmarks);
-
-          // Render BM Grades
-          var bmTemplate = "<tr><td>" + subjectName + "</td><td>" + bmmarks + "</td><td>" + grade + "</td></tr>"
-          bmMarks.append(bmTemplate);
-        });
+      if(marks == 0 && graded){
+        grade = "Absent";
+      }
+      else{
+      //calculate grade
+      grade = App.calculateGrade(marks);
       }
 
-      for (var i = 2; i <= 2; i++) {
-        gradeInstance2.bi(i).then(function(bis) {
-          var subjectName = "Bahasa Inggeris";
-          var bimarks = bis[3];
-          var grade ="-";
+      // Render BM Grades
+      var Template = "<tr><td>" + subjectName + "</td><td>" + marks + "</td><td>" + grade + "</td></tr>"
+      bmMarks.append(Template);
+    });
+  
 
-          //calculate grade
-          grade = App.calculateGrade(bimarks);
+    gradeInstance2.bi(2).then(function(bi) {
+      var subjectName = "Bahasa Inggeris";
+      var marks = bi[3];
+      var grade ="-";
+      var graded = bi[4];
 
-          // Render BI Grades
-          var biTemplate = "<tr><td>" + subjectName + "</td><td>" + bimarks + "</td><td>" + grade + "</td></tr>"
-          biMarks.append(biTemplate);
-        });
+      if(marks == 0 && graded){
+        grade = "Absent";
+      }
+      else{
+      //calculate grade
+      grade = App.calculateGrade(marks);
       }
 
-      for (var i = 2; i <= 2; i++) {
-        gradeInstance2.sj(i).then(function(sjs) {
-          var subjectName = "Sejarah";
-          var sjmarks = sjs[3];
-          var sjgrade ="-";
+      // Render BI Grades
+      var Template = "<tr><td>" + subjectName + "</td><td>" + marks + "</td><td>" + grade + "</td></tr>"
+      biMarks.append(Template);
+    });
 
-          //calculate grade
-          sjgrade = App.calculateGrade(sjmarks);
+    gradeInstance2.sj(2).then(function(sj) {
+      var subjectName = "Sejarah";
+      var marks = sj[3];
+      var grade ="-";
+      var graded = sj[4];
 
-          // Render Sejarah Grades
-          var sjTemplate = "<tr><td>" + subjectName + "</td><td>" + sjmarks + "</td><td>" + sjgrade + "</td></tr>"
-          sjMarks.append(sjTemplate);
-        });
+      if(marks == 0 && graded){
+        grade = "Absent";
+      }
+      else{
+      //calculate grade
+      grade = App.calculateGrade(marks);
       }
 
-      for (var i = 2; i <= 2; i++) {
-        gradeInstance2.ma(i).then(function(mas) {
-          var subjectName = "Mathematics";
-          var mamarks = mas[3];
-          var magrade ="-";
+      // Render Sejarah Grades
+      var Template = "<tr><td>" + subjectName + "</td><td>" + marks + "</td><td>" + grade + "</td></tr>"
+      sjMarks.append(Template);
+    });
 
-          //calculate grade
-          magrade = App.calculateGrade(mamarks);
+    gradeInstance2.ma(2).then(function(ma) {
+      var subjectName = "Mathematics";
+      var marks = ma[3];
+      var grade ="-";
+      var graded = ma[4];
 
-          // Render Mathematics Grades
-          var maTemplate = "<tr><td>" + subjectName + "</td><td>" + mamarks + "</td><td>" + magrade + "</td></tr>"
-          maMarks.append(maTemplate);
-        });
+      if(marks == 0 && graded){
+        grade = "Absent";
+      }
+      else{
+      //calculate grade
+      grade = App.calculateGrade(marks);
       }
 
-      for (var i = 1; i <= 2; i++) {
-        gradeInstance2.pm(i).then(function(pms) {
-          var subjectName = "Pendidikan Moral";
-          var pmstudent = pms[2];
-          var pmmarks = pms[3];
-          var pmgrade ="-";
-          var pmenrol = pms[5];
+      // Render Mathematics Grades
+      var Template = "<tr><td>" + subjectName + "</td><td>" + marks + "</td><td>" + grade + "</td></tr>"
+      maMarks.append(Template);
+    });
 
-          if(pmenrol && pmstudent == "Steve"){
-          //calculate grade
-          pmgrade = App.calculateGrade(pmmarks);
+    gradeInstance2.pm(2).then(function(pm) {
+      var subjectName = "Pendidikan Moral";
+      var student = pm[2];
+      var marks = pm[3];
+      var grade ="-";
+      var enrol = pm[5];
+      var graded = pm[4];
 
-          // Render Pendidikan Moral Grades
-          var pmTemplate = "<tr><td>" + subjectName + "</td><td>" + pmmarks + "</td><td>" + pmgrade + "</td></tr>"
-          pmMarks.append(pmTemplate);
-          }
-        });
+      if(enrol && student == "Steve"){
+
+        if(marks == 0 && graded){
+          grade = "Absent";
+        }
+        else{
+        //calculate grade
+        grade = App.calculateGrade(marks);
+        }
+
+      // Render Pendidikan Moral Grades
+      var Template = "<tr><td>" + subjectName + "</td><td>" + marks + "</td><td>" + grade + "</td></tr>"
+      pmMarks.append(Template);
       }
+    });
 
-      for (var i = 1; i <= 2; i++) {
-        gradeInstance2.pi(i).then(function(pis) {
-          var subjectName = "Pendidikan Islam";
-          var pistudent = pis[2];
-          var pimarks = pis[3];
-          var pigrade ="-";
-          var pienrol = pis[5];
+    gradeInstance2.pi(2).then(function(pi) {
+      var subjectName = "Pendidikan Islam";
+      var student = pi[2];
+      var marks = pi[3];
+      var grade ="-";
+      var enrol = pi[5];
+      var graded = pi[4];
 
-          if(pienrol && pistudent == "Steve"){
-          //calculate grade
-          pigrade = App.calculateGrade(pimarks);
+      if(enrol && student == "Steve"){
 
-          // Render Pendidikan Islam Grades
-          var piTemplate = "<tr><td>" + subjectName + "</td><td>" + pimarks + "</td><td>" + pigrade + "</td></tr>"
-          piMarks.append(piTemplate);
-          }
-        });
+        if(marks == 0 && graded){
+          grade = "Absent";
+        }
+        else{
+        //calculate grade
+        grade = App.calculateGrade(marks);
+        }
+
+      // Render Pendidikan Moral Grades
+      var Template = "<tr><td>" + subjectName + "</td><td>" + marks + "</td><td>" + grade + "</td></tr>"
+      pmMarks.append(Template);
       }
+    });
 
-      for (var i = 2; i <= 2; i++) {
-        gradeInstance2.am(i).then(function(ams) {
-          var subjectName = "Additional Mathematics";
-          var ammarks = ams[3];
-          var amgrade ="-";
-          var amenrol = ams[5];
 
-          if(amenrol){
-          //calculate grade
-          amgrade = App.calculateGrade(ammarks);
+    gradeInstance2.am(2).then(function(am) {
+      var subjectName = "Additional Mathematics";
+      var marks = am[3];
+      var grade ="-";
+      var enrol = am[5];
+      var graded = am[4];
 
-          // Render Add Maths Grades
-          var amTemplate = "<tr><td>" + subjectName + "</td><td>" + ammarks + "</td><td>" + amgrade + "</td></tr>"
-          amMarks.append(amTemplate);
-          }
-        });
+      if(enrol){
+      
+        if(marks == 0 && graded){
+          grade = "Absent";
+        }
+        else{
+        //calculate grade
+        grade = App.calculateGrade(marks);
+        }
+
+      // Render Add Maths Grades
+      var Template = "<tr><td>" + subjectName + "</td><td>" + marks + "</td><td>" + grade + "</td></tr>"
+      amMarks.append(Template);
       }
+    });
 
-      for (var i = 2; i <= 2; i++) {
-        gradeInstance2.py(i).then(function(pys) {
-          var subjectName = "Physics";
-          var pymarks = pys[3];
-          var pygrade ="-";
-          var pyenrol = pys[5];
 
-          if(pyenrol){
-          //calculate grade
-          pygrade = App.calculateGrade(pymarks);
+    gradeInstance2.py(2).then(function(py) {
+      var subjectName = "Physics";
+      var marks = py[3];
+      var grade ="-";
+      var enrol = py[5];
+      var graded = py[4];
 
-          // Render Physics Grades
-          var pyTemplate = "<tr><td>" + subjectName + "</td><td>" + pymarks + "</td><td>" + pygrade + "</td></tr>"
-          pyMarks.append(pyTemplate);
-          }
-        });
+      if(enrol){
+      
+        if(marks == 0 && graded){
+          grade = "Absent";
+        }
+        else{
+        //calculate grade
+        grade = App.calculateGrade(marks);
+        }
+
+      // Render Physics Grades
+      var Template = "<tr><td>" + subjectName + "</td><td>" + marks + "</td><td>" + grade + "</td></tr>"
+      pyMarks.append(Template);
       }
+    });
 
-      for (var i = 2; i <= 2; i++) {
-        gradeInstance2.bl(i).then(function(bls) {
-          var subjectName = "Biology";
-          var blmarks = bls[3];
-          var blgrade ="-";
-          var blenrol = bls[5];
 
-          if(blenrol){
-          //calculate grade
-          blgrade = App.calculateGrade(blmarks);
+    gradeInstance2.bl(2).then(function(bl) {
+      var subjectName = "Biology";
+      var marks = bl[3];
+      var grade ="-";
+      var enrol = bl[5];
+      var graded = bl[4];
 
-          // Render Biology Grades
-          var blTemplate = "<tr><td>" + subjectName + "</td><td>" + blmarks + "</td><td>" + blgrade + "</td></tr>"
-          blMarks.append(blTemplate);
-          }
-        });
+      if(enrol){
+      
+        if(marks == 0 && graded){
+          grade = "Absent";
+        }
+        else{
+        //calculate grade
+        grade = App.calculateGrade(marks);
+        }
+
+      // Render Biology Grades
+      var Template = "<tr><td>" + subjectName + "</td><td>" + marks + "</td><td>" + grade + "</td></tr>"
+      blMarks.append(Template);
       }
+    });
 
-      for (var i = 2; i <= 2; i++) {
-        gradeInstance2.cm(i).then(function(cms) {
-          var subjectName = "Chemistry";
-          var cmmarks = cms[3];
-          var cmgrade ="-";
-          var cmenrol = cms[5];
+    gradeInstance2.cm(2).then(function(cm) {
+      var subjectName = "Chemistry";
+      var marks = cm[3];
+      var grade ="-";
+      var enrol = cm[5];
+      var graded = cm[4];
 
-          if(cmenrol){
-          //calculate grade
-          cmgrade = App.calculateGrade(cmmarks);
+      if(enrol){
+      
+        if(marks == 0 && graded){
+          grade = "Absent";
+        }
+        else{
+        //calculate grade
+        grade = App.calculateGrade(marks);
+        }
 
-          // Render Chemistry Grades
-          var cmTemplate = "<tr><td>" + subjectName + "</td><td>" + cmmarks + "</td><td>" + cmgrade + "</td></tr>"
-          cmMarks.append(cmTemplate);
-          }
-        });
+      // Render Chemistry Grades
+      var Template = "<tr><td>" + subjectName + "</td><td>" + marks + "</td><td>" + grade + "</td></tr>"
+      cmMarks.append(Template);
       }
+    });
       return gradeInstance2.graders(App.account);
   }).then(function() {
       loader.hide();

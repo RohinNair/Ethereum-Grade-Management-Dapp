@@ -91,13 +91,10 @@ contract Grade {
         uint studId;
         uint totalSubs;
         uint totalMarks;
+        uint totalGPS;
+        string studentRemarks;
+        bool remarked;
     }
-
-    /*struct UserAcc {
-        uint UAID;
-        string username;
-        string password;
-    }*/
 
     //Read/write students
     mapping(uint => BahasaMalaysia) public bm;
@@ -129,8 +126,6 @@ contract Grade {
     mapping(address => bool) public electives;
 
     mapping (uint => StudentStats) public ss;
-
-    //mapping(uint => UserAcc) public userAcc;
 
     //Store Subject Count
 
@@ -164,8 +159,6 @@ contract Grade {
 
     uint public totalMarks2;
 
-    //uint public userAccCount;
-
     event gradedEvent (
         uint indexed _Id
     );
@@ -183,16 +176,10 @@ contract Grade {
         BL = 9
         CM = 10*/
 
-        /*User Accounts =
-
-        Student = Adam97/6367c48dd193d56ea7b0baad25b19455e529f5ee(abc123)
-        University = Nathan68/fe98a77a071167088b8aa1465639c92224456363(nathan68123)
-        Teacher*/
-
     //Constructor
     constructor () public {
-        studStats(0, 0);
-        studStats(0, 0);
+        studStats(0, 0, 0);
+        studStats(0, 0, 0);
         enrollCore(1, 970224042242, "Adam");
         enrollCore(1, 970113014543, "Steve");
         enrollCore(2, 970224042242, "Adam");
@@ -217,14 +204,9 @@ contract Grade {
         userLogin("Nathan68", "123abc");*/
     }
 
-    /*function userLogin(string memory _userName, string memory _password) private {
-        userAccCount++;
-        userAcc[userAccCount] = UserAcc(userAccCount, _userName, _password);
-    }*/
-
-    function studStats(uint _totalSubs, uint _totalMarks) private {
+    function studStats(uint _totalSubs, uint _totalMarks, uint _totalGPS) private {
         ssCount++;
-        ss[ssCount] = StudentStats(ssCount, _totalSubs, _totalMarks);
+        ss[ssCount] = StudentStats(ssCount, _totalSubs, _totalMarks, _totalGPS, "-", false);
     }
 
     function enrollCore(uint _subjectCode, uint _studentID, string memory _studentName) private {
@@ -329,7 +311,7 @@ contract Grade {
                 totalSub2++;
                 ss[_subjectInstanceId].totalSubs = totalSub2;
         }
-        emit gradedEvent(_ID);
+        emit gradedEvent(_subjectInstanceId);
         }
 
         //Pendidikan Islam
@@ -347,7 +329,7 @@ contract Grade {
                 totalSub2++;
                 ss[_subjectInstanceId].totalSubs = totalSub2;
         }
-        emit gradedEvent(_ID);
+        emit gradedEvent(_subjectInstanceId);
         }
 
         //Add Maths
@@ -365,7 +347,7 @@ contract Grade {
                 totalSub2++;
                 ss[_subjectInstanceId].totalSubs = totalSub2;
         }
-        emit gradedEvent(_ID);
+        emit gradedEvent(_subjectInstanceId);
         }
 
         //Physics
@@ -383,7 +365,7 @@ contract Grade {
                 totalSub2++;
                 ss[_subjectInstanceId].totalSubs = totalSub2;
         }
-        emit gradedEvent(_ID);
+        emit gradedEvent(_subjectInstanceId);
         }
 
         //Biology
@@ -401,7 +383,7 @@ contract Grade {
                 totalSub2++;
                 ss[_subjectInstanceId].totalSubs = totalSub2;
         }
-        emit gradedEvent(_ID);
+        emit gradedEvent(_subjectInstanceId);
         }
 
         //Chemistry
@@ -419,7 +401,7 @@ contract Grade {
                 totalSub2++;
                 ss[_subjectInstanceId].totalSubs = totalSub2;
         }
-        emit gradedEvent(_ID);
+        emit gradedEvent(_subjectInstanceId);
         }
     }
 
@@ -441,6 +423,8 @@ contract Grade {
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
 
+        calculateGP(_ID, _subjectMarks);
+
         emit gradedEvent(_ID);
         }
 
@@ -460,6 +444,8 @@ contract Grade {
 
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
+
+        calculateGP(_ID, _subjectMarks);
 
         emit gradedEvent(_ID);
         }
@@ -481,6 +467,8 @@ contract Grade {
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
 
+        calculateGP(_ID, _subjectMarks);
+
         emit gradedEvent(_ID);
         }
 
@@ -500,6 +488,8 @@ contract Grade {
 
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
+
+        calculateGP(_ID, _subjectMarks);
 
         emit gradedEvent(_ID);
         }
@@ -521,6 +511,8 @@ contract Grade {
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
 
+        calculateGP(_ID, _subjectMarks);
+
         emit gradedEvent(_ID);
         }
 
@@ -540,6 +532,8 @@ contract Grade {
 
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
+
+        calculateGP(_ID, _subjectMarks);
 
         emit gradedEvent(_ID);
         }
@@ -561,6 +555,8 @@ contract Grade {
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
 
+        calculateGP(_ID, _subjectMarks);
+
         emit gradedEvent(_ID);
         }
 
@@ -580,6 +576,8 @@ contract Grade {
 
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
+
+        calculateGP(_ID, _subjectMarks);
 
         emit gradedEvent(_ID);
         }
@@ -601,6 +599,8 @@ contract Grade {
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
 
+        calculateGP(_ID, _subjectMarks);
+
         emit gradedEvent(_ID);
         }
 
@@ -621,8 +621,51 @@ contract Grade {
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
 
+        calculateGP(_ID, _subjectMarks);
+
         emit gradedEvent(_ID);
         }
+    }
+
+    function calculateGP (uint _studentID, uint _studentMarks) public {
+        if (_studentMarks >= 90 && _studentMarks <= 100){
+            ss[_studentID].totalGPS += 0;
+        }
+        if (_studentMarks >= 80 && _studentMarks <= 89){
+            ss[_studentID].totalGPS += 1;
+        }
+        if (_studentMarks >= 75 && _studentMarks <= 79){
+            ss[_studentID].totalGPS += 2;
+        }
+        if (_studentMarks >= 70 && _studentMarks <= 74){
+            ss[_studentID].totalGPS += 3;
+        }
+        if (_studentMarks >= 65 && _studentMarks <= 69){
+            ss[_studentID].totalGPS += 4;
+        }
+        if (_studentMarks >= 60 && _studentMarks <= 64){
+            ss[_studentID].totalGPS += 5;
+        }
+        if (_studentMarks >= 50 && _studentMarks <= 59){
+            ss[_studentID].totalGPS += 6;
+        }
+        if (_studentMarks >= 40 && _studentMarks <= 49){
+            ss[_studentID].totalGPS += 7;
+        }
+        if (_studentMarks >= 30 && _studentMarks <= 39){
+            ss[_studentID].totalGPS += 8;
+        }
+        if (_studentMarks >= 0 && _studentMarks <= 29){
+            ss[_studentID].totalGPS += 9;
+        }
+    }
+
+    function remarks (uint _studentID, string memory _studentRemark) public {
+
+        ss[_studentID].studentRemarks = _studentRemark;
+        ss[_studentID].remarked = true;
+
+        emit gradedEvent(_studentID);
     }
 
 
