@@ -117,9 +117,13 @@ contract Grade {
 
     mapping(uint => Chemistry) public cm;
 
-    mapping(address => bool) public finalise1;
+    mapping(address => bool) public finaliseEnroll1;
 
-    mapping(address => bool) public finalise2;
+    mapping(address => bool) public finaliseEnroll2;
+
+    mapping(address => bool) public finaliseGrade1;
+
+    mapping(address => bool) public finaliseGrade2;
 
     mapping(address => bool) public graders;
 
@@ -200,8 +204,6 @@ contract Grade {
         enrollElective(9);
         enrollElective(10);
         enrollElective(10);
-        /*userLogin("Adam97", "abc123");
-        userLogin("Nathan68", "123abc");*/
     }
 
     function studStats(uint _totalSubs, uint _totalMarks, uint _totalGPS) private {
@@ -405,7 +407,7 @@ contract Grade {
         }
     }
 
-    function grade (uint _ID, uint _subjectMarks, uint _subjectIdentifier, bool _graded) public {
+    function grade (uint _ID, uint _subjectMarks, uint _subjectIdentifier) public {
         if(_subjectIdentifier == 1) {
 
         //Require a valid subject
@@ -418,7 +420,7 @@ contract Grade {
         bm[_ID].marks = _subjectMarks;
 
         //Indicated subject has been graded
-        bm[_ID].graded = _graded;
+        bm[_ID].graded = true;
 
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
@@ -440,7 +442,7 @@ contract Grade {
         bi[_ID].marks = _subjectMarks;
 
         //Indicated subject has been graded
-        bi[_ID].graded = _graded;
+        bi[_ID].graded = true;
 
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
@@ -462,7 +464,7 @@ contract Grade {
         sj[_ID].marks = _subjectMarks;
 
         //Indicated subject has been graded
-        sj[_ID].graded = _graded;
+        sj[_ID].graded = true;
 
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
@@ -484,7 +486,7 @@ contract Grade {
         ma[_ID].marks = _subjectMarks;
 
         //Indicated subject has been graded
-        ma[_ID].graded = _graded;
+        ma[_ID].graded = true;
 
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
@@ -506,7 +508,7 @@ contract Grade {
         pm[_ID].marks = _subjectMarks;
 
         //Indicated subject has been graded
-        pm[_ID].graded = _graded;
+        pm[_ID].graded = true;
 
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
@@ -528,7 +530,7 @@ contract Grade {
         pi[_ID].marks = _subjectMarks;
 
         //Indicated subject has been graded
-        pi[_ID].graded = _graded;
+        pi[_ID].graded = true;
 
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
@@ -550,7 +552,7 @@ contract Grade {
         am[_ID].marks = _subjectMarks;
 
         //Indicated subject has been graded
-        am[_ID].graded = _graded;
+        am[_ID].graded = true;
 
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
@@ -572,7 +574,7 @@ contract Grade {
         py[_ID].marks = _subjectMarks;
 
         //Indicated subject has been graded
-        py[_ID].graded = _graded;
+        py[_ID].graded = true;
 
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
@@ -594,7 +596,7 @@ contract Grade {
         bl[_ID].marks = _subjectMarks;
 
         //Indicated subject has been graded
-        bl[_ID].graded = _graded;
+        bl[_ID].graded = true;
 
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
@@ -616,7 +618,7 @@ contract Grade {
         cm[_ID].marks = _subjectMarks;
 
         //Indicated subject has been graded
-        cm[_ID].graded = _graded;
+        cm[_ID].graded = true;
 
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
@@ -672,10 +674,10 @@ contract Grade {
     function finalise (uint _studentInstance) public {
 
         if(_studentInstance == 1){
-            finalise1[msg.sender] = true;
+            finaliseEnroll1[msg.sender] = true;
         }
         if(_studentInstance == 2){
-            finalise2[msg.sender] = true;
+            finaliseEnroll2[msg.sender] = true;
         }
         
 
