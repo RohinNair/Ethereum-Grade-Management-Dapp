@@ -7,6 +7,7 @@ App = {
     return App.initWeb3();
   },
 
+  //Initialize Web3
   initWeb3: function() {
     if (typeof web3 !== 'undefined') {
       // If a web3 instance is already provided by Meta Mask.
@@ -20,6 +21,7 @@ App = {
     return App.initContract();
   },
 
+  //Initialize smart contract instance
   initContract: function() {
     $.getJSON("Grade.json", function(grade) {
       // Instantiate a new truffle contract from the artifact
@@ -33,6 +35,7 @@ App = {
     });
   },
 
+  //Listen for events from smart contract
   listenForEvents: function() {
     App.contracts.Grade.deployed().then(function(instance2) {
       instance2.gradedEvent({}, {
@@ -46,8 +49,10 @@ App = {
     });
   },
 
+  //Render page function
   render: function() {
     var gradeInstance2;
+    //Target specific HTML tags in UI
     var loader = $("#loader");
     var content = $("#content");
     var alt = $("#alt-text");
@@ -69,9 +74,12 @@ App = {
       gradeInstance2 = instance2;
       return gradeInstance2.bmCount();
     }).then(function() {
+
+      //Initialize containers to display student info
       var studentsName = $("#studentsName");
       studentsName.empty();
 
+      //Initialize containers to display electives
       var pendidikanMoral = $("#pendidikanMoral");
       var pendidikanIslam = $("#pendidikanIslam");
       var addMaths = $("#addMaths");
@@ -79,8 +87,9 @@ App = {
       var biology = $("#biology");
       var chemistry = $("#chemistry");
 
-      gradeInstance2.bm(2).then(function(bms) {
-        var name = bms[2];
+      //Pull and display student's name from blockchain
+      gradeInstance2.bm(2).then(function(bm) {
+        var name = bm[2];
 
         var nameTemplate = "<td>" + name + "</td>"
         studentsName.append(nameTemplate);
@@ -88,8 +97,8 @@ App = {
       });
 
       //Hide PM Option once Enrolled
-      gradeInstance2.pm(2).then(function(pms) {
-        var enrolled = pms[5];
+      gradeInstance2.pm(2).then(function(pm) {
+        var enrolled = pm[5];
 
         if(enrolled) {
           pendidikanMoral.hide();
@@ -99,8 +108,8 @@ App = {
       })
 
       //Hide PI Option once Enrolled
-      gradeInstance2.pi(2).then(function(pis) {
-        var enrolled = pis[5];
+      gradeInstance2.pi(2).then(function(pi) {
+        var enrolled = pi[5];
 
         if(enrolled) {
           pendidikanIslam.hide();
@@ -120,8 +129,8 @@ App = {
       })
 
       //Hide PY Option once Enrolled
-      gradeInstance2.py(2).then(function(pys) {
-        var enrolled = pys[5];
+      gradeInstance2.py(2).then(function(py) {
+        var enrolled = py[5];
 
         if(enrolled) {
           physics.hide();
@@ -130,8 +139,8 @@ App = {
       })
 
       //Hide BL Option once Enrolled
-      gradeInstance2.bl(2).then(function(bls) {
-        var enrolled = bls[5];
+      gradeInstance2.bl(2).then(function(bl) {
+        var enrolled = bl[5];
 
         if(enrolled) {
           biology.hide();
@@ -140,8 +149,8 @@ App = {
       })
 
       //Hide CM Option once Enrolled
-      gradeInstance2.cm(2).then(function(cms) {
-        var enrolled = cms[5];
+      gradeInstance2.cm(2).then(function(cm) {
+        var enrolled = cm[5];
 
         if(enrolled) {
           chemistry.hide();
@@ -150,6 +159,7 @@ App = {
       })
       return gradeInstance2.finaliseEnroll2(App.account);
   }).then(function(hasEnroll) {
+    //Check if enrollment finalised and update UI accordingly
     if(hasEnroll){
       loader.hide();
       content.hide();
@@ -165,6 +175,7 @@ App = {
     });
   },
   
+  //Enroll student in Pendidikan Moral
   enrollPendidikanMoral: function() {
     var electiveId = 5;
     var subjectInstanceId = 2;
@@ -180,6 +191,7 @@ App = {
     });
   },
 
+  //Enroll student in Pendidikan Islam
   enrollPendidikanIslam: function() {
     var electiveId = 6;
     var subjectInstanceId = 2;
@@ -195,6 +207,7 @@ App = {
     });
   },
 
+  //Enroll student in Additional Mathematics
   enrollAddMaths: function() {
     var electiveId = 7;
     var subjectInstanceId = 2;
@@ -210,6 +223,7 @@ App = {
     });
   },
 
+  //Enroll student in Physics
   enrollPhysics: function() {
     var electiveId = 8;
     var subjectInstanceId = 2;
@@ -225,6 +239,7 @@ App = {
     });
   },
 
+  //Enroll student in Biology
   enrollBiology: function() {
     var electiveId = 9;
     var subjectInstanceId = 2;
@@ -240,6 +255,7 @@ App = {
     });
   },
 
+  //Enroll student in Chemistry
   enrollChemistry: function() {
     var electiveId = 10;
     var subjectInstanceId = 2;
@@ -254,6 +270,8 @@ App = {
       console.error(err);
     });
   },
+
+  //Finalise student enrollment
   finaliseEnrollment: function() {
     var studentInstance = 2;
     App.contracts.Grade.deployed().then(function(instance2) {
