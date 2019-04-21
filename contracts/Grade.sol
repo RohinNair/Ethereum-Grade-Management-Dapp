@@ -127,8 +127,6 @@ contract Grade {
 
     mapping(address => bool) public graders;
 
-    mapping(address => bool) public electives;
-
     mapping (uint => StudentStats) public ss;
 
     //Store Subject Count
