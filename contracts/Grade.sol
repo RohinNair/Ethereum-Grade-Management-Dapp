@@ -119,6 +119,8 @@ contract Grade {
 
     mapping(uint => Chemistry) public cm;
 
+    mapping (uint => StudentStats) public ss;
+
     mapping(address => bool) public finaliseEnroll1;
 
     mapping(address => bool) public finaliseEnroll2;
@@ -127,9 +129,7 @@ contract Grade {
 
     mapping(address => bool) public finaliseGrade2;
 
-    mapping(address => bool) public graders;
-
-    mapping (uint => StudentStats) public ss;
+    mapping(address => bool) public graded;
 
 
     //Counter Cache

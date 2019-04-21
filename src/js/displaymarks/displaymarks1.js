@@ -458,7 +458,7 @@ App = {
           cmMarks.append(Template);
           }
         });
-      return gradeInstance2.graders(App.account);
+      return gradeInstance2.graded(App.account);
   }).then(function() {
       loader.hide();
       content.show();

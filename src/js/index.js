@@ -97,7 +97,7 @@ App = {
           studentsMenu.append(studentTemplate);
         });
       }
-      return gradeInstance.graders(App.account);
+      return gradeInstance.graded(App.account);
   }).then(function() {
       loader.hide();
       content.show();
