@@ -7,6 +7,7 @@ App = {
     return App.initWeb3();
   },
 
+  //Initialize Web3
   initWeb3: function() {
     if (typeof web3 !== 'undefined') {
       // If a web3 instance is already provided by Meta Mask.
@@ -20,6 +21,7 @@ App = {
     return App.initContract();
   },
 
+  //Initialize smart contract instance
   initContract: function() {
     $.getJSON("Grade.json", function(grade) {
       // Instantiate a new truffle contract from the artifact
@@ -33,6 +35,7 @@ App = {
     });
   },
 
+  //Listen for events from smart contract
   listenForEvents: function() {
     App.contracts.Grade.deployed().then(function(instance) {
       instance.gradedEvent({}, {
@@ -46,6 +49,7 @@ App = {
     });
   },
 
+  //Render page
   render: function() {
     var gradeInstance;
     var loader = $("#loader");
@@ -70,6 +74,7 @@ App = {
       var studentsMenu = $("#studentsMenu");
       studentsMenu.empty();
 
+      //Display hyperlinks
       for (var i = 1; i <= bmCount; i++) {
         gradeInstance.bm(i).then(function(bms) {
           var bmid = bms[0];
