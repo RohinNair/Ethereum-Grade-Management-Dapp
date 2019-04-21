@@ -165,7 +165,7 @@ App = {
       cmMarks.empty();
 
     //Display Student Details
-    gradeInstance2.bm(2).then(function(bms) {
+    gradeInstance2.bm(2).then(function(bm) {
       
       //Store data from blockchain into variables
       var Id = bm[1];
