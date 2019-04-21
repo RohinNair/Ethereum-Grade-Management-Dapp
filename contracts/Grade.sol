@@ -748,20 +748,12 @@ contract Grade {
         ss[_studentID].studentRemarks = _studentRemark;
         ss[_studentID].remarked = true;
 
-        //Mark student as having been remarked by teacher
-        if(_studentID == 1){
-            finaliseGrade1[msg.sender] = true;
-        }
-        if(_studentID == 2){
-            finaliseGrade2[msg.sender] = true;
-        }
-
         //Trigger event to refresh front-end
         emit gradedEvent(_studentID);
     }
 
     //Finalise enrollment function
-    function finalise (uint _studentInstance) public {
+    function finaliseEnrollment (uint _studentInstance) public {
 
         //Mark student as having enrollment complete by teacher
         if(_studentInstance == 1){
@@ -769,6 +761,21 @@ contract Grade {
         }
         if(_studentInstance == 2){
             finaliseEnroll2[msg.sender] = true;
+        }
+        
+        //Trigger event to refresh front-end
+        emit gradedEvent(_studentInstance);
+    }
+
+    //Finalise grade function
+    function finaliseGrade (uint _studentInstance) public {
+
+        //Mark student as having been remarked by teacher
+        if(_studentInstance == 1){
+            finaliseGrade1[msg.sender] = true;
+        }
+        if(_studentInstance == 2){
+            finaliseGrade2[msg.sender] = true;
         }
         
         //Trigger event to refresh front-end
