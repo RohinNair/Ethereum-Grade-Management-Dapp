@@ -49,7 +49,7 @@ App = {
     });
   },
 
-   //Render page function
+  //Render page function
   render: function() {
     var gradeInstance2;
     //Target specific HTML tags in UI

@@ -7,6 +7,7 @@ App = {
     return App.initWeb3();
   },
 
+  //Initialize Web3
   initWeb3: function() {
     if (typeof web3 !== 'undefined') {
       // If a web3 instance is already provided by Meta Mask.
@@ -20,6 +21,7 @@ App = {
     return App.initContract();
   },
 
+  //Initialize smart contract instance
   initContract: function() {
     $.getJSON("Grade.json", function(grade) {
       // Instantiate a new truffle contract from the artifact
@@ -33,6 +35,7 @@ App = {
     });
   },
 
+  //Listen for events from smart contract
   listenForEvents: function() {
     App.contracts.Grade.deployed().then(function(instance2) {
       instance2.gradedEvent({}, {
@@ -46,8 +49,10 @@ App = {
     });
   },
 
+  //Render page function
   render: function() {
     var gradeInstance2;
+    //Target specific HTML tags in UI
     var loader = $("#loader");
     var content = $("#content");
     var alt = $("#alt-text");
@@ -69,9 +74,12 @@ App = {
       gradeInstance2 = instance2;
       return gradeInstance2.bmCount();
     }).then(function() {
+
+      //Initialize containers to display student info
       var studentsName = $("#studentsName");
       studentsName.empty();
 
+      //Initialize containers to display subjects
       var bahasaMalaysia = $('#bahasaMalaysia');
 
       var bahasaInggeris = $('#bahasaInggeris');
@@ -94,6 +102,7 @@ App = {
 
       var studentRemark = $('#studentRemark');
 
+      //Pull and display student's name from blockchain
       gradeInstance2.bm(1).then(function(bms) {
         var name = bms[2];
 
@@ -231,6 +240,7 @@ App = {
 
       return gradeInstance2.finaliseGrade1(App.account);
   }).then(function(hasGraded) {
+    //Check if grading finalised and update UI accordingly
     if(hasGraded){
       loader.hide();
       content.hide();
@@ -245,6 +255,8 @@ App = {
       console.warn(error);
     });
   },
+
+  //Grade Bahasa Malaysia
   submitbmGrade: function() {
     //student within subject instance
     var studentID = 1;
@@ -262,6 +274,8 @@ App = {
       console.error(err);
     });
   },
+
+  //Grade Bahasa Inggeris
   submitbiGrade: function() {
     //student within subject instance
     var studentID = 1;
@@ -279,6 +293,8 @@ App = {
       console.error(err);
     });
   },
+
+  //Grade Sejarah
   submitsjGrade: function() {
     //student within subject instance
     var studentID = 1;
@@ -296,6 +312,8 @@ App = {
       console.error(err);
     });
   },
+
+  //Grade Mathematics
   submitmaGrade: function() {
     //student within subject instance
     var studentID = 1;
@@ -313,6 +331,8 @@ App = {
       console.error(err);
     });
   },
+
+  //Grade Pendidikan Moral
   submitpmGrade: function() {
     //student within subject instance
     var studentID = 1;
@@ -330,6 +350,8 @@ App = {
       console.error(err);
     });
   },
+
+  //Grade Pendidikan Islam
   submitpiGrade: function() {
     //student within subject instance
     var studentID = 1;
@@ -347,6 +369,8 @@ App = {
       console.error(err);
     });
   },
+
+  //Grade Additional Mathematics
   submitamGrade: function() {
     //student within subject instance
     var studentID = 1;
@@ -364,6 +388,8 @@ App = {
       console.error(err);
     });
   },
+
+  //Grade Physics
   submitpyGrade: function() {
     //student within subject instance
     var studentID = 1;
@@ -381,6 +407,8 @@ App = {
       console.error(err);
     });
   },
+
+  //Grade Biology
   submitblGrade: function() {
     //student within subject instance
     var studentID = 1;
@@ -398,6 +426,8 @@ App = {
       console.error(err);
     });
   },
+
+  //Grade Chemistry
   submitcmGrade: function() {
     //student within subject instance
     var studentID = 1;
@@ -414,6 +444,8 @@ App = {
       console.error(err);
     });
   },
+
+  //Submit teacher's remark and finalise grading
   submitStudentRemark: function() {
     //student within subject instance
     var studentID = 1;
