@@ -49,9 +49,10 @@ App = {
     });
   },
 
-  //Render page
+  //Render page function
   render: function() {
     var gradeInstance;
+    //Target specific HTML tags in UI
     var loader = $("#loader");
     var content = $("#content");
 

@@ -7,6 +7,7 @@ App = {
     return App.initWeb3();
   },
 
+  //Initialize Web3
   initWeb3: function() {
     if (typeof web3 !== 'undefined') {
       // If a web3 instance is already provided by Meta Mask.
@@ -20,6 +21,7 @@ App = {
     return App.initContract();
   },
 
+  //Initialize smart contract instance
   initContract: function() {
     $.getJSON("Grade.json", function(grade) {
       // Instantiate a new truffle contract from the artifact
@@ -33,6 +35,7 @@ App = {
     });
   },
 
+  //Listen for events from smart contract
   listenForEvents: function() {
     App.contracts.Grade.deployed().then(function(instance2) {
       instance2.gradedEvent({}, {
@@ -46,6 +49,7 @@ App = {
     });
   },
 
+  //Calculate Grade function
   calculateGrade: function(marks) {
     var grade ="-";
 
@@ -92,8 +96,10 @@ App = {
     return grade;
   },
 
+  //Render page function
   render: function() {
     var gradeInstance2;
+    //Target specific HTML tags in UI
     var loader = $("#loader");
     var content = $("#content");
 
@@ -112,7 +118,9 @@ App = {
     App.contracts.Grade.deployed().then(function(instance2) {
       gradeInstance2 = instance2;
       return gradeInstance2.totalSub2();
-    }).then(function(totalSub2) {
+    }).then(function() {
+
+      //Initialize containers to display student info
       var studentsName = $("#studentsName");
       studentsName.empty();
 
@@ -164,11 +172,14 @@ App = {
       var cmMarks = $("#cmMarks");
       cmMarks.empty();
 
-    //Display Student Name
+    //Display Student Details
     gradeInstance2.bm(2).then(function(bms) {
-      var Id = bms[1];
-      var name = bms[2];
+      
+      //Store data from blockchain into variables
+      var Id = bm[1];
+      var name = bm[2];
 
+       //Append pulled data to front-end
       var nameTemplate = "<td>" + name + "</td>"
       studentsName.append(nameTemplate);
 
@@ -179,6 +190,8 @@ App = {
       
      //Display Student Statistics
      gradeInstance2.ss(2).then(function(ss) {
+
+      //Store data from blockchain into variables
       var subs = ss[1];
       var total = ss[2];
       var totalGPP = ss[3];
@@ -186,12 +199,15 @@ App = {
       var studentAverage = 0;
       var teacherRemarks = ss[4];
 
+      //Calculate and append average marks and round off to 2 DP
       average = (total/subs);
       var averageRounded = average.toFixed(2);
 
+      //Calculate and append average pointer and round off to 2 DP
       studentAverage = (totalGPP/subs);
       var studentAverageRounded = studentAverage.toFixed(2);
 
+      //Append pulled data to front-end
       var subTemplate = "<td>" + subs + "</td>"
       subCount.append(subTemplate);
 
@@ -209,12 +225,14 @@ App = {
 
     })
 
+    //Display Bahasa Malaysia Marks
     gradeInstance2.bm(2).then(function(bm) {
       var subjectName = "Bahasa Malaysia";
       var marks = bm[3];
       var grade ="-";
       var graded = bm[4];
 
+      //Check if absent
       if(marks == 0 && graded){
         grade = "Absent";
       }
@@ -228,13 +246,14 @@ App = {
       bmMarks.append(Template);
     });
   
-
+    //Display Bahasa Inggeris Marks
     gradeInstance2.bi(2).then(function(bi) {
       var subjectName = "Bahasa Inggeris";
       var marks = bi[3];
       var grade ="-";
       var graded = bi[4];
 
+      //Check if absent
       if(marks == 0 && graded){
         grade = "Absent";
       }
@@ -248,6 +267,7 @@ App = {
       biMarks.append(Template);
     });
 
+    //Display Sejarah Marks
     gradeInstance2.sj(2).then(function(sj) {
       var subjectName = "Sejarah";
       var marks = sj[3];
@@ -267,17 +287,19 @@ App = {
       sjMarks.append(Template);
     });
 
+    //Display Mathematics Marks
     gradeInstance2.ma(2).then(function(ma) {
       var subjectName = "Mathematics";
       var marks = ma[3];
       var grade ="-";
       var graded = ma[4];
 
+      //Check if absent
       if(marks == 0 && graded){
         grade = "Absent";
       }
       else{
-      //calculate grade
+      //Calculate grade
       grade = App.calculateGrade(marks);
       }
 
@@ -286,6 +308,7 @@ App = {
       maMarks.append(Template);
     });
 
+    //Display Pendidikan Moral Marks
     gradeInstance2.pm(2).then(function(pm) {
       var subjectName = "Pendidikan Moral";
       var student = pm[2];
@@ -294,13 +317,15 @@ App = {
       var enrol = pm[5];
       var graded = pm[4];
 
+      //Check if enrolled
       if(enrol && student == "Steve"){
 
+        //Check if absent
         if(marks == 0 && graded){
           grade = "Absent";
         }
         else{
-        //calculate grade
+        //Calculate grade
         grade = App.calculateGrade(marks);
         }
 
@@ -310,6 +335,7 @@ App = {
       }
     });
 
+    //Display Pendidikan Islam Marks
     gradeInstance2.pi(2).then(function(pi) {
       var subjectName = "Pendidikan Islam";
       var student = pi[2];
@@ -318,8 +344,10 @@ App = {
       var enrol = pi[5];
       var graded = pi[4];
 
+      //Check if enrolled
       if(enrol && student == "Steve"){
 
+        //Check if absent
         if(marks == 0 && graded){
           grade = "Absent";
         }
@@ -334,31 +362,33 @@ App = {
       }
     });
 
-
+    //Display Additional Mathematics Marks
     gradeInstance2.am(2).then(function(am) {
       var subjectName = "Additional Mathematics";
       var marks = am[3];
       var grade ="-";
       var enrol = am[5];
       var graded = am[4];
-
+      
+      //Check if enrolled
       if(enrol){
       
+        //Check if absent
         if(marks == 0 && graded){
           grade = "Absent";
         }
         else{
-        //calculate grade
+        //Calculate grade
         grade = App.calculateGrade(marks);
         }
 
-      // Render Add Maths Grades
+      // Render Additional Mathematics Grades
       var Template = "<tr><td>" + subjectName + "</td><td>" + marks + "</td><td>" + grade + "</td></tr>"
       amMarks.append(Template);
       }
     });
 
-
+    //Display Physics Marks
     gradeInstance2.py(2).then(function(py) {
       var subjectName = "Physics";
       var marks = py[3];
@@ -366,13 +396,15 @@ App = {
       var enrol = py[5];
       var graded = py[4];
 
+      //Check if enrolled
       if(enrol){
-      
+        
+        //Check if absent
         if(marks == 0 && graded){
           grade = "Absent";
         }
         else{
-        //calculate grade
+        //Calculate grade
         grade = App.calculateGrade(marks);
         }
 
@@ -382,7 +414,7 @@ App = {
       }
     });
 
-
+    //Display Biology Marks
     gradeInstance2.bl(2).then(function(bl) {
       var subjectName = "Biology";
       var marks = bl[3];
@@ -390,13 +422,15 @@ App = {
       var enrol = bl[5];
       var graded = bl[4];
 
+      //Check if enrolled
       if(enrol){
-      
+        
+        //Check if absent
         if(marks == 0 && graded){
           grade = "Absent";
         }
         else{
-        //calculate grade
+        //Calculate grade
         grade = App.calculateGrade(marks);
         }
 
@@ -406,6 +440,7 @@ App = {
       }
     });
 
+    //Display Sejarah Marks
     gradeInstance2.cm(2).then(function(cm) {
       var subjectName = "Chemistry";
       var marks = cm[3];
@@ -413,13 +448,15 @@ App = {
       var enrol = cm[5];
       var graded = cm[4];
 
+      //Check if enrolled
       if(enrol){
-      
+        
+        //Check if absent
         if(marks == 0 && graded){
           grade = "Absent";
         }
         else{
-        //calculate grade
+        //Calculate grade
         grade = App.calculateGrade(marks);
         }
 
