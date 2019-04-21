@@ -667,6 +667,13 @@ contract Grade {
         ss[_studentID].studentRemarks = _studentRemark;
         ss[_studentID].remarked = true;
 
+        if(_studentID == 1){
+            finaliseGrade1[msg.sender] = true;
+        }
+        if(_studentID == 2){
+            finaliseGrade2[msg.sender] = true;
+        }
+
         emit gradedEvent(_studentID);
     }
 
