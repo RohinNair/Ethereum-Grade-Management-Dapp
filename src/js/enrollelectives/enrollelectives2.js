@@ -60,15 +60,7 @@ App = {
     loader.show();
     content.hide();
     alt.hide();
-
-    // Load account data
-    web3.eth.getCoinbase(function(err, account) {
-      if (err === null) {
-        App.account = account;
-        $("#accountAddress").html("Your Account: " + account);
-      }
-    });
-
+    
     // Load contract data
     App.contracts.Grade.deployed().then(function(instance2) {
       gradeInstance2 = instance2;
