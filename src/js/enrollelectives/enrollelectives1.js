@@ -148,9 +148,9 @@ App = {
         }
 
       })
-      return gradeInstance2.finalise1(App.account);
-  }).then(function(hasGraded) {
-    if(hasGraded){
+      return gradeInstance2.finaliseEnroll1(App.account);
+  }).then(function(hasEnroll) {
+    if(hasEnroll){
       loader.hide();
       content.hide();
       alt.show()
