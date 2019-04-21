@@ -276,7 +276,7 @@ App = {
   finaliseEnrollment: function() {
     var studentInstance = 1
     App.contracts.Grade.deployed().then(function(instance2) {
-      return instance2.finalise(studentInstance, { from: App.account });
+      return instance2.finaliseEnrollment(studentInstance, { from: App.account });
     }).then(function() {
       // Wait for grades to update
       $("#content").hide();
