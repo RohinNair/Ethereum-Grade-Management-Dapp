@@ -7,6 +7,7 @@ App = {
     return App.initWeb3();
   },
 
+  //Initialize Web3
   initWeb3: function() {
     if (typeof web3 !== 'undefined') {
       // If a web3 instance is already provided by Meta Mask.
@@ -20,6 +21,7 @@ App = {
     return App.initContract();
   },
 
+  //Initialize smart contract instance
   initContract: function() {
     $.getJSON("Grade.json", function(grade) {
       // Instantiate a new truffle contract from the artifact
@@ -33,6 +35,7 @@ App = {
     });
   },
 
+  //Listen for events from smart contract
   listenForEvents: function() {
     App.contracts.Grade.deployed().then(function(instance2) {
       instance2.gradedEvent({}, {
@@ -46,8 +49,10 @@ App = {
     });
   },
 
+  //Render page function
   render: function() {
     var gradeInstance2;
+    //Target specific HTML tags in UI
     var loader = $("#loader");
     var content = $("#content");
     var alt = $("#alt-text");
@@ -60,7 +65,6 @@ App = {
     web3.eth.getCoinbase(function(err, account) {
       if (err === null) {
         App.account = account;
-        $("#accountAddress").html("Your Account: " + account);
       }
     });
 
@@ -69,15 +73,12 @@ App = {
       gradeInstance2 = instance2;
       return gradeInstance2.bmCount();
     }).then(function() {
+
+      //Initialize containers to display student info
       var studentsName = $("#studentsName");
       studentsName.empty();
 
-      var studentsSubjects = $("#studentsSubjects");
-      studentsSubjects.empty();
-
-      var subjectsSelect = $('#subjectsSelect');
-      subjectsSelect.empty();
-
+      //Initialize containers to display subjects
       var bahasaMalaysia = $('#bahasaMalaysia');
 
       var bahasaInggeris = $('#bahasaInggeris');
@@ -100,16 +101,17 @@ App = {
 
       var studentRemark = $('#studentRemark');
 
-      gradeInstance2.bm(2).then(function(bms) {
-        var name = bms[2];
+      //Pull and display student's name from blockchain
+      gradeInstance2.bm(2).then(function(bm) {
+        var name = bm[2];
 
         var nameTemplate = "<td>" + name + "</td>"
         studentsName.append(nameTemplate);
 
       })
       //Hide BM Input Box Once Graded
-      gradeInstance2.bm(2).then(function(bms) {
-        var graded = bms[4];
+      gradeInstance2.bm(2).then(function(bm) {
+        var graded = bm[4];
 
         if(graded) {
           bahasaMalaysia.hide();
@@ -117,8 +119,8 @@ App = {
 
       })
       //Hide BI Input Box Once Graded
-      gradeInstance2.bi(2).then(function(bis) {
-        var graded = bis[4];
+      gradeInstance2.bi(2).then(function(bi) {
+        var graded = bi[4];
 
         if(graded) {
           bahasaInggeris.hide();
@@ -126,8 +128,8 @@ App = {
 
       })
       //Hide SJ Input Box Once Graded
-      gradeInstance2.sj(2).then(function(sjs) {
-        var graded = sjs[4];
+      gradeInstance2.sj(2).then(function(sj) {
+        var graded = sj[4];
 
         if(graded) {
           sejarah.hide();
@@ -135,8 +137,8 @@ App = {
 
       })
       //Hide MA Input Box Once Graded
-      gradeInstance2.ma(2).then(function(mas) {
-        var graded = mas[4];
+      gradeInstance2.ma(2).then(function(ma) {
+        var graded = ma[4];
 
         if(graded) {
           mathematics.hide();
@@ -145,9 +147,9 @@ App = {
       })
       
       //Hide PM Input Box Once Graded
-      gradeInstance2.pm(2).then(function(pms) {
-        var graded = pms[4];
-        var enrolled = pms[5];
+      gradeInstance2.pm(2).then(function(pm) {
+        var graded = pm[4];
+        var enrolled = pm[5];
 
         if(!enrolled){
           pendidikanMoral.hide();
@@ -158,9 +160,9 @@ App = {
 
       })
       //Hide PI Input Box Once Graded
-      gradeInstance2.pi(2).then(function(pis) {
-        var graded = pis[4];
-        var enrolled = pis[5];
+      gradeInstance2.pi(2).then(function(pi) {
+        var graded = pi[4];
+        var enrolled = pi[5];
 
         if(!enrolled){
           pendidikanIslam.hide();
@@ -171,9 +173,9 @@ App = {
 
       })
       //Hide AM Input Box Once Graded
-      gradeInstance2.am(2).then(function(ams) {
-        var graded = ams[4];
-        var enrolled = ams[5];
+      gradeInstance2.am(2).then(function(am) {
+        var graded = am[4];
+        var enrolled = am[5];
 
         if(!enrolled){
           addMaths.hide();
@@ -184,9 +186,9 @@ App = {
 
       })
       //Hide PY Input Box Once Graded
-      gradeInstance2.py(2).then(function(pys) {
-        var graded = pys[4];
-        var enrolled = pys[5];
+      gradeInstance2.py(2).then(function(py) {
+        var graded = py[4];
+        var enrolled = py[5];
 
         if(!enrolled){
           physics.hide();
@@ -198,9 +200,9 @@ App = {
 
       })
       //Hide BL Input Box Once Graded
-      gradeInstance2.bl(2).then(function(bls) {
-        var graded = bls[4];
-        var enrolled = bls[5];
+      gradeInstance2.bl(2).then(function(bl) {
+        var graded = bl[4];
+        var enrolled = bl[5];
 
         if(!enrolled){
           biology.hide();
@@ -212,9 +214,9 @@ App = {
 
       })
       //Hide CM Input Box Once Graded
-      gradeInstance2.cm(2).then(function(cms) {
-        var graded = cms[4];
-        var enrolled = cms[5];
+      gradeInstance2.cm(2).then(function(cm) {
+        var graded = cm[4];
+        var enrolled = cm[5];
 
         if(!enrolled){
           chemistry.hide();
@@ -226,6 +228,7 @@ App = {
 
       })
 
+      //Hide Remarks Input Box Once Submitted
       gradeInstance2.ss(2).then(function(ss) {
         var remarked = ss[5];
 
@@ -237,6 +240,7 @@ App = {
 
       return gradeInstance2.finaliseGrade2(App.account);
   }).then(function(hasGraded) {
+    //Check if grading finalised and update UI accordingly
     if(hasGraded){
       loader.hide();
       content.hide();
@@ -251,6 +255,8 @@ App = {
       console.warn(error);
     });
   },
+
+  //Grade Bahasa Malaysia
   submitbmGrade: function() {
     //student within subject instance
     var studentID = 2;
@@ -268,6 +274,8 @@ App = {
       console.error(err);
     });
   },
+
+  //Grade Bahasa Inggeris
   submitbiGrade: function() {
     //student within subject instance
     var studentID = 2;
@@ -285,6 +293,8 @@ App = {
       console.error(err);
     });
   },
+
+  //Grade Sejarah
   submitsjGrade: function() {
     //student within subject instance
     var studentID = 2;
@@ -302,6 +312,8 @@ App = {
       console.error(err);
     });
   },
+
+  //Grade Mathematics
   submitmaGrade: function() {
     //student within subject instance
     var studentID = 2;
@@ -319,6 +331,8 @@ App = {
       console.error(err);
     });
   },
+
+  //Grade Pendidikan Moral
   submitpmGrade: function() {
     //student within subject instance
     var studentID = 2;
@@ -336,6 +350,8 @@ App = {
       console.error(err);
     });
   },
+
+  //Grade Pendidikan Islam
   submitpiGrade: function() {
     //student within subject instance
     var studentID = 2;
@@ -353,6 +369,8 @@ App = {
       console.error(err);
     });
   },
+
+  //Grade Additional Mathematics
   submitamGrade: function() {
     //student within subject instance
     var studentID = 2;
@@ -370,6 +388,8 @@ App = {
       console.error(err);
     });
   },
+
+  //Grade Physics
   submitpyGrade: function() {
     //student within subject instance
     var studentID = 2;
@@ -387,6 +407,8 @@ App = {
       console.error(err);
     });
   },
+
+  //Grade Biology
   submitblGrade: function() {
     //student within subject instance
     var studentID = 2;
@@ -404,6 +426,8 @@ App = {
       console.error(err);
     });
   },
+
+  //Grade Chemistry
   submitcmGrade: function() {
     //student within subject instance
     var studentID = 2;
@@ -420,6 +444,8 @@ App = {
       console.error(err);
     });
   },
+
+  //Submit teacher's remark and finalise grading
   submitStudentRemark: function() {
     //student within subject instance
     var studentID = 2;
@@ -434,6 +460,20 @@ App = {
       console.error(err);
     });
   },
+
+  //Finalise student grading
+  finaliseGrading: function() {
+    var studentInstance = 2
+    App.contracts.Grade.deployed().then(function(instance2) {
+      return instance2.finaliseGrade(studentInstance, { from: App.account });
+    }).then(function() {
+      // Wait for grades to update
+      $("#content").hide();
+      $("#loader").show();
+    }).catch(function(err) {
+      console.error(err);
+    });
+  }
 };
 
 $(function() {

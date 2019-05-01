@@ -1,5 +1,6 @@
 
 contract Grade {
+
     //Modelling Subjects
     struct BahasaMalaysia {
         uint BMID;
@@ -87,6 +88,7 @@ contract Grade {
         bool elective;
     }
 
+    //Modelling student stats
     struct StudentStats {
         uint studId;
         uint totalSubs;
@@ -96,7 +98,7 @@ contract Grade {
         bool remarked;
     }
 
-    //Read/write students
+    //Key mapping for structures
     mapping(uint => BahasaMalaysia) public bm;
 
     mapping(uint => BahasaInggeris) public bi;
@@ -117,6 +119,8 @@ contract Grade {
 
     mapping(uint => Chemistry) public cm;
 
+    mapping (uint => StudentStats) public ss;
+
     mapping(address => bool) public finaliseEnroll1;
 
     mapping(address => bool) public finaliseEnroll2;
@@ -125,12 +129,10 @@ contract Grade {
 
     mapping(address => bool) public finaliseGrade2;
 
-    mapping(address => bool) public graders;
+    mapping(address => bool) public graded;
 
-    mapping (uint => StudentStats) public ss;
 
-    //Store Subject Count
-
+    //Counter Cache
     uint public bmCount;
 
     uint public biCount;
@@ -161,6 +163,7 @@ contract Grade {
 
     uint public totalMarks2;
 
+    //Event declaration
     event gradedEvent (
         uint indexed _Id
     );
@@ -204,15 +207,21 @@ contract Grade {
         enrollElective(10);
     }
 
+    //Initialize student stats
     function studStats(uint _totalSubs, uint _totalMarks, uint _totalGPS) private {
         ssCount++;
         ss[ssCount] = StudentStats(ssCount, _totalSubs, _totalMarks, _totalGPS, "-", false);
     }
 
+    //Initialize enrollment of core subjects
     function enrollCore(uint _subjectCode, uint _studentID, string memory _studentName) private {
+        
+        //Bahasa Malaysia
         if (_subjectCode == 1) {
             bmCount++;
             bm[bmCount] = BahasaMalaysia(bmCount, _studentID, _studentName, 0, false);
+
+            //Update subject count for student
             if (bmCount == 1){
                 totalSub1++;
                 ss[bmCount].totalSubs = totalSub1;
@@ -223,9 +232,12 @@ contract Grade {
             }
         }
 
+        //Bahasa Inggeris
         if (_subjectCode == 2) {
             biCount++;
             bi[biCount] = BahasaInggeris(biCount, _studentID, _studentName, 0, false);
+
+            //Update subject count for student
             if (biCount == 1){
                 totalSub1++;
                 ss[biCount].totalSubs = totalSub1;
@@ -236,9 +248,12 @@ contract Grade {
             }
         }
 
+        //Sejarah
         if (_subjectCode == 3) {
             sjCount++;
             sj[sjCount] = Sejarah(sjCount, _studentID, _studentName, 0, false);
+
+            //Update subject count for student
             if (sjCount == 1){
                 totalSub1++;
                 ss[sjCount].totalSubs = totalSub1;
@@ -249,9 +264,12 @@ contract Grade {
             }
         }
 
+        //Mathematics
         if (_subjectCode == 4) {
             maCount++;
             ma[maCount] = Mathematics(maCount, _studentID, _studentName, 0, false);
+            
+            //Update subject count for student
             if (maCount == 1){
                 totalSub1++;
                 ss[maCount].totalSubs = totalSub1;
@@ -263,46 +281,58 @@ contract Grade {
         }
     }
 
+    //Initialize creation of elective slots
     function enrollElective(uint _subjectCode) private {
+        
+        //Pendidikan Moral
         if (_subjectCode == 5) {
             pmCount++;
             pm[pmCount] = PendidikanMoral(pmCount, 0, "-", 0, false, false);
         }
 
+        //Pendidikan Islam
         if (_subjectCode == 6) {
             piCount++;
             pi[piCount] = PendidikanIslam(piCount, 0, "-", 0, false, false);
         }
 
+        //Additional Mathematics
         if (_subjectCode == 7) {
             amCount++;
             am[amCount] = AddMaths(amCount, 0, "-", 0, false, false);
-        }
+        }   
 
+        //Physics
         if (_subjectCode == 8) {
-            blCount++;
-            bl[blCount] = Biology(blCount, 0, "-", 0, false, false);
-        }
-
-        if (_subjectCode == 9) {
             pyCount++;
             py[pyCount] = Physics(pyCount, 0, "-", 0, false, false);
         }
 
+        //Biology
+        if (_subjectCode == 9) {
+            blCount++;
+            bl[blCount] = Biology(blCount, 0, "-", 0, false, false);
+        }
+
+        //Chemistry
         if (_subjectCode == 10) {
             cmCount++;
             cm[cmCount] = Chemistry(cmCount, 0, "-", 0, false, false);
         }
     }
 
+    //Enrollment of students function
     function elective (uint _ID, uint _subjectInstanceId, uint _studentID, string memory _studentName) public {
+
         //Pendidikan Moral
         if(_ID == 5) {
-
+        
+        //Store student info
         pm[_subjectInstanceId].studentID = _studentID;
         pm[_subjectInstanceId].studentName = _studentName;
         pm[_subjectInstanceId].elective = true;
 
+        //Update subject count for student
         if (_subjectInstanceId == 1){
                 totalSub1++;
                 ss[_subjectInstanceId].totalSubs = totalSub1;
@@ -311,16 +341,19 @@ contract Grade {
                 totalSub2++;
                 ss[_subjectInstanceId].totalSubs = totalSub2;
         }
+        //Trigger event to refresh front-end
         emit gradedEvent(_subjectInstanceId);
         }
 
         //Pendidikan Islam
         if(_ID == 6) {
-
+        
+        //Store student info
         pi[_subjectInstanceId].studentID = _studentID;
         pi[_subjectInstanceId].studentName = _studentName;
         pi[_subjectInstanceId].elective = true;
 
+        //Update subject count for student
         if (_subjectInstanceId == 1){
                 totalSub1++;
                 ss[_subjectInstanceId].totalSubs = totalSub1;
@@ -329,16 +362,19 @@ contract Grade {
                 totalSub2++;
                 ss[_subjectInstanceId].totalSubs = totalSub2;
         }
+        //Trigger event to refresh front-end
         emit gradedEvent(_subjectInstanceId);
         }
 
         //Add Maths
         if(_ID == 7) {
         
+        //Store student info
         am[_subjectInstanceId].studentID = _studentID;
         am[_subjectInstanceId].studentName = _studentName;
         am[_subjectInstanceId].elective = true;
-    
+
+        //Update subject count for student
         if (_subjectInstanceId == 1){
                 totalSub1++;
                 ss[_subjectInstanceId].totalSubs = totalSub1;
@@ -347,16 +383,19 @@ contract Grade {
                 totalSub2++;
                 ss[_subjectInstanceId].totalSubs = totalSub2;
         }
+        //Trigger event to refresh front-end
         emit gradedEvent(_subjectInstanceId);
         }
 
         //Physics
         if(_ID == 8) {
-
+        
+        //Store student info
         py[_subjectInstanceId].studentID = _studentID;
         py[_subjectInstanceId].studentName = _studentName;
         py[_subjectInstanceId].elective = true;
 
+        //Update subject count for student
         if (_subjectInstanceId == 1){
                 totalSub1++;
                 ss[_subjectInstanceId].totalSubs = totalSub1;
@@ -365,16 +404,19 @@ contract Grade {
                 totalSub2++;
                 ss[_subjectInstanceId].totalSubs = totalSub2;
         }
+        //Trigger event to refresh front-end
         emit gradedEvent(_subjectInstanceId);
         }
 
         //Biology
         if(_ID == 9) {
-
+        
+        //Store student info
         bl[_subjectInstanceId].studentID = _studentID;
         bl[_subjectInstanceId].studentName = _studentName;
         bl[_subjectInstanceId].elective = true;
 
+        //Update subject count for student
         if (_subjectInstanceId == 1){
                 totalSub1++;
                 ss[_subjectInstanceId].totalSubs = totalSub1;
@@ -383,16 +425,19 @@ contract Grade {
                 totalSub2++;
                 ss[_subjectInstanceId].totalSubs = totalSub2;
         }
+        //Trigger event to refresh front-end
         emit gradedEvent(_subjectInstanceId);
         }
 
         //Chemistry
         if(_ID == 10) {
-
+        
+        //Store student info
         cm[_subjectInstanceId].studentID = _studentID;
         cm[_subjectInstanceId].studentName = _studentName;
         cm[_subjectInstanceId].elective = true;
 
+        //Update subject count for student
         if (_subjectInstanceId == 1){
                 totalSub1++;
                 ss[_subjectInstanceId].totalSubs = totalSub1;
@@ -401,11 +446,15 @@ contract Grade {
                 totalSub2++;
                 ss[_subjectInstanceId].totalSubs = totalSub2;
         }
+        //Trigger event to refresh front-end
         emit gradedEvent(_subjectInstanceId);
         }
     }
 
+    //Grading students function
     function grade (uint _ID, uint _subjectMarks, uint _subjectIdentifier) public {
+
+        //Bahasa Malaysia
         if(_subjectIdentifier == 1) {
 
         //Require a valid subject
@@ -423,11 +472,14 @@ contract Grade {
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
 
+        //Call function to calculate grade point
         calculateGP(_ID, _subjectMarks);
 
+        //Trigger event to refresh front-end
         emit gradedEvent(_ID);
         }
 
+        //Bahasa Inggeris
         if(_subjectIdentifier == 2) {
 
         //Require a valid subject
@@ -444,12 +496,15 @@ contract Grade {
 
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
-
+        
+        //Call function to calculate grade point
         calculateGP(_ID, _subjectMarks);
 
+        //Trigger event to refresh front-end
         emit gradedEvent(_ID);
         }
 
+        //Sejarah
         if(_subjectIdentifier == 3) {
 
         //Require a valid subject
@@ -467,11 +522,14 @@ contract Grade {
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
 
+        //Call function to calculate grade point
         calculateGP(_ID, _subjectMarks);
 
+        //Trigger event to refresh front-end
         emit gradedEvent(_ID);
         }
 
+        //Mathematics
         if(_subjectIdentifier == 4) {
 
         //Require a valid subject
@@ -489,11 +547,14 @@ contract Grade {
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
 
+        //Call function to calculate grade point
         calculateGP(_ID, _subjectMarks);
 
+        //Trigger event to refresh front-end
         emit gradedEvent(_ID);
         }
 
+        //Pendidikan Moral
         if(_subjectIdentifier == 5) {
 
         //Require a valid subject
@@ -511,11 +572,14 @@ contract Grade {
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
 
+        //Call function to calculate grade point
         calculateGP(_ID, _subjectMarks);
 
+        //Trigger event to refresh front-end
         emit gradedEvent(_ID);
         }
 
+        //Pendidikan Islam
         if(_subjectIdentifier == 6) {
 
         //Require a valid subject
@@ -533,11 +597,14 @@ contract Grade {
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
 
+        //Call function to calculate grade point
         calculateGP(_ID, _subjectMarks);
 
+        //Trigger event to refresh front-end
         emit gradedEvent(_ID);
         }
 
+        //Additional Mathematics
         if(_subjectIdentifier == 7) {
 
         //Require a valid subject
@@ -555,11 +622,14 @@ contract Grade {
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
 
+        //Call function to calculate grade point
         calculateGP(_ID, _subjectMarks);
 
+        //Trigger event to refresh front-end
         emit gradedEvent(_ID);
         }
 
+        //Physics
         if(_subjectIdentifier == 8) {
 
         //Require a valid subject
@@ -577,11 +647,14 @@ contract Grade {
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
 
+        //Call function to calculate grade point
         calculateGP(_ID, _subjectMarks);
 
+        //Trigger event to refresh front-end
         emit gradedEvent(_ID);
         }
 
+        //Biology
         if(_subjectIdentifier == 9) {
 
         //Require a valid subject
@@ -599,11 +672,14 @@ contract Grade {
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
 
+        //Call function to calculate grade point
         calculateGP(_ID, _subjectMarks);
 
+        //Trigger event to refresh front-end
         emit gradedEvent(_ID);
         }
 
+        //Chemistry
         if(_subjectIdentifier == 10) {
 
         //Require a valid subject
@@ -621,13 +697,18 @@ contract Grade {
         //Total the Marks
         ss[_ID].totalMarks += _subjectMarks;
 
+        //Call function to calculate grade point
         calculateGP(_ID, _subjectMarks);
 
+        //Trigger event to refresh front-end
         emit gradedEvent(_ID);
         }
     }
 
+    //Calculate Grade Point of student function
     function calculateGP (uint _studentID, uint _studentMarks) public {
+
+        //Conditions to determine grade point average based on marks passed
         if (_studentMarks >= 90 && _studentMarks <= 100){
             ss[_studentID].totalGPS += 0;
         }
@@ -660,24 +741,21 @@ contract Grade {
         }
     }
 
+    //Leave teacher's remarks for students & finalise grading function
     function remarks (uint _studentID, string memory _studentRemark) public {
 
+        //Update remark for relevant student
         ss[_studentID].studentRemarks = _studentRemark;
         ss[_studentID].remarked = true;
 
-        if(_studentID == 1){
-            finaliseGrade1[msg.sender] = true;
-        }
-        if(_studentID == 2){
-            finaliseGrade2[msg.sender] = true;
-        }
-
+        //Trigger event to refresh front-end
         emit gradedEvent(_studentID);
     }
 
+    //Finalise enrollment function
+    function finaliseEnrollment (uint _studentInstance) public {
 
-    function finalise (uint _studentInstance) public {
-
+        //Mark student as having enrollment complete by teacher
         if(_studentInstance == 1){
             finaliseEnroll1[msg.sender] = true;
         }
@@ -685,7 +763,22 @@ contract Grade {
             finaliseEnroll2[msg.sender] = true;
         }
         
+        //Trigger event to refresh front-end
+        emit gradedEvent(_studentInstance);
+    }
 
+    //Finalise grade function
+    function finaliseGrade (uint _studentInstance) public {
+
+        //Mark student as having been remarked by teacher
+        if(_studentInstance == 1){
+            finaliseGrade1[msg.sender] = true;
+        }
+        if(_studentInstance == 2){
+            finaliseGrade2[msg.sender] = true;
+        }
+        
+        //Trigger event to refresh front-end
         emit gradedEvent(_studentInstance);
     }
 }
