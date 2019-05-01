@@ -1,183 +1,290 @@
 <!DOCTYPE html>
 <html lang="en">
+  
   <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Student Grading</title>
-
-    <!-- Bootstrap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+  
+    <title>Student Grade Management System</title>
+  
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  
+    <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="icon" href="css/img/tabico.png">
-    <style>
-      .footer {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        background-color: whitesmoke;
-        color: black;
-        text-align: center;
-      }
-      </style>
+  
+  
   </head>
-  <body>
-    <div class="container" style="width: auto;">
-      <div class="row">
-        <div class="col-lg-12">
-          <br/>
-          <h1 class="text-center">Student Grading</h1>
-          <hr/>
-          <div id="loader">
-            <p class="text-center">Loading...</p>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fas fa-user-graduate"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Welcome</div>
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+      <!-- Nav Item - Dashboard>
+      <li class="nav-item">
+        <a class="nav-link" href="home.html">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Manage Student Grades</span></a>
+      </li-->
+      <!-- Heading -->
+      <div class="sidebar-heading">
+          Directory
+        </div>
+  
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item active">
+          <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Pages</span>
+          </a>
+          <div id="collapsePages" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+              <h6 class="collapse-header">Main Functions:</h6>
+              <a class="collapse-item" href="index.html">Home</a>
+              <a class="collapse-item" href="home.html"><b>Manage Student Grades</b></a>
+              <a class="collapse-item" href="help.html">Help / FAQ</a>
+            </div>
           </div>
-          <div id="alt-text">
-            <p class="text-center">The grading for this student has been finalised.</p>
-          </div>
-          <div id="content" style="display: none;">
-            <table>
-              <th>Student Name: &nbsp;</th>
-              <td id="studentsName"></td>
-              <th>&nbsp;&nbsp;&nbsp;</th>
-              <!----th>IC No: </th>
-              <td id="studentsIc"></td-->
-            </table>
-            <hr />
-            <form onSubmit="App.submitbmGrade(); return false;">
-              <div class="form-group" id="bahasaMalaysia">
-                <br/>
-                <label for="bm-marks">Bahasa Malaysia</label>
-                <input id="bm-marks" type="text" class="form-control" placeholder="Enter Bahasa Malaysia Marks" maxlength="5"></input>
-              <br/>
-              <button type="submit" class="btn btn-primary">Submit Grade</button>
-              <hr />
-            </div>
-            </form>
-            <form onSubmit="App.submitbiGrade(); return false;">
-              <div class="form-group" id="bahasaInggeris">
-                <br/>
-                <label for="bi-marks">Bahasa Inggeris</label>
-                <input id="bi-marks" type="text" class="form-control" placeholder="Enter Bahasa Inggeris Marks" maxlength="5"></input>
-              <br/>
-              <button type="submit" class="btn btn-primary">Submit Grade</button>
-              <hr />
-            </div>
-            </form>
-            <form onSubmit="App.submitsjGrade(); return false;">
-              <div class="form-group" id="sejarah">
-                <br/>
-                <label for="sj-marks">Sejarah</label>
-                <input id="sj-marks" type="text" class="form-control" placeholder="Enter Sejarah Marks" maxlength="5"></input>
-              <br/>
-              <button type="submit" class="btn btn-primary">Submit Grade</button>
-              <hr />
-            </div>
-            </form>
-            <form onSubmit="App.submitmaGrade(); return false;">
-              <div class="form-group" id="mathematics">
-                <br/>
-                <label for="ma-marks">Mathematics</label>
-                <input id="ma-marks" type="text" class="form-control" placeholder="Enter Mathematics Marks" maxlength="5"></input>
-              <br/>
-              <button type="submit" class="btn btn-primary">Submit Grade</button>
-              <hr />
-            </div>
-            </form>
-            <form onSubmit="App.submitpmGrade(); return false;">
-              <div class="form-group" id="pendidikanMoral">
-                <br/>
-                <label for="pm-marks">Pendidikan Moral</label>
-                <input id="pm-marks" type="text" class="form-control" placeholder="Enter Pendidikan Moral Marks"></input>
-              <br/>
-              <button type="submit" class="btn btn-primary">Submit Grade</button>
-              <hr />
-            </div>
-            </form>
-            <form onSubmit="App.submitpiGrade(); return false;">
-              <div class="form-group" id="pendidikanIslam">
-                <br/>
-                <label for="pi-marks">Pendidikan Islam</label>
-                <input id="pi-marks" type="text" class="form-control" placeholder="Enter Pendidikan Islam Marks" maxlength="5"></input>
-              <br/>
-              <button type="submit" class="btn btn-primary">Submit Grade</button>
-              <hr />
-            </div>
-            </form>
-            <form onSubmit="App.submitamGrade(); return false;">
-              <div class="form-group" id="addMaths">
-                <br/>
-                <label for="am-marks">Additional Mathematics</label>
-                <input id="am-marks" type="text" class="form-control" placeholder="Enter Additional Mathematics Marks" maxlength="5"></input>
-              <br/>
-              <button type="submit" class="btn btn-primary">Submit Grade</button>
-              <hr />
-            </div>
-            </form>
-            <form onSubmit="App.submitpyGrade(); return false;">
-              <div class="form-group" id="physics">
-                <br/>
-                <label for="py-marks">Physics</label>
-                <input id="py-marks" type="text" class="form-control" placeholder="Enter Physics Marks" maxlength="5"></input>
-              <br/>
-              <button type="submit" class="btn btn-primary">Submit Grade</button>
-              <hr />
-            </div>
-            </form>
-            <form onSubmit="App.submitblGrade(); return false;">
-              <div class="form-group" id="biology">
-                <br/>
-                <label for="bl-marks">Biology</label>
-                <input id="bl-marks" type="text" class="form-control" placeholder="Enter Biology Marks" maxlength="5"></input>
-              <br/>
-              <button type="submit" class="btn btn-primary">Submit Grade</button>
-              <hr />
-            </div>
-            </form>
-            <form onSubmit="App.submitcmGrade(); return false;">
-              <div class="form-group" id="chemistry">
-                <br/>
-                <label for="cm-marks">Chemistry</label>
-                <input id="cm-marks" type="text" class="form-control" placeholder="Enter Chemistry Marks" maxlength="5"></input>
-              <br/>
-              <button type="submit" class="btn btn-primary">Submit Grade</button>
-              <hr />
-            </div>
-            </form>
-            <form onSubmit="App.submitStudentRemark(); return false;">
-              <div class="form-group" id="studentRemark">
-                <br/>
-                <label for="student-Remark">Remarks</label>
-                <input id="student-Remark" type="text" class="form-control" placeholder="Enter your remarks for this student"></input>
-              <br/>
-              <button type="submit" class="btn btn-primary">Submit Remark</button>
-              <hr />
-            </div>
-            </form>
-            <form onSubmit="App.finaliseGrading(); return false;">
-              <div class="form-group">
-              <p><font color="red">I hereby finalise the grading of this student. I understand no further changes can be made
-                after this.
-              </font></p>
-              <button type="submit" class="btn btn-primary">Finalise Grading</button>
-              <hr />
-            </div>
-            </form>
-            </form>
+        </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Project Details
+      </div>
+
+        <!-- Nav Item - Dashboard -->
+      <li class="nav-item">
+          <a class="nav-link" href="https://github.com/RohinNair/GradeManagement">
+            <i class="fab fa-github"></i>
+            <span>Source Code</span></a>
+        </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div class="container" style="height:100%">
+        <div class="row">
+          <div class="col-lg-12">
             <br/>
+            <h1 class="text-center">Student Grading</h1>
+            <hr/>
+            <div id="loader">
+              <p class="text-center">Loading...</p>
+            </div>
+            <div id="alt-text">
+              <p class="text-center">The grading for this student has been finalised.</p>
+            </div>
+            <div id="content" style="display: none;">
+              <table>
+                <th>Student Name: &nbsp;</th>
+                <td id="studentsName"></td>
+                <th>&nbsp;&nbsp;&nbsp;</th>
+                <!----th>IC No: </th>
+                <td id="studentsIc"></td-->
+              </table>
+              <hr />
+              <form onSubmit="App.submitbmGrade(); return false;">
+                <div class="form-group" id="bahasaMalaysia">
+                  <br/>
+                  <label for="bm-marks">Bahasa Malaysia</label>
+                  <input id="bm-marks" type="text" class="form-control" placeholder="Enter Bahasa Malaysia Marks" maxlength="5"></input>
+                <br/>
+                <button type="submit" class="btn btn-primary">Submit Grade</button>
+                <hr />
+              </div>
+              </form>
+              <form onSubmit="App.submitbiGrade(); return false;">
+                <div class="form-group" id="bahasaInggeris">
+                  <br/>
+                  <label for="bi-marks">Bahasa Inggeris</label>
+                  <input id="bi-marks" type="text" class="form-control" placeholder="Enter Bahasa Inggeris Marks" maxlength="5"></input>
+                <br/>
+                <button type="submit" class="btn btn-primary">Submit Grade</button>
+                <hr />
+              </div>
+              </form>
+              <form onSubmit="App.submitsjGrade(); return false;">
+                <div class="form-group" id="sejarah">
+                  <br/>
+                  <label for="sj-marks">Sejarah</label>
+                  <input id="sj-marks" type="text" class="form-control" placeholder="Enter Sejarah Marks" maxlength="5"></input>
+                <br/>
+                <button type="submit" class="btn btn-primary">Submit Grade</button>
+                <hr />
+              </div>
+              </form>
+              <form onSubmit="App.submitmaGrade(); return false;">
+                <div class="form-group" id="mathematics">
+                  <br/>
+                  <label for="ma-marks">Mathematics</label>
+                  <input id="ma-marks" type="text" class="form-control" placeholder="Enter Mathematics Marks" maxlength="5"></input>
+                <br/>
+                <button type="submit" class="btn btn-primary">Submit Grade</button>
+                <hr />
+              </div>
+              </form>
+              <form onSubmit="App.submitpmGrade(); return false;">
+                <div class="form-group" id="pendidikanMoral">
+                  <br/>
+                  <label for="pm-marks">Pendidikan Moral</label>
+                  <input id="pm-marks" type="text" class="form-control" placeholder="Enter Pendidikan Moral Marks"></input>
+                <br/>
+                <button type="submit" class="btn btn-primary">Submit Grade</button>
+                <hr />
+              </div>
+              </form>
+              <form onSubmit="App.submitpiGrade(); return false;">
+                <div class="form-group" id="pendidikanIslam">
+                  <br/>
+                  <label for="pi-marks">Pendidikan Islam</label>
+                  <input id="pi-marks" type="text" class="form-control" placeholder="Enter Pendidikan Islam Marks" maxlength="5"></input>
+                <br/>
+                <button type="submit" class="btn btn-primary">Submit Grade</button>
+                <hr />
+              </div>
+              </form>
+              <form onSubmit="App.submitamGrade(); return false;">
+                <div class="form-group" id="addMaths">
+                  <br/>
+                  <label for="am-marks">Additional Mathematics</label>
+                  <input id="am-marks" type="text" class="form-control" placeholder="Enter Additional Mathematics Marks" maxlength="5"></input>
+                <br/>
+                <button type="submit" class="btn btn-primary">Submit Grade</button>
+                <hr />
+              </div>
+              </form>
+              <form onSubmit="App.submitpyGrade(); return false;">
+                <div class="form-group" id="physics">
+                  <br/>
+                  <label for="py-marks">Physics</label>
+                  <input id="py-marks" type="text" class="form-control" placeholder="Enter Physics Marks" maxlength="5"></input>
+                <br/>
+                <button type="submit" class="btn btn-primary">Submit Grade</button>
+                <hr />
+              </div>
+              </form>
+              <form onSubmit="App.submitblGrade(); return false;">
+                <div class="form-group" id="biology">
+                  <br/>
+                  <label for="bl-marks">Biology</label>
+                  <input id="bl-marks" type="text" class="form-control" placeholder="Enter Biology Marks" maxlength="5"></input>
+                <br/>
+                <button type="submit" class="btn btn-primary">Submit Grade</button>
+                <hr />
+              </div>
+              </form>
+              <form onSubmit="App.submitcmGrade(); return false;">
+                <div class="form-group" id="chemistry">
+                  <br/>
+                  <label for="cm-marks">Chemistry</label>
+                  <input id="cm-marks" type="text" class="form-control" placeholder="Enter Chemistry Marks" maxlength="5"></input>
+                <br/>
+                <button type="submit" class="btn btn-primary">Submit Grade</button>
+                <hr />
+              </div>
+              </form>
+              <form onSubmit="App.submitStudentRemark(); return false;">
+                <div class="form-group" id="studentRemark">
+                  <br/>
+                  <label for="student-Remark">Teacher's Remarks</label>
+                  <input id="student-Remark" type="text" class="form-control" placeholder="Enter your remarks for this student"></input>
+                <br/>
+                <button type="submit" class="btn btn-primary">Submit Remark</button>
+                <hr />
+              </div>
+              </form>
+              <form onSubmit="App.finaliseGrading(); return false;">
+                <div class="form-group">
+                <p><font color="red">I hereby finalise the grading of this student. I understand no further changes can be made
+                  after this.
+                </font></p>
+                <button type="submit" class="btn btn-primary">Finalise Grading</button>
+                <hr />
+              </div>
+              </form>
+              </form>
+              <br/>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      <!-- End of Main Content -->
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+      <div>
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Developed by Rohindhran Nair - 2019</span>
+            </div>
+          </div>
+        </footer>
+        <!-- End of Footer -->  
+</div>
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/web3.min.js"></script>
     <script src="js/truffle-contract.js"></script>
     <script src="js/inputmarks/inputmarks2.js"></script>
-    <div class="footer">
-      <small>Developed by Rohindhran Nair - 2018</small>
-    </div>
-  </body>
+
+</body>
 </html>
