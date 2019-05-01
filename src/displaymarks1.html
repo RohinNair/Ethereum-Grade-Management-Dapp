@@ -1,114 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
+  
   <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Student Grade Report</title>
-
-    <!-- Bootstrap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+  
+    <title>Student Grade Management System</title>
+  
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  
+    <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="icon" href="css/img/tabico.png">
-    <style>
-      .footer {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        color: black;
-        text-align: center;
-      }
-      </style>
+  
+  
   </head>
-  <body>
-    <div class="container" style="width: auto;">
-      <div class="row">
-        <div class="col-lg-12">
-          <br/>
-          <h1 class="text-center">Student Grade Report</h1>
-          <hr/>
-          <br/>
-          <div id="loader">
-            <p class="text-center">Loading...</p>
-          </div>
-          <div id="content" style="display: none;">
-            <table>
-              <th>Student Name: &nbsp;</th>
-              <td id="studentsName"></td>
-              <th>&nbsp;&nbsp;&nbsp;</th>
-              <th>ID No: </th>
-              <td id="studentsId"></td>
-            </table>
-            <br/>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Subject</th>
-                  <th scope="col">Marks</th>
-                  <th scole="col">Grade</th>
-                </tr>
-              </thead>
-              <tbody id="bmMarks">
-              </tbody>
-              <tbody id="biMarks">
-              </tbody>
-              <tbody id="sjMarks">
-              </tbody>
-              <tbody id="maMarks">
-              </tbody>
-              <tbody id="pmMarks">
-              </tbody>
-              <tbody id="piMarks">
-              </tbody>
-              <tbody id="amMarks">
-              </tbody>
-              <tbody id="pyMarks">
-              </tbody>
-              <tbody id="blMarks">
-              </tbody>
-              <tbody id="cmMarks">
-              </tbody>
-            </table>
-            <hr/>
-            <div>
-              <table>
-                <th>Number of subjects enrolled: </th>
-                <td id="subCount"></td>
-                </table>
-              <table>
-                <th>Total Marks: </th>
-                <td id="totalMarks"></td>
-              </table>
-              <table>
-                <th>Percentage: </th>
-                <td id="marksPercentage"></td>
-              </table>
-              <table>
-                <th>Student Average Grade Point: </th>
-                <td id="studentPointAverage"></td>
-              </table>
-              <table>
-                <th>Teacher's Remarks: </th>
-                <td id="studentRemarks"></td>
-              </table>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fas fa-user-graduate"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Welcome</div>
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+      <!-- Nav Item - Dashboard>
+      <li class="nav-item">
+        <a class="nav-link" href="home.html">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Manage Student Grades</span></a>
+      </li-->
+      <!-- Heading -->
+      <div class="sidebar-heading">
+          Directory
+        </div>
+  
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item active">
+          <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Pages</span>
+          </a>
+          <div id="collapsePages" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+              <h6 class="collapse-header">Main Functions:</h6>
+              <a class="collapse-item" href="index.html">Home</a>
+              <a class="collapse-item" href="home.html"><b>Manage Student Grades</b></a>
+              <a class="collapse-item" href="help.html">Help / FAQ</a>
             </div>
-            <hr/>
-            </form>
+          </div>
+        </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Project Details
+      </div>
+
+        <!-- Nav Item - Dashboard -->
+      <li class="nav-item">
+          <a class="nav-link" href="https://github.com/RohinNair/GradeManagement">
+            <i class="fab fa-github"></i>
+            <span>Source Code</span></a>
+        </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div class="container" style="height:100%">
+        <div class="row">
+          <div class="col-lg-12">
             <br/>
+            <h1 class="text-center">Student Grade Report</h1>
+            <hr/>
+            <br/>
+            <div id="loader">
+              <p class="text-center">Loading...</p>
+            </div>
+            <div id="content" style="display: none;">
+              <table>
+                <th>Student Name: &nbsp;</th>
+                <td id="studentsName"></td>
+                <th>&nbsp;&nbsp;&nbsp;</th>
+                <th>ID No: </th>
+                <td id="studentsId"></td>
+              </table>
+              <br/>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Subject</th>
+                    <th scope="col">Marks</th>
+                    <th scole="col">Grade</th>
+                  </tr>
+                </thead>
+                <tbody id="bmMarks">
+                </tbody>
+                <tbody id="biMarks">
+                </tbody>
+                <tbody id="sjMarks">
+                </tbody>
+                <tbody id="maMarks">
+                </tbody>
+                <tbody id="pmMarks">
+                </tbody>
+                <tbody id="piMarks">
+                </tbody>
+                <tbody id="amMarks">
+                </tbody>
+                <tbody id="pyMarks">
+                </tbody>
+                <tbody id="blMarks">
+                </tbody>
+                <tbody id="cmMarks">
+                </tbody>
+              </table>
+              <hr/>
+              <div>
+                <table>
+                  <th>Number of subjects enrolled: </th>
+                  <td id="subCount"></td>
+                  </table>
+                <table>
+                  <th>Total Marks: </th>
+                  <td id="totalMarks"></td>
+                </table>
+                <table>
+                  <th>Percentage: </th>
+                  <td id="marksPercentage"></td>
+                </table>
+                <table>
+                  <th>Student Average Grade Point: </th>
+                  <td id="studentPointAverage"></td>
+                </table>
+                <table>
+                  <th>Teacher's Remarks: </th>
+                  <td id="studentRemarks"></td>
+                </table>
+              </div>
+              <hr/>
+              </form>
+              <br/>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      <!-- End of Main Content -->
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+      <div>
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Developed by Rohindhran Nair - 2019</span>
+            </div>
+          </div>
+        </footer>
+        <!-- End of Footer -->  
+</div>
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/web3.min.js"></script>
     <script src="js/truffle-contract.js"></script>
     <script src="js/displaymarks/displaymarks1.js"></script>
-    <div class="footer">
-      <small>Developed by Rohindhran Nair - 2018</small>
-    </div>
-  </body>
+
+</body>
 </html>
