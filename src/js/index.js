@@ -1,114 +1,132 @@
 App = {
-  web3Provider: null,
+  loading: false,
   contracts: {},
-  account: '0x0',
 
-  init: function() {
-    return App.initWeb3();
+  load: async () => {
+    await App.loadWeb3()
+    await App.loadAccount()
+    await App.loadContract()
+    await App.render()
   },
 
-  //Initialize Web3
-  initWeb3: function() {
+  loadWeb3: async () => {
     if (typeof web3 !== 'undefined') {
-      // If a web3 instance is already provided by Meta Mask.
-      App.web3Provider = web3.currentProvider;
-      web3 = new Web3(web3.currentProvider);
+      App.web3Provider = web3.currentProvider
+      web3 = new Web3(web3.currentProvider)
     } else {
-      // Specify default instance if no web3 instance provided
-      App.web3Provider = new Web3.providers.HttpProvider('http://localhost:8545');
-      web3 = new Web3(App.web3Provider);
+      window.alert("Please connect to Metamask.")
     }
-    return App.initContract();
+    // Modern dapp browsers...
+    if (window.ethereum) {
+      window.web3 = new Web3(ethereum)
+      try {
+        // Request account access if needed
+        await ethereum.enable()
+        // Acccounts now exposed
+        web3.eth.sendTransaction({/* ... */})
+      } catch (error) {
+        // User denied account access...
+      }
+    }
+    // Legacy dapp browsers...
+    else if (window.web3) {
+      App.web3Provider = web3.currentProvider
+      window.web3 = new Web3(web3.currentProvider)
+      // Acccounts always exposed
+      web3.eth.sendTransaction({/* ... */})
+    }
+    // Non-dapp browsers...
+    else {
+      console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
+    }
   },
 
-  //Initialize smart contract instance
-  initContract: function() {
-    $.getJSON("Grade.json", function(grade) {
-      // Instantiate a new truffle contract from the artifact
-      App.contracts.Grade = TruffleContract(grade);
-      // Connect provider to interact with contract
-      App.contracts.Grade.setProvider(App.web3Provider);
-
-      App.listenForEvents();
-
-      return App.render();
-    });
+  loadAccount: async () => {
+    // Set the current blockchain account
+    App.account = web3.eth.accounts[0]
   },
 
-  //Listen for events from smart contract
-  listenForEvents: function() {
-    App.contracts.Grade.deployed().then(function(instance) {
-      instance.gradedEvent({}, {
-        fromBlock: 0,
-        toBlock: 'latest'
-      }).watch(function(error, event) {
-        console.log("event triggered", event)
-        // Reload when a new grade is recorded
-        App.render();
-      });
-    });
+  loadContract: async () => {
+    // Create a JavaScript version of the smart contract
+    const grade = await $.getJSON('Grade.json')
+    App.contracts.Grade = TruffleContract(grade)
+    App.contracts.Grade.setProvider(App.web3Provider)
+
+    // Hydrate the smart contract with values from the blockchain
+    App.grade = await App.contracts.Grade.deployed()
+  },
+
+  render: async () => {
+    // Prevent double render
+    if (App.loading) {
+      return
+    }
+
+    // Update app loading state
+    App.setLoading(true)
+
+    // Render Tasks
+    await App.renderContent()
+
+    // Update loading state
+    App.setLoading(false)
   },
 
   //Render page function
-  render: function() {
-    var gradeInstance;
-    //Target specific HTML tags in UI
-    var loader = $("#loader");
-    var content = $("#content");
+  renderContent: async() => {
 
-    loader.show();
-    content.hide();
+    const bmCount = await App.grade.bmCount()
+    var studentsMenu = $("#studentsMenu");
+    studentsMenu.empty();
 
-    // Load contract data
-    App.contracts.Grade.deployed().then(function(instance) {
-      gradeInstance = instance;
-      return gradeInstance.bmCount();
-    }).then(function(bmCount) {
-      var studentsMenu = $("#studentsMenu");
-      studentsMenu.empty();
+    for(var i = 1; i <= bmCount; i++){
+      const students = await App.grade.bm(i)
+      const bmid = students[0].toNumber();
+      const studentID = students[1].toNumber();
+      const studentName = students[2];
 
-      //Display hyperlinks
-      for (var i = 1; i <= bmCount; i++) {
-        gradeInstance.bm(i).then(function(bms) {
-          var bmid = bms[0];
-          var studentid = bms[1];
-          var studentName = bms[2];
-          links0 = [
-            "",
-            '<a href="./enrollelectives1.html">Enroll</a>',
-            '<a href="./enrollelectives2.html">Enroll</a>'
-          ];
-          links1 = [
-            "",
-            '<a href="./inputmarks1.html">Grade</a>',
-            '<a href="./inputmarks2.html">Grade</a>'
-          ];
-          links2 = [
-            "",
-            '<a href="./displaymarks1.html">View</a>',
-            '<a href="./displaymarks2.html">View</a>'
-          ];
-          var goto0 = links0[bmid];
-          var goto1 = links1[bmid];
-          var goto2 = links2[bmid];
-          // Render Student Menu
-          var studentTemplate = "<tr><th>" + bmid + "</th><td>" + studentid + "</td><td>" 
-                                + studentName + "</td><td>" + goto0 + "</td><td>" + goto1 + "</td><td>" + goto2 + "</td></tr>"
-          studentsMenu.append(studentTemplate);
-        });
-      }
-      return gradeInstance.graded(App.account);
-  }).then(function() {
-      loader.hide();
-      content.show();
-    }).catch(function(error) {
-      console.warn(error);
-    });
-  }
+      links0 = [
+        "",
+        '<a href="./enrollelectives1.html">Enroll</a>',
+        '<a href="./enrollelectives2.html">Enroll</a>'
+      ];
+      links1 = [
+        "",
+        '<a href="./inputmarks1.html">Grade</a>',
+        '<a href="./inputmarks2.html">Grade</a>'
+      ];
+      links2 = [
+        "",
+        '<a href="./displaymarks1.html">View</a>',
+        '<a href="./displaymarks2.html">View</a>'
+      ];
+      var goto0 = links0[bmid];
+      var goto1 = links1[bmid];
+      var goto2 = links2[bmid];
+      
+      // Render UI
+      var Template = "<tr><th>" + bmid + "</th><td>" + studentID + "</td><td>" 
+                      + studentName + "</td><td>" + goto0 + "</td><td>" + goto1 + "</td><td>" + goto2 + "</td></tr>"
+      studentsMenu.append(Template);
+    }
+  },
+
+  setLoading: (boolean) => {
+    App.loading = boolean
+    const loader = $('#loader')
+    const content = $('#content')
+    if (boolean) {
+      loader.show()
+      content.hide()
+    } else {
+      loader.hide()
+      content.show()
+    }
+  },
 };
 
-$(function() {
-  $(window).load(function() {
-    App.init();
-  });
+$(() => {
+  $(window).load(() => {
+    App.load()
+  })
 });
